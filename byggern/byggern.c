@@ -16,6 +16,23 @@
 #include <stdlib.h>
 #include "xmem.h"
 
+void adcInit(void) {
+	xmemWrite(0b00000100,0x1600);
+}
+
+#define test_bit(reg, bit) (reg & (1<<bit))
+ 
+uint8_t readAdcCH1(uint8_t channel){
+	volatile char * adc = (char *) 0x1400;
+	channel = 0;
+	*adc = 0x04 | channel;
+	
+	while (test_bit(PINE, PINE0));
+	
+	return *adc;
+}
+
+
 void SRAM_test(void)
 {
 volatile char *ext_ram = (char *) 0x1800; // Start address for the SRAM
@@ -55,7 +72,7 @@ int main(void)
 {
 	xmem_init();
 	USART_init(MYUBRR);
-	
+	adcInit();
 	//xmemWrite(0x51, 0x183E); //sram
 	//xmemWrite(0x1400);
 	SRAM_test();
@@ -63,10 +80,8 @@ int main(void)
 	while (1) {
 		
 		//sram test
-		xmemWrite(0x51, 0x180E);
-		//printf("Read from SRAM: %i\r\n", xmemRead(0x183E));
-		//xmemWrite(0x51, 0x103E);
-		printf("hello\n\r");
 		_delay_ms(500);
+
+		printf("ADC: %i \n\r",readAdcCH1(0));
 	}
 }
