@@ -6,3 +6,5 @@ byggern.c
 
 uart.c
 
+xmem.c
+
