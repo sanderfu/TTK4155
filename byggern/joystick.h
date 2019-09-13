@@ -3,7 +3,8 @@
 typedef struct {
 	int8_t x_pos;
 	int8_t y_pos;
-} position_t;
+	int16_t angle;
+} joystick_position_t;
 
 typedef enum DIRECTION {
 	LEFT, 
@@ -13,6 +14,6 @@ typedef enum DIRECTION {
 	NEUTRAL
 } DIRECTION_t ;
 	
-void joystick_readPosition(position_t * pos);
-DIRECTION_t joystick_getDirection(position_t * pos);
+void joystick_readPosition(joystick_position_t * pos);
+DIRECTION_t joystick_getDirection(joystick_position_t * pos);
 void joystick_printDirection(DIRECTION_t dir);

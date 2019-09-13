@@ -1,6 +1,7 @@
 #include "joystick.h"
 #include "adc.h"
 #include <stdlib.h>
+#include <math.h>
 #define X_POS_CHANNEL 0
 #define Y_POS_CHANNEL 1
 
@@ -12,7 +13,7 @@ void joystickInit() {
 	joystickOffsetX = readAdc(X_POS_CHANNEL);
 	joystickOffsetY = readAdc(Y_POS_CHANNEL);
 }
-void joystick_readPosition(position_t * pos) {
+void joystick_readPosition(joystick_position_t * pos) {
 	uint8_t x_pos = readAdc(X_POS_CHANNEL);
 	uint8_t y_pos = readAdc(Y_POS_CHANNEL);
 	if (x_pos < joystickOffsetX) {
@@ -25,9 +26,10 @@ void joystick_readPosition(position_t * pos) {
 	} else {
 		pos->y_pos = ((y_pos - joystickOffsetY)*100)/(255-joystickOffsetY);
 	}
-	}
+	pos->angle = atan2(pos->y_pos, pos->x_pos)*360/2.0/3.14;
+}
 
-DIRECTION_t joystick_getDirection(position_t * pos) {
+DIRECTION_t joystick_getDirection(joystick_position_t * pos) {
 	if (abs(pos->x_pos) < 5 && abs(pos->y_pos) <5) {
 		return NEUTRAL;
 	}

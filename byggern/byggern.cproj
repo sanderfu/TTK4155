@@ -162,6 +162,12 @@
     <Compile Include="slider.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="touchButton.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="touchButton.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="uart.c">
       <SubType>compile</SubType>
     </Compile>

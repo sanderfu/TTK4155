@@ -12,6 +12,8 @@ setup.c
 
 slider.c
 
+touchButton.c
+
 uart.c
 
 xmem.c

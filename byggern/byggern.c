@@ -6,7 +6,6 @@
  */ 
 
 
-
 #include "setup.h"
 
 #include <stdlib.h>
@@ -16,7 +15,7 @@
 #include "adc.h"
 #include "joystick.h"
 #include "slider.h"
-
+#include "touchButton.h"
 
 void SRAM_test(void)
 {
@@ -55,23 +54,27 @@ printf("SRAM test completed with \n\r%4d errors in write phase and \n\r%4d error
 
 int main(void)
 {
-	
+	DDRB &= ~(1 << BUTTON_LEFT | 1 << BUTTON_RIGHT);
 	setupInit();
 	SRAM_test();
 	printf("Hello, world!\n\r");
-	position_t pos;
+	joystick_position_t pos;
 	slider_position_t slider_pos;
+	buttonValues_t buttons;
 	
 	while (1) {
 		
 		_delay_ms(500);
 		joystick_readPosition(&pos);
 		slider_readPosition(&slider_pos);
+		touchButton_readButtons(&buttons);
 		printf("ADC: \n\r");
 		printf("x: %i\t", pos.x_pos);
 		printf("y: %i\n\r", pos.y_pos);
 		joystick_printDirection(joystick_getDirection(&pos));
 		printf("Slider left: %i\tSlider right: %i\n\r", slider_pos.left_pos, slider_pos.right_pos);
+		printf("Button left: %i \tButton right: %i\n\r", buttons.left_button, buttons.right_button);
+		printf("Angle: %i\n\r", pos.angle);
 		
 	}
 }
