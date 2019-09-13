@@ -9,4 +9,5 @@ typedef struct {
 	uint8_t right_button;
 } buttonValues_t;
 
-touchButton_readButtons(buttonValues_t * buttons);
+void touchButton_init();
+void touchButton_readButtons(buttonValues_t * buttons);

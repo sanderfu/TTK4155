@@ -16,6 +16,8 @@
 #include "joystick.h"
 #include "slider.h"
 #include "touchButton.h"
+#include "avr/interrupt.h"
+
 
 void SRAM_test(void)
 {
@@ -52,15 +54,31 @@ retrieval_errors++;
 printf("SRAM test completed with \n\r%4d errors in write phase and \n\r%4d errors in retrieval phase\n\r", write_errors, retrieval_errors);
 }
 
+ISR (TIMER0_COMP_vect) {
+	printf("timer interrupt");
+}
+
 int main(void)
 {
-	DDRB &= ~(1 << BUTTON_LEFT | 1 << BUTTON_RIGHT);
+	//DDRB &= ~(1 << BUTTON_LEFT | 1 << BUTTON_RIGHT);
 	setupInit();
 	SRAM_test();
 	printf("Hello, world!\n\r");
 	joystick_position_t pos;
 	slider_position_t slider_pos;
 	buttonValues_t buttons;
+	
+	//Enable interrupt from timer
+	
+	//Disable global interrupts
+	cli();
+	
+	//Setup code here for timer interrupt
+	TCCR0 = (1 << COM00 | 1 << COM01);
+	
+	//Enable global interrupts
+	sei();
+
 	
 	while (1) {
 		

@@ -9,4 +9,5 @@
 	USART_init(MYUBRR);
 	adcInit();
 	joystickInit();
+	touchButton_init();
 }
