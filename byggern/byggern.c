@@ -18,6 +18,13 @@
 #include "touchButton.h"
 #include "avr/interrupt.h"
 
+#define PRESCALE 1024
+#define SECONDS 0.05
+#define TIMER_RESET (F_CPU/PRESCALE)*SECONDS
+
+joystick_position_t joystick_pos;
+slider_position_t slider_pos;
+buttonValues_t buttons;
 
 void SRAM_test(void)
 {
@@ -54,8 +61,14 @@ retrieval_errors++;
 printf("SRAM test completed with \n\r%4d errors in write phase and \n\r%4d errors in retrieval phase\n\r", write_errors, retrieval_errors);
 }
 
-ISR (TIMER0_COMP_vect) {
-	printf("timer interrupt");
+ISR (TIMER1_COMPB_vect) {
+	cli();
+	TCNT1 = 0x00;
+	printf("timer interrupt: %i, ", TCNT1);
+	joystick_readPosition(&joystick_pos);
+	slider_readPosition(&slider_pos);
+	touchButton_readButtons(&buttons);
+	sei();
 }
 
 int main(void)
@@ -64,35 +77,43 @@ int main(void)
 	setupInit();
 	SRAM_test();
 	printf("Hello, world!\n\r");
-	joystick_position_t pos;
-	slider_position_t slider_pos;
-	buttonValues_t buttons;
+	
 	
 	//Enable interrupt from timer
 	
 	//Disable global interrupts
 	cli();
 	
+	//enable timer 0
+	TIMSK |= (1 << OCIE1B);
+
+	
 	//Setup code here for timer interrupt
-	TCCR0 = (1 << COM00 | 1 << COM01);
+	TCNT1 = 0x00;
+	TCCR1A = (1 << COM1B0 | 1 << COM1B1);
+	TCCR1B = (1 << CS12 | 1 << CS00);
+	
+	OCR1B = TIMER_RESET;
 	
 	//Enable global interrupts
 	sei();
-
+	printf("Timer initialized");
 	
 	while (1) {
 		
-		_delay_ms(500);
-		joystick_readPosition(&pos);
-		slider_readPosition(&slider_pos);
-		touchButton_readButtons(&buttons);
+		//_delay_ms(500);
+		
+		//cli();
+		//TCNT1 = 0x4444;
+		//printf("Timer: %i\n\r", TCNT1);
+		//sei();
 		printf("ADC: \n\r");
-		printf("x: %i\t", pos.x_pos);
-		printf("y: %i\n\r", pos.y_pos);
-		joystick_printDirection(joystick_getDirection(&pos));
+		printf("x: %i\t", joystick_pos.x_pos);
+		printf("y: %i\n\r", joystick_pos.y_pos);
+		joystick_printDirection(joystick_getDirection(&joystick_pos));
 		printf("Slider left: %i\tSlider right: %i\n\r", slider_pos.left_pos, slider_pos.right_pos);
 		printf("Button left: %i \tButton right: %i\n\r", buttons.left_button, buttons.right_button);
-		printf("Angle: %i\n\r", pos.angle);
+		printf("Angle: %i\n\r", joystick_pos.angle);
 		
 	}
 }
