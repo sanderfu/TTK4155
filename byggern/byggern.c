@@ -57,8 +57,8 @@ int main(void)
 	xmem_init();
 	USART_init(MYUBRR);
 	adcInit();
-	//xmemWrite(0x51, 0x183E); //sram
-	//xmemWrite(0x1400);
+	joystickInit();
+	
 	SRAM_test();
 	printf("Hello, world!\n\r");
 	position_t pos;
@@ -70,6 +70,7 @@ int main(void)
 		printf("ADC: \n\r");
 		printf("x: %i\t", pos.x_pos);
 		printf("y: %i\n\r", pos.y_pos);
+		printDirection(getDirection(&pos));
 		
 	}
 }
