@@ -135,7 +135,22 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="adc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="adc.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="byggern.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="joystick.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="joystick.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="setup.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="uart.c">
