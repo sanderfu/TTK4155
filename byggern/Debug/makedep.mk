@@ -8,6 +8,10 @@ byggern.c
 
 joystick.c
 
+setup.c
+
+slider.c
+
 uart.c
 
 xmem.c

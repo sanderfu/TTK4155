@@ -13,6 +13,6 @@ typedef enum DIRECTION {
 	NEUTRAL
 } DIRECTION_t ;
 	
-void setPosition(position_t * pos);
-DIRECTION_t getDirection(position_t * pos);
-void printDirection(DIRECTION_t dir);
+void joystick_readPosition(position_t * pos);
+DIRECTION_t joystick_getDirection(position_t * pos);
+void joystick_printDirection(DIRECTION_t dir);

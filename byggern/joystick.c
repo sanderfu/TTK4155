@@ -12,7 +12,7 @@ void joystickInit() {
 	joystickOffsetX = readAdc(X_POS_CHANNEL);
 	joystickOffsetY = readAdc(Y_POS_CHANNEL);
 }
-void setPosition(position_t * pos) {
+void joystick_readPosition(position_t * pos) {
 	uint8_t x_pos = readAdc(X_POS_CHANNEL);
 	uint8_t y_pos = readAdc(Y_POS_CHANNEL);
 	if (x_pos < joystickOffsetX) {
@@ -27,7 +27,7 @@ void setPosition(position_t * pos) {
 	}
 	}
 
-DIRECTION_t getDirection(position_t * pos) {
+DIRECTION_t joystick_getDirection(position_t * pos) {
 	if (abs(pos->x_pos) < 5 && abs(pos->y_pos) <5) {
 		return NEUTRAL;
 	}
@@ -46,7 +46,7 @@ DIRECTION_t getDirection(position_t * pos) {
 	}
 	
 } 
-void printDirection(DIRECTION_t dir) {
+void joystick_printDirection(DIRECTION_t dir) {
 	printf("Direction:\t");
 	switch(dir) {
 		case NEUTRAL:

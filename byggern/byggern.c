@@ -15,6 +15,7 @@
 #include "xmem.h"
 #include "adc.h"
 #include "joystick.h"
+#include "slider.h"
 
 
 void SRAM_test(void)
@@ -54,23 +55,23 @@ printf("SRAM test completed with \n\r%4d errors in write phase and \n\r%4d error
 
 int main(void)
 {
-	xmem_init();
-	USART_init(MYUBRR);
-	adcInit();
-	joystickInit();
 	
+	setupInit();
 	SRAM_test();
 	printf("Hello, world!\n\r");
 	position_t pos;
+	slider_position_t slider_pos;
+	
 	while (1) {
 		
-		//sram test
 		_delay_ms(500);
-		setPosition(&pos);
+		joystick_readPosition(&pos);
+		slider_readPosition(&slider_pos);
 		printf("ADC: \n\r");
 		printf("x: %i\t", pos.x_pos);
 		printf("y: %i\n\r", pos.y_pos);
-		printDirection(getDirection(&pos));
+		joystick_printDirection(joystick_getDirection(&pos));
+		printf("Slider left: %i\tSlider right: %i\n\r", slider_pos.left_pos, slider_pos.right_pos);
 		
 	}
 }
