@@ -70,7 +70,9 @@ ISR (TIMER1_COMPB_vect) {
 	touchButton_readButtons(&buttons);
 	sei();
 }
-
+void timer_init() {
+	
+}
 int main(void)
 {
 	//DDRB &= ~(1 << BUTTON_LEFT | 1 << BUTTON_RIGHT);
@@ -107,13 +109,16 @@ int main(void)
 		//TCNT1 = 0x4444;
 		//printf("Timer: %i\n\r", TCNT1);
 		//sei();
-		printf("ADC: \n\r");
-		printf("x: %i\t", joystick_pos.x_pos);
-		printf("y: %i\n\r", joystick_pos.y_pos);
-		joystick_printDirection(joystick_getDirection(&joystick_pos));
-		printf("Slider left: %i\tSlider right: %i\n\r", slider_pos.left_pos, slider_pos.right_pos);
-		printf("Button left: %i \tButton right: %i\n\r", buttons.left_button, buttons.right_button);
-		printf("Angle: %i\n\r", joystick_pos.angle);
+		//clear terminal
+		printf("\033\143");
+		//printf("ADC: \n\r");
+		//printf("x: %i\t", joystick_pos.x_pos);
+		//printf("", joystick_pos.y_pos);
+		//joystick_printDirection(joystick_getDirection(&joystick_pos));
+		//printf("Slider left: %i\tSlider right: %i\n\r", slider_pos.left_pos, slider_pos.right_pos);
+		//printf("Button left: %i \tButton right: %i\n\r", buttons.left_button, buttons.right_button);
+		//printf("Angle: %i\n\r", joystick_pos.angle);
 		
+		printf("x: %i\ty: %i\n\rSlider left: %i\tSlider right: %i\n\rButton left: %i \tButton right: %i\n\rAngle: %i\n\r", joystick_pos.x_pos, joystick_pos.y_pos, slider_pos.left_pos, slider_pos.right_pos,  buttons.left_button, buttons.right_button, joystick_pos.angle);	
 	}
 }
