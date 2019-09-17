@@ -55,6 +55,7 @@
     <EraseKey />
     <avrtoolserialnumber>J41800001522</avrtoolserialnumber>
     <avrdeviceexpectedsignature>0x1E9404</avrdeviceexpectedsignature>
+    <avrtoolinterfaceclock>200000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -148,6 +149,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="joystick.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="oled.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="oled.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="setup.c">

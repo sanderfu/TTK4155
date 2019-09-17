@@ -8,6 +8,8 @@ byggern.c
 
 joystick.c
 
+oled.c
+
 setup.c
 
 slider.c

@@ -3,6 +3,7 @@
 #include "adc.h"
 #include "joystick.h"
 #include "setup.h"
+#include "oled.h"
 
 	void setupInit(void){
 	xmem_init();
@@ -10,4 +11,5 @@
 	adcInit();
 	joystickInit();
 	touchButton_init();
+	oled_init();
 }

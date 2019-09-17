@@ -16,7 +16,9 @@
 #include "joystick.h"
 #include "slider.h"
 #include "touchButton.h"
+#include "oled.h"
 #include "avr/interrupt.h"
+
 
 #define PRESCALE 1024
 #define SECONDS 0.05
@@ -64,7 +66,6 @@ printf("SRAM test completed with \n\r%4d errors in write phase and \n\r%4d error
 ISR (TIMER1_COMPB_vect) {
 	cli();
 	TCNT1 = 0x00;
-	printf("timer interrupt: %i, ", TCNT1);
 	joystick_readPosition(&joystick_pos);
 	slider_readPosition(&slider_pos);
 	touchButton_readButtons(&buttons);
@@ -100,17 +101,19 @@ int main(void)
 	//Enable global interrupts
 	sei();
 	printf("Timer initialized");
-	
+	oled_print_arrow(0x6, 0x6);
+
 	while (1) {
-		
 		//_delay_ms(500);
 		
 		//cli();
 		//TCNT1 = 0x4444;
 		//printf("Timer: %i\n\r", TCNT1);
 		//sei();
+		
 		//clear terminal
-		printf("\033\143");
+		//printf("\033\143");
+		
 		//printf("ADC: \n\r");
 		//printf("x: %i\t", joystick_pos.x_pos);
 		//printf("", joystick_pos.y_pos);
@@ -118,7 +121,9 @@ int main(void)
 		//printf("Slider left: %i\tSlider right: %i\n\r", slider_pos.left_pos, slider_pos.right_pos);
 		//printf("Button left: %i \tButton right: %i\n\r", buttons.left_button, buttons.right_button);
 		//printf("Angle: %i\n\r", joystick_pos.angle);
-		
-		printf("x: %i\ty: %i\n\rSlider left: %i\tSlider right: %i\n\rButton left: %i \tButton right: %i\n\rAngle: %i\n\r", joystick_pos.x_pos, joystick_pos.y_pos, slider_pos.left_pos, slider_pos.right_pos,  buttons.left_button, buttons.right_button, joystick_pos.angle);	
+		oled_print_arrow(0x6, 0x6);
+
+		//printf("x: %i y: %i\n\rSl L: %i SL R: %i\n\rB L: %i B R: %i\n\rAngle: %i\n", joystick_pos.x_pos, joystick_pos.y_pos, slider_pos.left_pos, slider_pos.right_pos,  buttons.left_button, buttons.right_button, joystick_pos.angle);
+		_delay_ms(100);	
 	}
 }
