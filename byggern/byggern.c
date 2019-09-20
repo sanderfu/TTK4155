@@ -18,6 +18,7 @@
 #include "touchButton.h"
 #include "oled.h"
 #include "avr/interrupt.h"
+#include "menu.h"
 
 
 #define PRESCALE 1024
@@ -78,9 +79,12 @@ int main(void)
 {
 	//DDRB &= ~(1 << BUTTON_LEFT | 1 << BUTTON_RIGHT);
 	setupInit();
-	SRAM_test();
+	//SRAM_test();
 	printf("Hello, world!\n\r");
-	
+	MenuNode* gameMenu = mainMenuInit();
+	printf((gameMenu->name)[0]);
+	oled_gotoLine(6);
+	//oled_print(gameMenu->name);
 	
 	//Enable interrupt from timer
 	
@@ -100,13 +104,12 @@ int main(void)
 	
 	//Enable global interrupts
 	sei();
-	printf("Timer initialized");
+	//printf("Timer initialized");
 	oled_print_arrow(0x0, 0x0);
 	oled_home();
 	oled_gotoLine(2);
 	
-	char character[] = "CAT  DSF !'#cat";
-	oled_print(&character);
+	//oled_print("hei paa deg");
 	while (1) {
 		//_delay_ms(500);
 		

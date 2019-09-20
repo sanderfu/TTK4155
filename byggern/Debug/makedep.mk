@@ -8,6 +8,8 @@ byggern.c
 
 joystick.c
 
+menu.c
+
 oled.c
 
 setup.c
