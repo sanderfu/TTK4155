@@ -1,3 +1,5 @@
+#ifndef TOUCHBUTTON_H_
+#define TOUCHBUTTON_H_
 
 #define BUTTON_LEFT (PINB & (1 << PB0))
 #define BUTTON_RIGHT (PINB & (1 << PB1))
@@ -11,3 +13,5 @@ typedef struct {
 
 void touchButton_init();
 void touchButton_readButtons(buttonValues_t * buttons);
+
+#endif

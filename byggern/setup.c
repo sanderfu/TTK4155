@@ -4,7 +4,8 @@
 #include "joystick.h"
 #include "setup.h"
 #include "oled.h"
-
+#include "timer.h"
+#include "sleep.h"
 	void setupInit(void){
 	xmem_init();
 	USART_init(MYUBRR);
@@ -12,4 +13,6 @@
 	joystickInit();
 	touchButton_init();
 	oled_init();
+	timer_init();
+	sleep_init();
 }

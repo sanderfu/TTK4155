@@ -1,3 +1,6 @@
+#ifndef SETUP_H_
+#define SETUP_H_
+
 #define FOSC 4915200
 #define F_CPU 4915200
 #define BAUD 9600
@@ -6,3 +9,5 @@
 #define test_bit(reg, bit) (reg & (1<<bit))
 
 void setupInit(void);
+
+#endif

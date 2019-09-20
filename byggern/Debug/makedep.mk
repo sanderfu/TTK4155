@@ -6,6 +6,8 @@ adc.c
 
 byggern.c
 
+sleep.c
+
 joystick.c
 
 menu.c
@@ -15,6 +17,10 @@ oled.c
 setup.c
 
 slider.c
+
+test.c
+
+timer.c
 
 touchButton.c
 

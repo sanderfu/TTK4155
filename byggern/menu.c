@@ -7,22 +7,18 @@
 #include "menu.h"
 
 
-typedef struct{
-	MenuNode * currentMenuItem;
-	uint8_t childIndex;
-	DIRECTION_t lastDir;
-} menu;
 
-menu currentMenu;
 
 MenuNode* mainMenuInit (void){
 	MenuNode* ptr = (MenuNode*) malloc(sizeof(MenuNode));
+	ptr->numChildren = 0;
 	strcpy(ptr->name, "Main menu");
 	ptr->parent = NULL;
+	/*
 	for (int i = 0; i< MAXCHILDREN; i++) {
 		ptr->children[i] = NULL;
 	}
-
+	*/
 	return ptr;
 }
 
@@ -33,9 +29,7 @@ MenuNode * addChild(MenuNode* parent, char* child_name)
 	parent->numChildren++;
 	strcpy(childPtr->name, child_name);
 	childPtr->parent = parent;
-	for (int i = 0; i< MAXCHILDREN; i++) {
-		childPtr->children[i] = NULL;
-	}
+	
 	if (parent->numChildren > MAXCHILDREN) {
 		return NULL;
 	} 
@@ -97,7 +91,7 @@ void navigateMenu(joystick_position_t * joystick_position_p) {
 				
 				break;
 			case RIGHT:
-				if (currentMenu.currentMenuItem->children[currentMenu.childIndex]->children[0] != NULL) {
+				if (currentMenu.currentMenuItem->children[currentMenu.childIndex]->numChildren != 0) {
 					currentMenu.currentMenuItem = currentMenu.currentMenuItem->children[currentMenu.childIndex];
 					currentMenu.childIndex = 0;
 				}

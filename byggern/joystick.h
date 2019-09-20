@@ -1,5 +1,5 @@
-#ifndef JOYSTICK_HEADER
-#define  JOYSTICK_HEADER
+#ifndef JOYSTICK_H_
+#define  JOYSTICK_H_
 #include <avr/io.h>
 
 typedef struct {

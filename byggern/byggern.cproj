@@ -145,6 +145,9 @@
     <Compile Include="byggern.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="sleep.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="fonts.h">
       <SubType>compile</SubType>
     </Compile>
@@ -172,10 +175,25 @@
     <Compile Include="setup.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="sleep.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="slider.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="slider.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="test.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="test.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="timer.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="touchButton.c">
