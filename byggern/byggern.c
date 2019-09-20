@@ -82,14 +82,7 @@ int main(void)
 	//SRAM_test();
 	printf("Hello, world!\n\r");
 	MenuNode* gameMenu = menuInit();
-	oled_gotoLine(6);
-	
-	oled_print((gameMenu->name));
-	oled_gotoLine(7);
-	
-	oled_print((gameMenu->children[0]->name));
-	
-	oled_print_arrow();
+	menu_printCurrentMenu();
 	
 	
 	//oled_print(gameMenu->name);
@@ -137,8 +130,10 @@ int main(void)
 		//printf("Button left: %i \tButton right: %i\n\r", buttons.left_button, buttons.right_button);
 		//printf("Angle: %i\n\r", joystick_pos.angle);
 		//oled_print_arrow(0x6, 0x6);
+		navigateMenu(&joystick_pos);
+		menu_printCurrentMenu();
 
 		//printf("x: %i y: %i\n\rSl L: %i SL R: %i\n\rB L: %i B R: %i\n\rAngle: %i\n", joystick_pos.x_pos, joystick_pos.y_pos, slider_pos.left_pos, slider_pos.right_pos,  buttons.left_button, buttons.right_button, joystick_pos.angle);
-		_delay_ms(100);	
+		_delay_ms(10);	
 	}
 }

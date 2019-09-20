@@ -1,3 +1,5 @@
+#ifndef JOYSTICK_HEADER
+#define  JOYSTICK_HEADER
 #include <avr/io.h>
 
 typedef struct {
@@ -17,3 +19,5 @@ typedef enum DIRECTION {
 void joystick_readPosition(joystick_position_t * pos);
 DIRECTION_t joystick_getDirection(joystick_position_t * pos);
 void joystick_printDirection(DIRECTION_t dir);
+
+#endif
