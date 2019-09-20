@@ -101,8 +101,12 @@ int main(void)
 	//Enable global interrupts
 	sei();
 	printf("Timer initialized");
-	oled_print_arrow(0x6, 0x6);
-
+	oled_print_arrow(0x0, 0x0);
+	oled_home();
+	oled_gotoLine(2);
+	
+	char character[] = "CAT  DSF !'#cat";
+	oled_print(&character);
 	while (1) {
 		//_delay_ms(500);
 		
@@ -121,7 +125,7 @@ int main(void)
 		//printf("Slider left: %i\tSlider right: %i\n\r", slider_pos.left_pos, slider_pos.right_pos);
 		//printf("Button left: %i \tButton right: %i\n\r", buttons.left_button, buttons.right_button);
 		//printf("Angle: %i\n\r", joystick_pos.angle);
-		oled_print_arrow(0x6, 0x6);
+		//oled_print_arrow(0x6, 0x6);
 
 		//printf("x: %i y: %i\n\rSl L: %i SL R: %i\n\rB L: %i B R: %i\n\rAngle: %i\n", joystick_pos.x_pos, joystick_pos.y_pos, slider_pos.left_pos, slider_pos.right_pos,  buttons.left_button, buttons.right_button, joystick_pos.angle);
 		_delay_ms(100);	

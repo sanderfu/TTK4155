@@ -145,6 +145,9 @@
     <Compile Include="byggern.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="fonts.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="joystick.c">
       <SubType>compile</SubType>
     </Compile>
