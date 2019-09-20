@@ -81,9 +81,17 @@ int main(void)
 	setupInit();
 	//SRAM_test();
 	printf("Hello, world!\n\r");
-	MenuNode* gameMenu = mainMenuInit();
-	printf((gameMenu->name)[0]);
+	MenuNode* gameMenu = menuInit();
 	oled_gotoLine(6);
+	
+	oled_print((gameMenu->name));
+	oled_gotoLine(7);
+	
+	oled_print((gameMenu->children[0]->name));
+	
+	oled_print_arrow();
+	
+	
 	//oled_print(gameMenu->name);
 	
 	//Enable interrupt from timer
@@ -105,7 +113,7 @@ int main(void)
 	//Enable global interrupts
 	sei();
 	//printf("Timer initialized");
-	oled_print_arrow(0x0, 0x0);
+	
 	oled_home();
 	oled_gotoLine(2);
 	

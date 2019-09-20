@@ -12,10 +12,7 @@
 
 MenuNode* mainMenuInit (void){
 	MenuNode* ptr = (MenuNode*) malloc(sizeof(MenuNode));
-	(ptr->name)[0] = 'A';
-	(ptr->name)[0] = 'B';
-	(ptr->name)[0] = '\0';
-	//strcpy(ptr->name, "Main menu");
+	strcpy(ptr->name, "Main menu");
 	ptr->parent = NULL;
 	for (int i = 0; i< 3; i++) {
 		ptr->children[i] = NULL;

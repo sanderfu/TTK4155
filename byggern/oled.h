@@ -1,7 +1,7 @@
 #include <avr/io.h>
 #define	ASCII_SPACE 32
 void oled_init(void);
-void oled_print_arrow(uint8_t page, uint8_t col);
+void oled_print_arrow();
 void oled_reset();
 
 

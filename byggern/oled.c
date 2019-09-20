@@ -61,13 +61,13 @@ void oled_init(void) {
 	oled_home();
 }
 
-void oled_print_arrow(uint8_t row, uint8_t col)
+void oled_print_arrow()
 {
-	oled_pos(row, col);
+
 	oled_write_d(0b00011000);
-	oled_write_d(0b00011000);
-	oled_write_d(0b01111110);
 	oled_write_d(0b00111100);
+	oled_write_d(0b01111110);
+	oled_write_d(0b00011000);
 	oled_write_d(0b00011000);
 }
 
@@ -91,7 +91,6 @@ void oled_clearLine(uint8_t page){
 void oled_print(char* character){
 	while (*character != '\0')
 	{
-		printf("\n\rCharacter: %c", character[0]);
 		for (int col = 0; col < 8; col++ ) {
 			oled_write_d(pgm_read_byte(&(font8[*character-ASCII_SPACE][col])));
 		}
