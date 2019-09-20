@@ -14,11 +14,7 @@ MenuNode* mainMenuInit (void){
 	ptr->numChildren = 0;
 	strcpy(ptr->name, "Main menu");
 	ptr->parent = NULL;
-	/*
-	for (int i = 0; i< MAXCHILDREN; i++) {
-		ptr->children[i] = NULL;
-	}
-	*/
+	
 	return ptr;
 }
 

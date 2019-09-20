@@ -2,9 +2,31 @@
 #define TIMER1_SECONDS 0.05
 #define TIMER1_RESET (F_CPU/PRESCALE)*TIMER1_SECONDS
 
-#define TIMER0_SECONDS 100
+#define TIMER0_SECONDS 0.2
 #define TIMER0_RESET (F_CPU/PRESCALE)*TIMER0_SECONDS
 #include "timer.h"
+#include "joystick.h"
+#include "slider.h"
+#include "touchButton.h"
+#include "menu.h"
+
+
+ISR (TIMER1_COMPB_vect) {
+	cli();
+	TCNT1 = 0x00;
+	joystick_readPosition(&joystick_pos);
+	slider_readPosition(&slider_pos);
+	touchButton_readButtons(&buttons);
+	sei();
+}
+
+ISR (TIMER0_COMP_vect) {
+	cli();
+	TCNT1 = 0x00;
+	navigateMenu(&joystick_pos);
+	menu_printCurrentMenu();
+	sei();
+}
 
 
 void timer_init() {
@@ -36,10 +58,6 @@ void timer_init() {
 	TCCR0 = (1 << COM01 | 1 << COM00 | 1 << CS02 | 1 << CS00);
 	
 	OCR0 = TIMER0_RESET;
-	
-	
-	
-	
 	
 	
 	//Enable global interrupts

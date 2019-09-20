@@ -15,4 +15,6 @@
 	oled_init();
 	timer_init();
 	sleep_init();
+	menuInit();
+
 }

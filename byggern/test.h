@@ -16,6 +16,6 @@
 void test_SRAM(void);
 
 void test_outputControllers(joystick_position_t joystick_pos, slider_position_t slider_pos, buttonValues_t buttons);
-
+void test_resetMenu();
 
 #endif /* TEST_H_ */
