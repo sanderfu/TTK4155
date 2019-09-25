@@ -21,7 +21,7 @@
 #include "menu.h"
 #include "timer.h"
 #include "test.h"
-
+#include "SPI.h"
 
 int main(void)
 {

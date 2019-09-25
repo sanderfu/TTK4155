@@ -6,6 +6,8 @@
 #include "oled.h"
 #include "timer.h"
 #include "sleep.h"
+#include "SPI.h"
+
 	void setupInit(void){
 	xmem_init();
 	USART_init(MYUBRR);
@@ -16,5 +18,5 @@
 	timer_init();
 	sleep_init();
 	menuInit();
-
+	SPI_MasterInit();
 }
