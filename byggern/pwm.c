@@ -5,6 +5,7 @@
 #define MYUBRR FOSC/16/BAUD-1
 
 #include <avr/io.h>
+#include "notes.h"
 typedef enum {
     PRESC_OFF =  ~( 1 << CS02 & 1 << CS01  & 1 << CS00), 
     PRESC_1   =  (1 << CS00),
@@ -72,5 +73,5 @@ void pwm_setFreq(uint32_t freq) {
     
 }
 void pwm_testPlayNote() {
-    pwm_setFreq(440);
+    pwm_setFreq(NOTE_A4);
 }
