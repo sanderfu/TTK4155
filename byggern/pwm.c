@@ -72,5 +72,5 @@ void pwm_setFreq(uint32_t freq) {
     
 }
 void pwm_testPlayNote() {
-    pwm_setFreq(500);
+    pwm_setFreq(440);
 }
