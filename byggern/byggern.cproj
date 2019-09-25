@@ -184,6 +184,12 @@
     <Compile Include="slider.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="SPI.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="test.c">
       <SubType>compile</SubType>
     </Compile>

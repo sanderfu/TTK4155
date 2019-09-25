@@ -18,6 +18,8 @@ setup.c
 
 slider.c
 
+SPI.c
+
 test.c
 
 timer.c
