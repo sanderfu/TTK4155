@@ -4,6 +4,7 @@
 #define BAUD 9600
 #define MYUBRR FOSC/16/BAUD-1
 
+#include <avr/io.h>
 typedef enum {
     PRESC_OFF =  ~( 1 << CS02 & 1 << CS01  & 1 << CS00), 
     PRESC_1   =  (1 << CS00),
@@ -25,11 +26,13 @@ void pwm_init() {
     TCR0 = (1 << FOC0);
 
     //set tct mode
-    TCR0 |= (1 << WGM01) | (1 << WGM00);
+    TCR0 |= (1 << WGM01) ;
     
     //set toggle output mode
-    TCR0 | (1 << COM01); //and 0 << COM00;
-
+    TCR0 |= (1 << COM01); //and 0 << COM00;
+    
+    //set OC0 to clear on match
+    TCR0 |= PRESC_1;
 
 }
 
@@ -40,7 +43,7 @@ void pwm_setFreq(uint32_t freq) {
     }
     //first calculate for prescaling type 1
     enum prescaler = PRESC_1;
-    ocr_plus_one = F_CPU/(2*prescaler)/freq;
+    uint32_t ocr_plus_one = F_CPU/(2*prescaler)/freq;
 
     if (ocr_plus_one > 255+1) {
         prescaler = PRESC_8;
