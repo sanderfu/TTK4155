@@ -39,6 +39,7 @@ SUBDIRS :=
 C_SRCS +=  \
 ../adc.c \
 ../byggern.c \
+../CAN.c \
 ../sleep.c \
 ../joystick.c \
 ../menu.c \
@@ -62,6 +63,7 @@ ASM_SRCS +=
 OBJS +=  \
 adc.o \
 byggern.o \
+CAN.o \
 sleep.o \
 joystick.o \
 menu.o \
@@ -78,6 +80,7 @@ xmem.o
 OBJS_AS_ARGS +=  \
 adc.o \
 byggern.o \
+CAN.o \
 sleep.o \
 joystick.o \
 menu.o \
@@ -94,6 +97,7 @@ xmem.o
 C_DEPS +=  \
 adc.d \
 byggern.d \
+CAN.d \
 sleep.d \
 joystick.d \
 menu.d \
@@ -110,6 +114,7 @@ xmem.d
 C_DEPS_AS_ARGS +=  \
 adc.d \
 byggern.d \
+CAN.d \
 sleep.d \
 joystick.d \
 menu.d \
@@ -145,6 +150,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./byggern.o: .././byggern.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega162" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./CAN.o: .././CAN.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega162" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

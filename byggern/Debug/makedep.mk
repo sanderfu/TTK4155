@@ -6,6 +6,8 @@ adc.c
 
 byggern.c
 
+CAN.c
+
 sleep.c
 
 joystick.c

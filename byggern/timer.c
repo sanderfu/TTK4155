@@ -30,8 +30,7 @@ ISR (TIMER0_COMP_vect) {
 
 
 void timer_init() {
-	//Disable global interrupts
-	cli();
+
 	
 	//////////////////////////TIMER 1 (16 bit)//////////////////////////////////
 	
@@ -61,6 +60,6 @@ void timer_init() {
 	
 	
 	//Enable global interrupts
-	sei();
+
 	//printf("Timer initialized");
 }

@@ -9,14 +9,12 @@
 #include <stdlib.h>
 
 
-#include <util/delay.h>
 #include <avr/interrupt.h>
 #include "menu.h"
 
 #include "setup.h"
 
 #include <stdlib.h>
-#include <util/delay.h>
 #include "uart.h"
 #include "xmem.h"
 #include "adc.h"
@@ -29,14 +27,23 @@
 #include "timer.h"
 #include "test.h"
 #include "SPI.h"
+#include "CAN.h"
+#include "MCP2515.h"
 
 int main(void)
+//p.23 for can read instructions
 {
 	setupInit();
 	test_SRAM();
-	SPI_MasterTransmit(0xAA);
-	SPI_MasterTransmit(0x01);
-	printf("%i",SPDR);
+	
+	CAN_write(0x31, 5);
+	SPI_setChipSelect(PB4, 0);
+	SPI_masterWrite(MCP_RTS_TX0);
+	SPI_setChipSelect(PB4, 1);
+
+	uint8_t i = CAN_read(0x61);
+	
+	printf("This is my integer: %i",i);
 
 	while (1) {
 		//Put microcontroller to sleep until next interrupt. 

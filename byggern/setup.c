@@ -7,8 +7,10 @@
 #include "timer.h"
 #include "sleep.h"
 #include "SPI.h"
+#include "CAN.h"
 
 	void setupInit(void){
+		cli();
 	xmem_init();
 	USART_init(MYUBRR);
 	adcInit();
@@ -18,5 +20,7 @@
 	timer_init();
 	sleep_init();
 	menuInit();
-	SPI_MasterInit();
+	SPI_masterInit();
+	CAN_init();
+		sei();
 }

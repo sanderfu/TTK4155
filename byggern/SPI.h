@@ -10,9 +10,9 @@
 #define SPI_H_
 #include <avr/io.h>
 
-void SPI_MasterInit(void);
-void SPI_MasterTransmit(char cData);
-
-
+void SPI_masterInit(void);
+void SPI_masterWrite(char cData);
+void SPI_setChipSelect(uint8_t pin, uint8_t setHigh );
+uint8_t SPI_masterRead();
 
 #endif /* SPI_H_ */

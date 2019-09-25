@@ -12,13 +12,13 @@
 void sleep_init() {
 	
 	//Choose sleep mode
-	set_sleep_mode(SLEEP_MODE_IDLE);
+	//set_sleep_mode(SLEEP_MODE_IDLE);
 	
 	//Set sleep mode
-	sleep_mode();
+	//sleep_mode();
 	
 	//Enable sleep
-	sleep_enable();
+	//sleep_enable();
    
 }
 

@@ -7,25 +7,42 @@
 
 
 #include "SPI.h"
+#include <avr/io.h>
 
-void SPI_MasterInit(void)
+void SPI_masterInit(void)
 {
-	//select slave output
-	DDRB |= (1 << PB4);
 	/* Set MOSI and SCK output, all others input */
-	DDRB |= (1 << PB5) | (1 << PB7);
+	DDRB = (1 << PB5) | (1 << PB7);
+	//define select slave as output
+	DDRB |= (1 << PB4);
 	/* Enable SPI, Master, set clock rate fck/16 */
 	SPCR |= (1 << SPE) | (1 << MSTR) | (1 << SPR0);
+	SPI_setChipSelect(PB4, 1);
 }
 
-void SPI_MasterTransmit(char cData)
+void SPI_slaveInit(void) {
+	DDRB = (1 << PB6);
+	SPCR = (1 << SPE);
+	
+}
+void SPI_masterWrite(char cData)
 {
-	//select slave low
-	PORTB |= (0 << PB4);
-	/* Start transmission */
 	SPDR = cData;
-	/* Wait for transmission complete */
 	while (!(SPSR & (1<<SPIF)));
-	//select slave high
-	PORTB |= (1 << PB4);
+
+}
+
+uint8_t SPI_masterRead() {
+	SPDR = 0;
+	while (!(SPSR & (1<<SPIF)));
+	return SPDR;
+}
+
+void SPI_setChipSelect(uint8_t pin, uint8_t setHigh ) {
+	if (setHigh) {
+		PORTB |= (1 << pin); //chip select high
+	}
+	else {
+		PORTB &= ~(1 << pin); //chip select low
+	}
 }
