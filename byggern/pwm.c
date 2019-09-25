@@ -5,9 +5,10 @@
 #define MYUBRR FOSC/16/BAUD-1
 
 #include <avr/io.h>
+#include <stdlib.h>
 #include "notes.h"
 typedef enum {
-    PRESC_OFF =  ~( 1 << CS02 & 1 << CS01  & 1 << CS00), 
+    PRESC_OFF =  ~( 1 << CS02 | 1 << CS01  | 1 << CS00), 
     PRESC_1   =  (1 << CS00),
     PRESC_8   =  (1 << CS02),
     PRESC_64  =  (1 << CS01) | (1 << CS00),
@@ -24,16 +25,15 @@ void pwm_init() {
     OCR0 = 0xFF;
     
     //set foc0 in tcr0
-    TCR0 = (1 << FOC0);
+    TCCR0 = (1 << FOC0);
 
     //set tct mode
-    TCR0 |= (1 << WGM01) ;
+    TCCR0 |= (1 << WGM01) ;
     
     //set toggle output mode
-    TCR0 |= (1 << COM01); //and 0 << COM00;
+    TCCR0 |= (1 << COM00); //and 0 << COM00;
     
-    //set OC0 to clear on match
-    TCR0 |= PRESC_1;
+    TCCR0 |= PRESC_1;
 
 }
 
@@ -43,8 +43,8 @@ void pwm_setFreq(uint32_t freq) {
         return;
     }
     //first calculate for prescaling type 1
-    enum prescaler = PRESC_1;
-    uint32_t ocr_plus_one = F_CPU/(2*prescaler)/freq;
+    prescaling prescaler = PRESC_1;
+    uint32_t ocr_plus_one = F_CPU/(2*1)/freq;
 
     if (ocr_plus_one > 255+1) {
         prescaler = PRESC_8;
@@ -65,13 +65,15 @@ void pwm_setFreq(uint32_t freq) {
             }
         }
     }
-
+	printf("Prescaler, %i, ocr_plus_one %i\n\n\r", prescaler, ocr_plus_one);
     //set prescaler bits to 0 first to reset
     TCCR0 &= PRESC_OFF; 
     //set correct prescaler    
     TCCR0 |= prescaler;
+	OCR0 = ocr_plus_one-1;
+	
     
 }
 void pwm_testPlayNote() {
-    pwm_setFreq(NOTE_A4);
+    pwm_setFreq(NOTE_A2);
 }

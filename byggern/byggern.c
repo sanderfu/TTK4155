@@ -22,21 +22,22 @@
 #include "timer.h"
 #include "test.h"
 #include "SPI.h"
+#include "pwm.h"
 
 int main(void)
 {
 	setupInit();
 	test_SRAM();
-	
-
+	pwm_testPlayNote();
+	pwm_init();
 	while (1) {
 		//Put microcontroller to sleep until next interrupt. 
-		sleep_now();
+		//sleep_now();
 		                         
 		
 		
-		test_resetMenu();
-		test_outputControllers(joystick_pos, slider_pos, buttons);		
+		//test_resetMenu();
+		//test_outputControllers(joystick_pos, slider_pos, buttons);		
 		//_delay_ms(50);	
 	}
 }
