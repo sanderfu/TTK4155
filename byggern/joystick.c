@@ -13,20 +13,20 @@ void joystickInit() {
 	joystickOffsetX = readAdc(X_POS_CHANNEL);
 	joystickOffsetY = readAdc(Y_POS_CHANNEL);
 }
-void joystick_readPosition(joystick_position_t * pos) {
+void joystick_readPosition() {
 	uint8_t x_pos = readAdc(X_POS_CHANNEL);
 	uint8_t y_pos = readAdc(Y_POS_CHANNEL);
 	if (x_pos < joystickOffsetX) {
-		pos->x_pos = ((x_pos - joystickOffsetX)*100)/(joystickOffsetX);
+		joystick_pos.x_pos = ((x_pos - joystickOffsetX)*100)/(joystickOffsetX);
 	} else {
-		pos->x_pos = ((x_pos - joystickOffsetX)*100)/(255-joystickOffsetX);
+		joystick_pos.x_pos = ((x_pos - joystickOffsetX)*100)/(255-joystickOffsetX);
 	}
 	if (y_pos < joystickOffsetY) {
-		pos->y_pos = ((y_pos - joystickOffsetY)*100)/(joystickOffsetY);
+		joystick_pos.y_pos = ((y_pos - joystickOffsetY)*100)/(joystickOffsetY);
 	} else {
-		pos->y_pos = ((y_pos - joystickOffsetY)*100)/(255-joystickOffsetY);
+		joystick_pos.y_pos = ((y_pos - joystickOffsetY)*100)/(255-joystickOffsetY);
 	}
-	pos->angle = atan2(pos->y_pos, pos->x_pos)*360/2.0/3.14;
+	joystick_pos.angle = atan2(joystick_pos.y_pos, joystick_pos.x_pos)*360/2.0/3.14;
 }
 
 DIRECTION_t joystick_getDirection(joystick_position_t * pos) {

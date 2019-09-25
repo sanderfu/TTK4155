@@ -5,10 +5,16 @@
  *  Author: torsteoe
  */ 
 
+#include "setup.h"
 #include "test.h"
 #include <avr/io.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+
+#include <util/delay.h>
+#include <avr/interrupt.h>
+#include "menu.h"
 
 void test_SRAM(void)
 {
@@ -47,9 +53,39 @@ void test_SRAM(void)
 
 void test_outputControllers(joystick_position_t joystick_pos, slider_position_t slider_pos, buttonValues_t buttons) {
 	
+	//clear terminal
 	printf("\033\143");
 		
 	printf("x: %i y: %i\n\rSl L: %i SL R: %i\n\rB L: %i B R: %i\n\rAngle: %i\n", joystick_pos.x_pos, joystick_pos.y_pos, slider_pos.left_pos, slider_pos.right_pos,  buttons.left_button, buttons.right_button, joystick_pos.angle);
 
 	
+}
+
+
+void test_resetMenu(void) {
+	/*
+	cli();
+
+		if (!strcmp(currentMenu.currentMenuItem->name,"Highscore")) {
+			
+			oled_reset();
+			oled_home();
+			for (int i = 0; i< 8; i++) {
+				for (int col = 0; col<128; col++) {
+					oled_pos(i, col);
+					oled_print_arrow();
+				}
+				
+			}
+			
+			
+			free(currentMenu.currentMenuItem);
+			currentMenu.currentMenuItem = menuInit();
+			_delay_ms(500);
+			
+			
+		}
+	sei();
+	*/
+		
 }
