@@ -30,13 +30,14 @@ int main(void)
 	setupInit();
 	printf("Starting program\n\n\n\n\n\n\n\n\n\n");
 	//test_SRAM();
-	pwm_testPlayNote();
+	//pwm_testPlayNote();
 	pwm_init();
+	music_playLisaGikk();                 
+
 	while (1) {
 		//Put microcontroller to sleep until next interrupt. 
 		//sleep_now();
-		//music_playAfrica();
-		//music_playLisaGikk();                 
+		music_playAfrica();
 		
 		
 		//test_resetMenu();

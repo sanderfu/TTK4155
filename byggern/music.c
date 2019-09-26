@@ -52,7 +52,7 @@ const uint8_t PROGMEM tempo[82] = {
     115, 128, 128, 112,
     124, 4, 112, 124,
     
-    4, 500, 124, 4, 
+    4, 112, 124, 4, 
     112, 124, 4, 115, 
     128, 112, 124, 132, 
     115, 128, 115, 128, 
@@ -111,8 +111,9 @@ void music_playAfrica() {
 	printf("playing Africa, by Toto\n\n\r");
    for (int i = 0; i< sizeof(melody)/sizeof(uint32_t); i++) {
 	   printf("Playing note or silence: %i", i);
-       pwm_setFreq(pgm_read_byte(&(melody[i])));
-       uint32_t duration = 3*pgm_read_byte(&(tempo[i]));
+	 
+       pwm_setFreq(pgm_read_word(&(melody[i])));
+       uint32_t duration = pgm_read_byte(&(tempo[i]));
        while (duration--) {
            _delay_ms(1);
        }
@@ -125,8 +126,8 @@ void music_playLisaGikk() {
 	cli();
 	printf("playing Lisa Gikk til Skolen, not by Toto\n\n\r");
 	for (int i = 0; i< sizeof(lisaMelody)/sizeof(uint32_t); i++) {
-		printf("Playing note or silence: %i", i);
-		pwm_setFreq(pgm_read_byte(&(lisaMelody[i])));
+		printf("Playing frequency: %i", pgm_read_word(&(lisaMelody[i])));
+		pwm_setFreq(pgm_read_word(&(lisaMelody[i])));
 		uint32_t duration = 4*pgm_read_byte(&(lisaTempo[i]));
 		while (duration--) {
 			_delay_ms(1);

@@ -73,7 +73,8 @@ void pwm_setFreq(uint32_t freq) {
             }
         }
     }
-	printf("Prescaler: %i\t ocr_plus_one: %i\n\r", prescaler, ocr_plus_one);
+	printf("Prescaler: %i\t ocr_plus_one: %i\n\r", presc_num, ocr_plus_one);
+	printf("ocr:  %i\n\r", ocr_plus_one-1);
 	uint32_t frequency = F_CPU/(2*presc_num*(ocr_plus_one));
 	printf("frequency obtained: %i\n\n\r", frequency);
     //set prescaler bits to 0 first to reset
@@ -85,8 +86,19 @@ void pwm_setFreq(uint32_t freq) {
     
 }
 void pwm_testPlayNote() {
-		printf("Note should have this frequency: %i ", NOTE_G5);
+		printf("Note should have this frequency: %i \n\r", NOTE_A4);
+		pwm_setFreq(NOTE_A4);
+		printf("Note should have this frequency: %i \n\r", NOTE_G5);
 		pwm_setFreq(NOTE_G5);
+		printf("Note should have this frequency: %i \n\r", NOTE_F5);
+		pwm_setFreq(NOTE_F5);
+		printf("Note should have this frequency: %i \n\r", NOTE_E5);
+		pwm_setFreq(NOTE_E5);
+		printf("Note should have this frequency: %i \n\r", NOTE_D5);
+		pwm_setFreq(NOTE_D5);
+		printf("Note should have this frequency: %i \n\r", NOTE_C5);
+		pwm_setFreq(NOTE_C5);
+		
 		/*
 	for (int i = 200; i<1000; i+=10) {
 		printf("Note should have this frequency: %i ", i);
