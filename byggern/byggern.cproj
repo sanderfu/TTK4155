@@ -145,6 +145,15 @@
     <Compile Include="byggern.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="notes.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pwm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pwm.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="sleep.c">
       <SubType>compile</SubType>
     </Compile>
