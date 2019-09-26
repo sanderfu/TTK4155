@@ -6,6 +6,10 @@ adc.c
 
 byggern.c
 
+music.c
+
+pwm.c
+
 sleep.c
 
 joystick.c

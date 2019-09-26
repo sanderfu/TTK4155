@@ -4,11 +4,12 @@
 #define BAUD 9600
 #define MYUBRR FOSC/16/BAUD-1
 
+#include <stdio.h>
 #include <avr/io.h>
 #include <stdlib.h>
 #include "notes.h"
 typedef enum {
-    PRESC_OFF =  ~( 1 << CS02 &  1 << CS01   &   1 << CS00) , 
+    PRESC_OFF =  ~( 1 << CS02 |  1 << CS01   |   1 << CS00) , 
     PRESC_1   =                                 (1 << CS00) ,
     PRESC_8   =                 (1 << CS01)                 ,
     PRESC_64  =                 (1 << CS01)  |  (1 << CS00) ,
@@ -44,28 +45,37 @@ void pwm_setFreq(uint32_t freq) {
     }
     //first calculate for prescaling type 1
     prescaling prescaler = PRESC_1;
+	uint32_t presc_num = 1;
     uint32_t ocr_plus_one = F_CPU/(2*1)/freq;
 
     if (ocr_plus_one > 255+1) {
         prescaler = PRESC_8;
+		presc_num *=8;
         ocr_plus_one /= 8;
 
         if (ocr_plus_one > 255+1) {
             prescaler = PRESC_64;
+			presc_num *=8;
+			
             ocr_plus_one /= 8;
             
             if (ocr_plus_one > 255+1) {
                 prescaler = PRESC_256;
+				presc_num *=4;
+
                 ocr_plus_one /= 4;
                     
                 if (ocr_plus_one > 255+1) {
                     prescaler = PRESC_1024;
+					presc_num *=4;
                     ocr_plus_one /= 4;
                 }
             }
         }
     }
-	printf("Prescaler, %i, ocr_plus_one %i\n\n\r", prescaler, ocr_plus_one);
+	printf("Prescaler: %i\t ocr_plus_one: %i\n\r", prescaler, ocr_plus_one);
+	uint32_t frequency = F_CPU/(2*presc_num*(ocr_plus_one));
+	printf("frequency obtained: %i\n\n\r", frequency);
     //set prescaler bits to 0 first to reset
     TCCR0 &= PRESC_OFF; 
     //set correct prescaler    
@@ -75,5 +85,12 @@ void pwm_setFreq(uint32_t freq) {
     
 }
 void pwm_testPlayNote() {
-    pwm_setFreq(NOTE_A2);
+		printf("Note should have this frequency: %i ", NOTE_G5);
+		pwm_setFreq(NOTE_G5);
+		/*
+	for (int i = 200; i<1000; i+=10) {
+		printf("Note should have this frequency: %i ", i);
+		pwm_setFreq(i);
+	}
+	*/
 }

@@ -3,6 +3,6 @@
 
 
 void music_playAfrica();
-
+void music_playLisaGikk();
 
 #endif
