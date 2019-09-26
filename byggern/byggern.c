@@ -23,13 +23,14 @@
 #include "test.h"
 #include "SPI.h"
 #include "pwm.h"
+#include "music.h"
 
 int main(void)
 {
 	setupInit();
 	test_SRAM();
-	pwm_testPlayNote();
 	pwm_init();
+    music_playAfrica();
 	while (1) {
 		//Put microcontroller to sleep until next interrupt. 
 		//sleep_now();

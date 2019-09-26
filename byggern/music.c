@@ -1,6 +1,11 @@
 //Africa, by Toto
 //
 //Africa main theme melody
+
+#include <avr/io.h>
+#include "music.h"
+#include "pwm.h"
+
 uint32_t PROGMEM melody[] = {
   NOTE_A4, 0, 0, NOTE_A4,
   0, NOTE_A4, 0, 0,
@@ -64,7 +69,7 @@ uint8_t PROGMEM tempo[] = {
 
 
 
-void playAfrica() {
+void music_playAfrica() {
     cli(); 
    for (int i = 0; i< sizeof(melody)/sizeof(uint8_t); i++) {
        pwm_playFreq(pgm_read_byte(&(melody[i]));
