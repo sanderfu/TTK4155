@@ -7,12 +7,12 @@
 #include <avr/io.h>
 #include "notes.h"
 typedef enum {
-    PRESC_OFF =  ~( 1 << CS02 & 1 << CS01  & 1 << CS00), 
-    PRESC_1   =  (1 << CS00),
-    PRESC_8   =  (1 << CS02),
-    PRESC_64  =  (1 << CS01) | (1 << CS00),
-    PRESC_256 =  (1 << CS02) | (1 << CS00),
-    PRESC_1024 = (1 << CS02) | (1 << CS01) | (1 << CS01)
+    PRESC_OFF =  ~( 1 << CS02 &  1 << CS01   &   1 << CS00) , 
+    PRESC_1   =                                 (1 << CS00) ,
+    PRESC_8   =                 (1 << CS01)                 ,
+    PRESC_64  =                 (1 << CS01)  |  (1 << CS00) ,
+    PRESC_256 =    (1 << CS02)                              , 
+    PRESC_1024 =   (1 << CS02)  |               (1 << CS00)
 } prescaling;
 
 void pwm_init() {
