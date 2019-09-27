@@ -33,11 +33,12 @@ int main(void)
 	//pwm_testPlayNote();
 	pwm_init();
 	//music_playLisaGikk();                 
-	music_playRick();
 	while (1) {
 		//Put microcontroller to sleep until next interrupt. 
-		//sleep_now();
-		
+		sleep_now();
+		if (!strcmp(currentMenu.currentMenuItem->children[currentMenu.childIndex]->name, "Rick")) {
+			music_playRick();
+		}
 		
 		//test_resetMenu();
 		//test_outputControllers(joystick_pos, slider_pos, buttons);		

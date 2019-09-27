@@ -5,7 +5,7 @@
  *  Author: torsteoe
  */ 
 #include "menu.h"
-
+#include <avr/interrupt.h>
 
 
 
@@ -25,8 +25,10 @@ MenuNode * addChild(MenuNode* parent, char* child_name)
 	parent->numChildren++;
 	strcpy(childPtr->name, child_name);
 	childPtr->parent = parent;
-	
+	//printf("Added child: %s\n\r", childPtr->name);
+
 	if (parent->numChildren > MAXCHILDREN) {
+		printf("REached max: \n\r");
 		return NULL;
 	} 
 	parent->children[parent->numChildren-1]=childPtr;
@@ -50,14 +52,27 @@ MenuNode* menuInit(void)
 		addChild(childHighscore, "High: 1");
 	}
 	
+	//MenuNode* childSettings = addChild(mainMenu,"Settings");
+	
+	MenuNode* childMusic = addChild(mainMenu,"Music");
+	addChild(childMusic, "Rick");
+	
+	
+	//addChild(childSettings, "No sett");
+	
+	
+	printf("Number of children: %i\n\r",mainMenu->numChildren);
+
+
+	/*
 	MenuNode* childSettings = addChild(mainMenu,"Settings");
-	//childSettings->numChildren = 1;
 	addChild(childSettings, "No sett");
+	printf("Number of children: %i\n\r",childSettings->numChildren);
+	*/
 	currentMenu.currentMenuItem = mainMenu;
 	currentMenu.childIndex = 0;
 	currentMenu.lastDir = NEUTRAL;
 	
-
 	return mainMenu;
 }
 

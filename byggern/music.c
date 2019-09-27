@@ -47,7 +47,7 @@ const uint8_t PROGMEM lisaTempo[33] = {
 };
 
 
-const uint32_t PROGMEM song1_chorus_melody[80] =
+const uint32_t PROGMEM song1_chorus_melody[79] =
 { NOTE_AS4, NOTE_AS4, NOTE_GS4, 0, 
 	NOTE_GS4,NOTE_F5, 0, NOTE_F5, 
 	NOTE_DS5, NOTE_AS4, 0,NOTE_AS4,
@@ -73,7 +73,7 @@ const uint32_t PROGMEM song1_chorus_melody[80] =
 	 NOTE_GS4, NOTE_DS5, NOTE_CS5, 0
 };
 
-const char* lyrics_chorus[80] =
+const char* lyrics_chorus[79] =
 { "Never ", "", "gonna ", "",
   "", "give ", "", "you ", "up\r\n",
   "Never ", "", "gonna ", "",
@@ -95,7 +95,7 @@ const char* lyrics_chorus[80] =
    "and ","", "hurt ",  "you", "\r\n", ""
 };
 
-const uint8_t PROGMEM song1_chorus_rhythmn[80] =
+const uint8_t PROGMEM song1_chorus_rhythmn[79] =
 { 10, 10, 10, 1, 
 	10,30,  1, 30,
 	 60, 10,  1,10, 
@@ -139,7 +139,7 @@ void music_playLisaGikk() {
 
 }
 void music_playRick() {
-	cli();
+	
 	printf("You got rickrolled\n\n\r");
 	for (int i = 0; i< sizeof(song1_chorus_melody)/sizeof(uint32_t); i++) {
 		printf(lyrics_chorus[i]);
@@ -150,6 +150,6 @@ void music_playRick() {
 		}
 	}
 	pwm_setFreq(0);
-	sei();
+	
 
 }

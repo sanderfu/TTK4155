@@ -17,6 +17,8 @@ ISR (TIMER1_COMPB_vect) {
 	joystick_readPosition(&joystick_pos);
 	slider_readPosition(&slider_pos);
 	touchButton_readButtons(&buttons);
+	navigateMenu(&joystick_pos);
+	menu_printCurrentMenu();
 	sei();
 }
 /*

@@ -34,7 +34,7 @@ void pwm_init() {
     //set toggle output mode
     TCCR0 |= (1 << COM00); //and 0 << COM00;
     
-    TCCR0 |= PRESC_1;
+    TCCR0 &= PRESC_OFF;
 
 }
 
