@@ -32,12 +32,11 @@ int main(void)
 	//test_SRAM();
 	//pwm_testPlayNote();
 	pwm_init();
-	music_playLisaGikk();                 
-
+	//music_playLisaGikk();                 
+	music_playRick();
 	while (1) {
 		//Put microcontroller to sleep until next interrupt. 
 		//sleep_now();
-		music_playAfrica();
 		
 		
 		//test_resetMenu();

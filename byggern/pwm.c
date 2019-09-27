@@ -56,7 +56,6 @@ void pwm_setFreq(uint32_t freq) {
         if (ocr_plus_one > 255+1) {
             prescaler = PRESC_64;
 			presc_num *=8;
-			
             ocr_plus_one /= 8;
             
             if (ocr_plus_one > 255+1) {
@@ -73,10 +72,10 @@ void pwm_setFreq(uint32_t freq) {
             }
         }
     }
-	printf("Prescaler: %i\t ocr_plus_one: %i\n\r", presc_num, ocr_plus_one);
-	printf("ocr:  %i\n\r", ocr_plus_one-1);
-	uint32_t frequency = F_CPU/(2*presc_num*(ocr_plus_one));
-	printf("frequency obtained: %i\n\n\r", frequency);
+	//printf("Prescaler: %i\t ocr_plus_one: %i\n\r", presc_num, ocr_plus_one);
+	//printf("ocr:  %i\n\r", ocr_plus_one-1);
+	//uint32_t frequency = F_CPU/(2*presc_num*(ocr_plus_one));
+	//printf("frequency obtained: %i\n\n\r", frequency);
     //set prescaler bits to 0 first to reset
     TCCR0 &= PRESC_OFF; 
     //set correct prescaler    

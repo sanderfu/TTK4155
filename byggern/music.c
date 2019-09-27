@@ -14,66 +14,6 @@
 #include "pwm.h"
 #include "notes.h"
 
-const uint32_t PROGMEM melody[80] = {
-  NOTE_A4, 0, 0, NOTE_A4,
-  0, NOTE_A4, 0, 0,
-  NOTE_A4, 0, 0, NOTE_A4,
-  0, 0, NOTE_A4, 0,
-      
-  0, NOTE_FS4, 0, 0,
-  NOTE_GS5, 0, 0, NOTE_B5,
-  0, NOTE_CS5, 0, 0, 
-  NOTE_FS4, 0, 659, 0,
-
-  1108, 0, 987, 0, 
-  1108, 0, 739, 0, 
-  1318, 0, 1108, 0, 
-  987, 0, 554, 0, 
-  
-  369, 0, 329, 0, 
-  277, 0, 493, 0, 
-  1108, 0, 1479, 0, 
-  1318, 0, 0, 1318,
-
-  0, 1108, 0, 1244, 
-  0, 659, 0, 0, 
-  1318, 0, 0, 1318, 
-  0, 659, 0, 415,
-
-  //0, 493, 0, 277, 
-  //0, 1661, 0, 0
-
-};
-
-//Africa main them tempo
-const uint8_t PROGMEM tempo[82] = {
-    108, 120, 136, 115,
-    128, 112, 124, 132, 
-    115, 128, 128, 112,
-    124, 4, 112, 124,
-    
-    4, 112, 124, 4, 
-    112, 124, 4, 115, 
-    128, 112, 124, 132, 
-    115, 128, 115, 128, 
-
-    115, 128, 115, 128, 
-    115, 128, 115, 128, 
-    115, 128, 115, 128, 
-    115, 128, 115, 128,
-
-    115, 128, 115, 128, 
-    115, 128, 115, 128, 
-    115, 128, 115, 128, 
-    115, 128, 128, 115, 
-
-    128, 115, 128, 115, 
-    128, 115, 128, 128,
-    115, 128, 128, 115, 
-    128, 115, 128, 115,
-
-};
-
 
 const uint32_t PROGMEM lisaMelody[33] = {
 	NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, 
@@ -106,22 +46,83 @@ const uint8_t PROGMEM lisaTempo[33] = {
 
 };
 
-void music_playAfrica() {
-    cli(); 
-	printf("playing Africa, by Toto\n\n\r");
-   for (int i = 0; i< sizeof(melody)/sizeof(uint32_t); i++) {
-	   printf("Playing note or silence: %i", i);
-	 
-       pwm_setFreq(pgm_read_word(&(melody[i])));
-       uint32_t duration = pgm_read_byte(&(tempo[i]));
-       while (duration--) {
-           _delay_ms(1);
-       }
-   }
-   pwm_setFreq(0);
-   sei();
 
-}
+const uint32_t PROGMEM song1_chorus_melody[80] =
+{ NOTE_AS4, NOTE_AS4, NOTE_GS4, 0, 
+	NOTE_GS4,NOTE_F5, 0, NOTE_F5, 
+	NOTE_DS5, NOTE_AS4, 0,NOTE_AS4,
+    NOTE_GS4, 0, NOTE_GS4, NOTE_DS5, 0,
+	
+	NOTE_DS5, NOTE_CS5, NOTE_C5, NOTE_AS4,
+	NOTE_CS5, 0, NOTE_CS5, 0, 
+	 NOTE_CS5, 0, NOTE_CS5, 0, NOTE_CS5,
+	  0, NOTE_DS5, NOTE_C5, NOTE_AS4,
+	 
+	 NOTE_GS4, 0, NOTE_GS4, 0, 
+	 NOTE_GS4, NOTE_DS5, NOTE_CS5,NOTE_AS4,
+	  0, NOTE_AS4, NOTE_GS4,NOTE_GS4,
+	  NOTE_F5, 0, NOTE_F5, NOTE_DS5, 
+	 
+	 NOTE_AS4, 0, NOTE_AS4, NOTE_GS4, 
+	 0, NOTE_GS4, 0,  NOTE_GS4, 
+	 NOTE_C5, NOTE_CS5, NOTE_C5, NOTE_AS4,
+	 NOTE_CS5, 0, NOTE_CS5, 0,
+	 
+	 NOTE_CS5,  NOTE_CS5, 0, NOTE_CS5, NOTE_DS5,
+	 NOTE_C5, NOTE_AS4, NOTE_GS4, 0, 
+	 NOTE_GS4, NOTE_DS5, NOTE_CS5, 0
+};
+
+const char* lyrics_chorus[80] =
+{ "Never ", "", "gonna ", "",
+  "", "give ", "", "you ", "up\r\n",
+  "Never ", "", "gonna ", "",
+   "", "let ",  "",  "you ", "",
+   
+   "down", "\r\n", "", "Never ", "", 
+  "gonna ", "", "", "", "run ", "", "", 
+  "around ", "", "", 
+   "", "", "and ", "", "desert ",  "","", "you", "\n\r",  
+  
+  "Never ", "", "gonna ", "",
+   "make ", "", "you ", "cry", "\n\r",
+   "Never ", "", "gonna ", "",
+    "", "",  "say ",  "goodbye ", "", 
+	
+	"", "\r\n", "Never ", "", 
+	"gonna ", "", "", "tell ", "", "",
+	"a ", "lie ", "","",
+   "and ","", "hurt ",  "you", "\r\n", ""
+};
+
+const uint8_t PROGMEM song1_chorus_rhythmn[80] =
+{ 10, 10, 10, 1, 
+	10,30,  1, 30,
+	 60, 10,  1,10, 
+	 10,  1, 10, 30, 0,
+	 
+	 30, 30, 10, 20,
+	10, 1, 10, 1, 
+	10, 1, 10, 1, 30, 
+	1, 30, 30, 10,
+	
+	20, 1, 20,  1,
+	 20, 40, 80,10, 
+	 1, 10, 10, 10,
+	 30,  1, 30, 60, 
+	
+	10,  1, 10, 10,
+	 1, 10, 1,30,
+	30, 30, 10, 20,
+	10,  1, 10,  1,
+	
+	10, 10, 1, 30, 30,
+	 30, 10, 20, 20,
+	 20,40, 80, 40
+};
+
+
+
 void music_playLisaGikk() {
 	cli();
 	printf("playing Lisa Gikk til Skolen, not by Toto\n\n\r");
@@ -129,6 +130,21 @@ void music_playLisaGikk() {
 		printf("Playing frequency: %i", pgm_read_word(&(lisaMelody[i])));
 		pwm_setFreq(pgm_read_word(&(lisaMelody[i])));
 		uint32_t duration = 4*pgm_read_byte(&(lisaTempo[i]));
+		while (duration--) {
+			_delay_ms(1);
+		}
+	}
+	pwm_setFreq(0);
+	sei();
+
+}
+void music_playRick() {
+	cli();
+	printf("You got rickrolled\n\n\r");
+	for (int i = 0; i< sizeof(song1_chorus_melody)/sizeof(uint32_t); i++) {
+		printf(lyrics_chorus[i]);
+		pwm_setFreq(pgm_read_word(&(song1_chorus_melody[i])));
+		uint32_t duration = 20*pgm_read_byte(&(song1_chorus_rhythmn[i]));
 		while (duration--) {
 			_delay_ms(1);
 		}

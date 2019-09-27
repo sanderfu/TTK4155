@@ -2,7 +2,7 @@
 #define MUSIC_H_
 
 
-void music_playAfrica();
+void music_playRick();
 void music_playLisaGikk();
 
 #endif
