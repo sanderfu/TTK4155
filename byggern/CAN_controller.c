@@ -20,6 +20,7 @@ uint8_t CAN_controller_read(uint8_t addr) {
 	SPI_setChipSelect(PB4, 0); 
 	SPI_masterWrite(MCP_READ);
 	SPI_masterWrite(addr);
+	SPI_masterWrite(0);
 	uint8_t data = SPI_masterRead();
 	SPI_setChipSelect(PB4, 1);
 	
@@ -47,7 +48,7 @@ void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data) {
 
 }
 
-uint8_t CAN_controller_init() {
+void CAN_controller_init() {
 	
 	
 	SPI_masterInit();
@@ -60,20 +61,20 @@ uint8_t CAN_controller_init() {
 	
 	
 	//printf("After spi write\n");
-	_delay_ms(200);
+	_delay_ms(1);
 	
 	//Check CANSTAT register
 	
 	uint8_t data = CAN_controller_read(MCP_CANSTAT);
+	_delay_ms(1);
 	
 	//uint8_t data = 0x44;
 	uint8_t mode_bits = (data & MODE_MASK);
 	
 	if (mode_bits != MODE_CONFIG) {
-		printf("Not in config mode");
-		return 0;
+		printf("Not in config mode, \t %i\n\r", mode_bits);
 	}
-	/*
+	
 	
 	 //set in loopback mode p.60 MCP2515
 	CAN_controller_bitModify(0b11100000, MCP_CANCTRL, MODE_LOOPBACK);
@@ -84,8 +85,7 @@ uint8_t CAN_controller_init() {
 	printf("after write to canctrl\n\r");
 	
 	//Check CANSTAT register
-	uint8_t data = CAN_controller_read(MCP_CANSTAT);
+	data = CAN_controller_read(MCP_CANSTAT);
 	printf("Data: %i\n\r", data);
-	*/
-	return 1;
+
 }

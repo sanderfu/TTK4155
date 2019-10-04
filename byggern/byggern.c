@@ -8,10 +8,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+#define F_CPU 4915200
 #include <avr/interrupt.h>
 #include "menu.h"
-
+#include <util/delay.h>
 #include "setup.h"
 
 #include <stdlib.h>
@@ -35,34 +35,40 @@
 int main(void)
 //p.23 for can read instructions
 {
-	if (!setupInit()) {
-		return 0;
-	}
+	setupInit();
+	
 	//test_SRAM();
 	
-	//CAN_controller_write(0x31, 5);
-	//SPI_setChipSelect(PB4, 0);
-	//SPI_masterWrite(MCP_RTS_TX0);
-	//SPI_setChipSelect(PB4, 1);
+	CAN_controller_write(0x31, 5);
+	SPI_setChipSelect(PB4, 0);
+	SPI_masterWrite(MCP_RTS_TX0);
+	SPI_setChipSelect(PB4, 1);
 
-	//uint8_t i = CAN_controller_read(0x61);
+	uint8_t i = CAN_controller_read(0x61);
 	
-	//printf("This is my integer: %i",i);
+	printf("This is my integer: %i",i);
 
 	printf("Starting program\n\n\n\n\n\n\n\n\n\n");
 	//test_SRAM();
 	//pwm_testPlayNote();
-	pwm_init();
+	//pwm_init();
 	//music_playLisaGikk();                 
 	while (1) {
 		//Put microcontroller to sleep until next interrupt. 
+		SPI_setChipSelect(PB4, 0);
+
 		sleep_now();
 		if (!strcmp(currentMenu.currentMenuItem->children[currentMenu.childIndex]->name, "Rick")) {
-			music_playRick();
 		}
 		
 		//test_resetMenu();
 		//test_outputControllers(joystick_pos, slider_pos, buttons);		
-		//_delay_ms(50);	
+		_delay_ms(500);	
+		SPI_setChipSelect(PB4,1);
+		CAN_controller_write(0x31,5);
+		uint8_t i = CAN_controller_read(0x61);
+	
+	printf("This is my integer: %i",i);
+		_delay_ms(500);
 	}
 }

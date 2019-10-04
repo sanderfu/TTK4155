@@ -9,6 +9,6 @@
 #include <avr/io.h>
 #define test_bit(reg, bit) (reg & (1<<bit))
 
-uint8_t setupInit(void);
+void setupInit(void);
 
 #endif

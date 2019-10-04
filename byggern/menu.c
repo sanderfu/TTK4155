@@ -124,7 +124,7 @@ void menu_printCurrentMenu() {
 	
 	for (int i = 0; i<currentMenu.currentMenuItem->numChildren; i++) {
 		oled_gotoLine(i+2);
-		oled_print(((currentMenu.currentMenuItem->children)[i])->name);
+		oled_print(currentMenu.currentMenuItem->children[i]->name);
 		if (currentMenu.childIndex == i) {
 			oled_print_arrow();
 		}
