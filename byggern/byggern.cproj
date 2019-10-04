@@ -145,10 +145,13 @@
     <Compile Include="byggern.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="CAN.c">
+    <Compile Include="CAN_controller.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="CAN.h">
+    <Compile Include="CAN_controller.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCP2515.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="music.c">

@@ -6,10 +6,9 @@
 #include "oled.h"
 #include "timer.h"
 #include "sleep.h"
-#include "SPI.h"
-#include "CAN.h"
+#include "CAN_controller.h"
 
-	void setupInit(void){
+	uint8_t setupInit(void){
 		cli();
 	xmem_init();
 	USART_init(MYUBRR);
@@ -19,8 +18,11 @@
 	oled_init();
 	timer_init();
 	sleep_init();
-	menuInit();
-	SPI_masterInit();
-	CAN_init();
+	//menuInit();
+	
+	if (!CAN_controller_init()) {
+		return 0;
+	}
 		sei();
+	return 1;
 }

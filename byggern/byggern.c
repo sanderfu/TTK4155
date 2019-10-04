@@ -27,7 +27,7 @@
 #include "timer.h"
 #include "test.h"
 #include "SPI.h"
-#include "CAN.h"
+#include "CAN_controller.h"
 #include "MCP2515.h"
 #include "pwm.h"
 #include "music.h"
@@ -35,17 +35,19 @@
 int main(void)
 //p.23 for can read instructions
 {
-	setupInit();
-	test_SRAM();
+	if (!setupInit()) {
+		return 0;
+	}
+	//test_SRAM();
 	
-	CAN_write(0x31, 5);
-	SPI_setChipSelect(PB4, 0);
-	SPI_masterWrite(MCP_RTS_TX0);
-	SPI_setChipSelect(PB4, 1);
+	//CAN_controller_write(0x31, 5);
+	//SPI_setChipSelect(PB4, 0);
+	//SPI_masterWrite(MCP_RTS_TX0);
+	//SPI_setChipSelect(PB4, 1);
 
-	uint8_t i = CAN_read(0x61);
+	//uint8_t i = CAN_controller_read(0x61);
 	
-	printf("This is my integer: %i",i);
+	//printf("This is my integer: %i",i);
 
 	printf("Starting program\n\n\n\n\n\n\n\n\n\n");
 	//test_SRAM();
