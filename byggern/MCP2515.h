@@ -155,5 +155,22 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_MERRF		0x80
 
 
+//buffers, receive and transmit
+
+#define TXB0SIDL		0b00110010
+#define TXB0SIDH		0b00110001
+#define TXB1SIDL		0b01000010
+#define TXB1SIDH		0b01000001
+#define TXB2SIDL		0b01010010
+#define TXB2SIDH		0b01010001
+
+#define TXB0DLC			0b00110101
+#define TXB1DLC			0b01000101
+#define TXB2DLC			0b01010101
+
+#define TXB0D0			0b00110110
+#define TXB1D0			0b01000110
+#define TXB2D0			0b01010110
+
 
 #endif

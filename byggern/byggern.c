@@ -55,7 +55,6 @@ int main(void)
 	//music_playLisaGikk();                 
 	while (1) {
 		//Put microcontroller to sleep until next interrupt. 
-		SPI_setChipSelect(PB4, 0);
 
 		sleep_now();
 		if (!strcmp(currentMenu.currentMenuItem->children[currentMenu.childIndex]->name, "Rick")) {
@@ -64,11 +63,14 @@ int main(void)
 		//test_resetMenu();
 		//test_outputControllers(joystick_pos, slider_pos, buttons);		
 		_delay_ms(500);	
-		SPI_setChipSelect(PB4,1);
-		CAN_controller_write(0x31,5);
-		uint8_t i = CAN_controller_read(0x61);
-	
-	printf("This is my integer: %i",i);
+		CAN_controller_write(0x31,5); //0x31 is TX buffer 0
 		_delay_ms(500);
+
+		CAN_controller_RTS(0);
+		_delay_ms(500);
+
+		uint8_t i = CAN_controller_read(0x61);  //0x61 is rx buffer 0
+	
+		printf("This is my integer: %i",i);
 	}
 }

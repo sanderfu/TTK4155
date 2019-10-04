@@ -145,6 +145,12 @@
     <Compile Include="byggern.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="CAN.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CAN.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="CAN_controller.c">
       <SubType>compile</SubType>
     </Compile>

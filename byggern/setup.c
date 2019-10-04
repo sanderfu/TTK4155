@@ -6,7 +6,6 @@
 #include "oled.h"
 #include "timer.h"
 #include "sleep.h"
-#include "CAN_controller.h"
 
 	void setupInit(void){
 	cli();

@@ -47,29 +47,31 @@ void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data) {
 		SPI_setChipSelect(PB4, 1);
 
 }
-
+CAN_controller_reset() {
+	SPI_setChipSelect(PB4, 0);
+	printf("Before spi write");
+	SPI_masterWrite(MCP_RESET);
+	SPI_setChipSelect(PB4, 1);
+}
 void CAN_controller_init() {
 	
 	
 	SPI_masterInit();
 	
 	//reset with spi command
-	SPI_setChipSelect(PB4, 0);
-	printf("Before spi write");
-	SPI_masterWrite(MCP_RESET);
-	SPI_setChipSelect(PB4, 1);
+	CAN_controller_reset();
 	
 	
 	//printf("After spi write\n");
-	_delay_ms(1);
+	_delay_ms(20);
 	
 	//Check CANSTAT register
 	
-	uint8_t data = CAN_controller_read(MCP_CANSTAT);
-	_delay_ms(1);
+	uint8_t status = CAN_controller_read(MCP_CANSTAT);
+	_delay_ms(20);
 	
 	//uint8_t data = 0x44;
-	uint8_t mode_bits = (data & MODE_MASK);
+	uint8_t mode_bits = (status & MODE_MASK);
 	
 	if (mode_bits != MODE_CONFIG) {
 		printf("Not in config mode, \t %i\n\r", mode_bits);
@@ -85,7 +87,28 @@ void CAN_controller_init() {
 	printf("after write to canctrl\n\r");
 	
 	//Check CANSTAT register
-	data = CAN_controller_read(MCP_CANSTAT);
-	printf("Data: %i\n\r", data);
+	status = CAN_controller_read(MCP_CANSTAT);
+	printf("Data: %i\n\r", status);
 
 }
+
+void CAN_controller_RTS(uint8_t buffer) {
+	SPI_setChipSelect(PB4, 0);
+	switch (buffer) {
+		case 0:
+			SPI_masterWrite(MCP_RTS_TX0);
+			break;
+		case 1:
+			SPI_masterWrite(MCP_RTS_TX1);
+			break;
+		case 2:
+			SPI_masterWrite(MCP_RTS_TX2);
+			break;
+		default: 
+			break;
+			
+	}
+	SPI_setChipSelect(PB4, 1);
+}
+
+

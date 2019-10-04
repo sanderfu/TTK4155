@@ -6,6 +6,8 @@ adc.c
 
 byggern.c
 
+CAN.c
+
 CAN_controller.c
 
 music.c
