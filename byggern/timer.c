@@ -17,9 +17,11 @@ ISR (TIMER1_COMPB_vect) {
 	joystick_readPosition(&joystick_pos);
 	slider_readPosition(&slider_pos);
 	touchButton_readButtons(&buttons);
+	navigateMenu(&joystick_pos);
+	menu_printCurrentMenu();
 	sei();
 }
-
+/*
 ISR (TIMER0_COMP_vect) {
 	cli();
 	TCNT1 = 0x00;
@@ -28,7 +30,7 @@ ISR (TIMER0_COMP_vect) {
 	sei();
 }
 
-
+*/
 void timer_init() {
 
 	
@@ -50,14 +52,14 @@ void timer_init() {
 	
 	
 	////////////////////////TIMER 0////////////////////////////////////
-	
+	/*
 	TIMSK |= (1 << OCIE0);
 	TCNT0 = 0x0; 
 	
 	TCCR0 = (1 << COM01 | 1 << COM00 | 1 << CS02 | 1 << CS00);
 	
 	OCR0 = TIMER0_RESET;
-	
+	*/
 	
 	//Enable global interrupts
 

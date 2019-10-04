@@ -152,6 +152,19 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="MCP2515.h">
+    <Compile Include="music.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="music.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="notes.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pwm.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="pwm.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="sleep.c">

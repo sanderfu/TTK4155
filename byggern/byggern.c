@@ -29,6 +29,8 @@
 #include "SPI.h"
 #include "CAN.h"
 #include "MCP2515.h"
+#include "pwm.h"
+#include "music.h"
 
 int main(void)
 //p.23 for can read instructions
@@ -45,11 +47,17 @@ int main(void)
 	
 	printf("This is my integer: %i",i);
 
+	printf("Starting program\n\n\n\n\n\n\n\n\n\n");
+	//test_SRAM();
+	//pwm_testPlayNote();
+	pwm_init();
+	//music_playLisaGikk();                 
 	while (1) {
 		//Put microcontroller to sleep until next interrupt. 
-		//sleep_now();
-		                         
-		
+		sleep_now();
+		if (!strcmp(currentMenu.currentMenuItem->children[currentMenu.childIndex]->name, "Rick")) {
+			music_playRick();
+		}
 		
 		//test_resetMenu();
 		//test_outputControllers(joystick_pos, slider_pos, buttons);		
