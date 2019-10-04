@@ -151,7 +151,6 @@
     <Compile Include="CAN.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="MCP2515.h">
     <Compile Include="music.c">
       <SubType>compile</SubType>
     </Compile>
