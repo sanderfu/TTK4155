@@ -31,6 +31,19 @@
 #include "MCP2515.h"
 #include "pwm.h"
 #include "music.h"
+#include "CAN.h"
+CAN_message_t received_message;
+volatile uint8_t flag = 0;
+ISR (INT0_vect) {
+	//cli();
+	flag= 1;
+	
+	
+	
+	//sei();
+	
+}
+
 
 int main(void)
 //p.23 for can read instructions
@@ -38,17 +51,17 @@ int main(void)
 	setupInit();
 	
 	//test_SRAM();
+	CAN_message_t message;
+	message.ID = 3;
+	message.data_length = 1;
+	message.data[0] = (uint8_t) 8;
+	CAN_transmit_message(&message);
 	
-	CAN_controller_write(0x31, 5);
-	SPI_setChipSelect(PB4, 0);
-	SPI_masterWrite(MCP_RTS_TX0);
-	SPI_setChipSelect(PB4, 1);
 
-	uint8_t i = CAN_controller_read(0x61);
 	
-	printf("This is my integer: %i",i);
 
-	printf("Starting program\n\n\n\n\n\n\n\n\n\n");
+	printf("Starting program\n\n\n\n\n\n\n\n\n\n\r");
+	printf("---------------------------------------\n\r");
 	//test_SRAM();
 	//pwm_testPlayNote();
 	//pwm_init();
@@ -59,18 +72,22 @@ int main(void)
 		sleep_now();
 		if (!strcmp(currentMenu.currentMenuItem->children[currentMenu.childIndex]->name, "Rick")) {
 		}
-		
+		if (flag) {
+			//printf("Message received");
+			CAN_receiveMessage(&received_message);
+			//printf("This is the data: %i", received_message.data);
+			uint8_t mask = 0b11; 
+			CAN_controller_bitModify(mask, CANINTF, 0b00);
+			flag=0;
+		}
 		//test_resetMenu();
 		//test_outputControllers(joystick_pos, slider_pos, buttons);		
+		/*
+		CAN_transmit_message(&message);
 		_delay_ms(500);	
-		CAN_controller_write(0x31,5); //0x31 is TX buffer 0
-		_delay_ms(500);
+		_delay_ms(500);	
+		*/
 
-		CAN_controller_RTS(0);
-		_delay_ms(500);
-
-		uint8_t i = CAN_controller_read(0x61);  //0x61 is rx buffer 0
-	
-		printf("This is my integer: %i",i);
+		
 	}
 }

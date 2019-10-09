@@ -172,5 +172,26 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define TXB1D0			0b01000110
 #define TXB2D0			0b01010110
 
+#define TXB0CTRL		0b00110000
+#define	TXB1CTRL		0b01000000
+#define TXB2CTRL		0b01010000
+
+#define TXREQ			3
+
+#define	CANINTE			Ox2B
+#define TX0IE			2
+#define TX1IE			3
+#define TX2IE			4
+
+#define CANINTF			0x2C
+
+#define MCP_RXB0SIDL	0x62
+#define MCP_RXB1SIDL	0b01110010
+
+#define MCP_RXB0D0		0b01100110
+#define MCP_RXB0DLC		0b01100101
+
+#define MCP_RXB1D0		0b01110110
+#define MCP_RXB1DLC		0b01110101
 
 #endif

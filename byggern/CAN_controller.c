@@ -81,7 +81,16 @@ void CAN_controller_init() {
 	 //set in loopback mode p.60 MCP2515
 	CAN_controller_bitModify(0b11100000, MCP_CANCTRL, MODE_LOOPBACK);
 	CAN_controller_bitModify(0b01100000, MCP_RXB0CTRL, 0b01100000); //receive any type of message, no filter p. 27
-	CAN_controller_bitModify(0b1, MCP_CANINTE, 0b1);
+	CAN_controller_bitModify(0b11111111, MCP_CANINTE, 0b11);
+	
+	//set interrupt on atm162
+	 GICR |= (1<< INT0); //turn on interrupt 0
+	MCUCR |= (1 << ISC01); //Turn on falling edge
+	MCUCR &= ~(1 << ISC00);
+//set PD2 as input
+	DDRD  &= (1 << PD2); //set as input.
+	
+	
 	
 	_delay_ms(200);
 	printf("after write to canctrl\n\r");
