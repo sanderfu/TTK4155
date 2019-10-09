@@ -78,10 +78,11 @@ void CAN_transmit_message(CAN_message_t *message) {
 	//Load id in registers TXBnSIDH and TXBnSIDL
 	switch(buffer_number) {
 			case 0:
-				CAN_controller_bitModify(0b11100000, TXB0SIDL, (uint8_t) (message->ID  << 5));
-				CAN_controller_write(TXB0SIDH, (uint8_t) message->ID >> 3 );
+				CAN_controller_bitModify(0b11100000, TXB0SIDL, (uint8_t) ((message->ID & 0b111) << 5));
+				CAN_controller_write(TXB0SIDH, (uint8_t) ( message->ID >> 3) );
 				
-				
+				printf("Sending whole id: %i", message->ID );
+
 				
 				//CAN_controller_bitModify(0b11100000, TXB0SIDL, (uint8_t) 0b111 << 5);
 				//CAN_controller_write(TXB0SIDH, (uint8_t) 0b1 );
@@ -90,6 +91,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 			case 1:
 				CAN_controller_bitModify(0b11100000, TXB1SIDL, (uint8_t) (message->ID) << 5);
 				CAN_controller_write(TXB1SIDH, (uint8_t)  message->ID >> 3);
+				
 				break;
 			case 2:
 				CAN_controller_bitModify(0b11100000, TXB2SIDL, (uint8_t) (message->ID) << 5);
@@ -99,8 +101,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 			
 	}
 		_delay_ms(20);
-
-	printf("Sending id: %i", message->ID);
+;
 	//Load length in register TXBnDLC
 	switch(buffer_number) {
 			case 0:
@@ -154,7 +155,9 @@ void CAN_receiveMessage(CAN_message_t * received_message) {
 	switch (buffer) {
 		case 0:
 				received_message->ID = ((CAN_controller_read(MCP_RXB0SIDL) & 0b11100000) >> 5) + (CAN_controller_read(MCP_RXB0SIDH) << 3); 
-				printf("Message id: %i\n\r", received_message->ID);
+				printf("Message id: %i\n\r", (CAN_controller_read(MCP_RXB0SIDL) & 0b11100000) >> 5);
+				printf("Message high: %i\n\r", (CAN_controller_read(MCP_RXB0SIDH)));
+				printf("Whole id: %i\n\r", received_message->ID);
 				received_message->data_length = (CAN_controller_read(MCP_RXB0DLC) & 0b00001111);
 				printf("data length read: %i\n\r",(CAN_controller_read(MCP_RXB0DLC) & 0b00001111));
 				for (uint8_t i = 0; i != received_message->data_length; i++) {
