@@ -86,14 +86,14 @@ int main(void)
 		}
 		//test_resetMenu();
 		//test_outputControllers(joystick_pos, slider_pos, buttons);
-		/*		
+				
 		_delay_ms(500);	
 
 		CAN_transmit_message(&message);
 		_delay_ms(500);	
 		printf("\n\r-------------------------------------------\n\r");
 		
-		*/
+		
 		
 	}
 }
