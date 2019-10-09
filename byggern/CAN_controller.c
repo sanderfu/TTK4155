@@ -20,7 +20,6 @@ uint8_t CAN_controller_read(uint8_t addr) {
 	SPI_setChipSelect(PB4, 0); 
 	SPI_masterWrite(MCP_READ);
 	SPI_masterWrite(addr);
-	SPI_masterWrite(0);
 	uint8_t data = SPI_masterRead();
 	SPI_setChipSelect(PB4, 1);
 	
@@ -79,9 +78,9 @@ void CAN_controller_init() {
 	
 	
 	 //set in loopback mode p.60 MCP2515
-	CAN_controller_bitModify(0b11100000, MCP_CANCTRL, MODE_LOOPBACK);
+	CAN_controller_bitModify(0b11101110, MCP_CANCTRL, MODE_LOOPBACK | (0b1100));
 	CAN_controller_bitModify(0b01100000, MCP_RXB0CTRL, 0b01100000); //receive any type of message, no filter p. 27
-	CAN_controller_bitModify(0b11111111, MCP_CANINTE, 0b11);
+	CAN_controller_bitModify(0b11111111, MCP_CANINTE, 0b1);
 	
 	//set interrupt on atm162
 	 GICR |= (1<< INT0); //turn on interrupt 0

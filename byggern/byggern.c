@@ -32,7 +32,7 @@
 #include "pwm.h"
 #include "music.h"
 #include "CAN.h"
-CAN_message_t received_message;
+volatile CAN_message_t received_message;
 volatile uint8_t flag = 0;
 ISR (INT0_vect) {
 	//cli();
@@ -51,17 +51,21 @@ int main(void)
 	setupInit();
 	
 	//test_SRAM();
-	CAN_message_t message;
-	message.ID = 3;
-	message.data_length = 1;
-	message.data[0] = (uint8_t) 8;
+	volatile CAN_message_t message;
+	message.ID = 0b10101010111;
+	message.data_length = 3;
+	message.data[0] = 13;
+	message.data[1] = 22;
+	message.data[2] = 33;
+	
+	printf("Starting program\n\n\n\n\n\n\n\n\n\n\r");
+	printf("---------------------------------------\n\r");
+	_delay_ms(500);
 	CAN_transmit_message(&message);
 	
 
 	
 
-	printf("Starting program\n\n\n\n\n\n\n\n\n\n\r");
-	printf("---------------------------------------\n\r");
 	//test_SRAM();
 	//pwm_testPlayNote();
 	//pwm_init();
@@ -81,13 +85,15 @@ int main(void)
 			flag=0;
 		}
 		//test_resetMenu();
-		//test_outputControllers(joystick_pos, slider_pos, buttons);		
-		/*
+		//test_outputControllers(joystick_pos, slider_pos, buttons);
+		/*		
+		_delay_ms(500);	
+
 		CAN_transmit_message(&message);
 		_delay_ms(500);	
-		_delay_ms(500);	
+		printf("\n\r-------------------------------------------\n\r");
+		
 		*/
-
 		
 	}
 }

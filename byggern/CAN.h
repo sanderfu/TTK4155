@@ -10,9 +10,10 @@
 #define CAN_H_
 
 typedef struct {
-	unsigned int ID;
-	uint8_t data_length;
-	uint8_t data[8];
+	volatile uint8_t data[8];
+	volatile uint16_t ID;
+	volatile uint8_t data_length;
+
 } CAN_message_t;
 
 void CAN_transmit_message(CAN_message_t * message);
