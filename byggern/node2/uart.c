@@ -16,6 +16,7 @@ void USART_init(unsigned int ubrr) {
 	UCSR0C = (1<<USBS0) | (3<<UCSZ00);
 	
 	uart = fdevopen(&USART_transmitChar, &USART_receiveChar);
+	printf("uart setup finished\n\r");
 }
 
 void USART_transmitChar(unsigned char data) {

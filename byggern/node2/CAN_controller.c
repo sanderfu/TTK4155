@@ -21,49 +21,52 @@
 #define I 7
 
 uint8_t CAN_controller_read(uint8_t addr) {
-	SPI_setChipSelect(PB0, 0); 
+	SPI_setChipSelect(PB7, 0); 
 	SPI_masterWrite(MCP_READ);
 	SPI_masterWrite(addr);
 	uint8_t data = SPI_masterRead();
-	SPI_setChipSelect(PB0, 1);
+	SPI_setChipSelect(PB7, 1);
 	
 	return data;
 }
 
 void CAN_controller_write(uint8_t addr, uint8_t data) {
-	SPI_setChipSelect(PB0, 0);
+	SPI_setChipSelect(PB7, 0);
 	
 	SPI_masterWrite(MCP_WRITE);
 	SPI_masterWrite(addr);
 	SPI_masterWrite(data);
 	
-	SPI_setChipSelect(PB0, 1); 
+	SPI_setChipSelect(PB7, 1); 
 	
 }
 void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data) {
-		SPI_setChipSelect(PB0, 0);
+		SPI_setChipSelect(PB7, 0);
 		SPI_masterWrite(MCP_BITMOD);
 		SPI_masterWrite(addr);
 		SPI_masterWrite(mask);
 		SPI_masterWrite(data);
 		
-		SPI_setChipSelect(PB0, 1);
+		SPI_setChipSelect(PB7, 1);
 
 }
 CAN_controller_reset() {
-	SPI_setChipSelect(PB0, 0);
-	printf("Before spi write");
+	SPI_setChipSelect(PB7, 0);
+	printf("CAN reset\n\r");
 	SPI_masterWrite(MCP_RESET);
-	SPI_setChipSelect(PB0, 1);
+	SPI_setChipSelect(PB7, 1);
 }
 void CAN_controller_init() {
 	
-	
+	printf("Can controller init \n\r");
 	SPI_masterInit();
+	printf("SPI master init done \n\r");
+
 	CAN_controller_setMode(MODE_LOOPBACK);
 	CAN_controller_bitModify(0b01100000, MCP_RXB0CTRL, 0b01100000); //receive any type of message, no filter p. 27
 	CAN_controller_bitModify(0b11111111, MCP_CANINTE, 0b1);
-	
+	printf("Modes set \n\r");
+
 	//set interrupt on 2560
 	//Global interrupt enable
 	sei();
@@ -87,7 +90,7 @@ void CAN_controller_init() {
 }
 
 void CAN_controller_RTS(uint8_t buffer) {
-	SPI_setChipSelect(PB0, 0);
+	SPI_setChipSelect(PB7, 0);
 	switch (buffer) {
 		case 0:
 			SPI_masterWrite(MCP_RTS_TX0);
@@ -102,15 +105,16 @@ void CAN_controller_RTS(uint8_t buffer) {
 			break;
 			
 	}
-	SPI_setChipSelect(PB0, 1);
+	SPI_setChipSelect(PB7, 1);
 }
 
 void CAN_controller_setMode(uint8_t mode) {
 	
 	CAN_controller_reset();
+	printf("CAN reset done\n\r");
 	uint8_t status = CAN_controller_read(MCP_CANSTAT);
+	printf("Read status register\n\r");
 	uint8_t mode_bits = (status & MODE_MASK);
-	
 	if (mode_bits != MODE_CONFIG) {
 		printf("Not in config mode, \t %i\n\r", mode_bits);
 		return;

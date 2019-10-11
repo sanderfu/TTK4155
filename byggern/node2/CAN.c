@@ -115,9 +115,8 @@ void CAN_transmit_message(CAN_message_t *message) {
 
 	
 	//request_to_send
-
 	CAN_controller_RTS(buffer_number);
-	
+
 	//ERROR HANDLING?	
 }
 

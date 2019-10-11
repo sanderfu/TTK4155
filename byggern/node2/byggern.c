@@ -52,7 +52,7 @@ int main(void)
 	
 	
 	//CAN_controller_setMode(MODE_NORMAL);
-	CAN_transmit_message(&message);
+	
 
 	//test_SRAM();
 	//pwm_testPlayNote();
@@ -60,7 +60,6 @@ int main(void)
 	//music_playLisaGikk();                 
 	while (1) {
 		//
-		printf("Mei");
 		_delay_ms(500);
 		//Put microcontroller to sleep until next interrupt. 
 
@@ -77,6 +76,8 @@ int main(void)
 		_delay_ms(500);	
 	
 		CAN_transmit_message(&message);
+		printf("\n\r-------------------------------------------\n\r");
+
 		/*
 		//test_outputControllers(joystick_pos, slider_pos, buttons);
 				
@@ -84,7 +85,6 @@ int main(void)
 	
 		CAN_transmit_message(&message);
 		_delay_ms(500);	
-		printf("\n\r-------------------------------------------\n\r");
 		
 		//CAN_controller_setMode(MODE_LOOPBACK);
 		*/

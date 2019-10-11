@@ -5,6 +5,6 @@
 	void setupInit(void){
 	//cli();
 	USART_init(MYUBRR);
-	//CAN_controller_init();
+	CAN_controller_init();
 	//sei();
 }
