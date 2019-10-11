@@ -8,33 +8,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define F_CPU 4915200
+#define F_CPU 16000000
 #include <avr/interrupt.h>
-#include "menu.h"
 #include <util/delay.h>
 #include "setup.h"
 
 #include <stdlib.h>
 #include "uart.h"
-#include "xmem.h"
-#include "adc.h"
-#include "joystick.h"
-#include "slider.h"
-#include "touchButton.h"
-#include "oled.h"
 #include "avr/interrupt.h"
-#include "menu.h"
 #include "timer.h"
-#include "test.h"
+
 #include "SPI.h"
 #include "CAN_controller.h"
 #include "MCP2515.h"
-#include "pwm.h"
-#include "music.h"
 #include "CAN.h"
 volatile CAN_message_t received_message;
 volatile uint8_t flag = 0;
-ISR (INT0_vect) {
+ISR (INT4_vect) {
 	//cli();
 	flag= 1;
 	
@@ -49,7 +39,9 @@ int main(void)
 //p.23 for can read instructions
 {
 	setupInit();
-	
+	printf("\n\r---------------------------------------\n\n\n\n\n\n\r");
+
+
 	//test_SRAM();
 	volatile CAN_message_t message;
 	message.ID = 0b10101010111;
@@ -58,42 +50,43 @@ int main(void)
 	message.data[1] = 22;
 	message.data[2] = 33;
 	
-	printf("Starting program\n\n\n\n\n\n\n\n\n\n\r");
-	printf("---------------------------------------\n\r");
-	_delay_ms(500);
+	
+	//CAN_controller_setMode(MODE_NORMAL);
 	CAN_transmit_message(&message);
-	
-
-	
 
 	//test_SRAM();
 	//pwm_testPlayNote();
 	//pwm_init();
 	//music_playLisaGikk();                 
 	while (1) {
+		//
+		printf("Mei");
+		_delay_ms(500);
 		//Put microcontroller to sleep until next interrupt. 
 
-		sleep_now();
-		if (!strcmp(currentMenu.currentMenuItem->children[currentMenu.childIndex]->name, "Rick")) {
-		}
+		
 		if (flag) {
-			//printf("Message received");
+			printf("Message received");
+			flag=0;
 			CAN_receiveMessage(&received_message);
 			//printf("This is the data: %i", received_message.data);
 			uint8_t mask = 0b11; 
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
-			flag=0;
+			
 		}
-		//test_resetMenu();
+		_delay_ms(500);	
+	
+		CAN_transmit_message(&message);
+		/*
 		//test_outputControllers(joystick_pos, slider_pos, buttons);
 				
 		_delay_ms(500);	
-
+	
 		CAN_transmit_message(&message);
 		_delay_ms(500);	
 		printf("\n\r-------------------------------------------\n\r");
 		
-		
-		
+		//CAN_controller_setMode(MODE_LOOPBACK);
+		*/
 	}
 }

@@ -56,7 +56,7 @@ void CAN_controller_init() {
 	
 	
 	SPI_masterInit();
-	
+	/*
 	//reset with spi command
 	CAN_controller_reset();
 	
@@ -79,6 +79,9 @@ void CAN_controller_init() {
 	
 	 //set in loopback mode p.60 MCP2515
 	CAN_controller_bitModify(0b11101110, MCP_CANCTRL, MODE_LOOPBACK | (0b1100));
+	
+	*/
+	CAN_controller_setMode(MODE_LOOPBACK);
 	CAN_controller_bitModify(0b01100000, MCP_RXB0CTRL, 0b01100000); //receive any type of message, no filter p. 27
 	CAN_controller_bitModify(0b11111111, MCP_CANINTE, 0b1);
 	
@@ -95,7 +98,7 @@ void CAN_controller_init() {
 	printf("after write to canctrl\n\r");
 	
 	//Check CANSTAT register
-	status = CAN_controller_read(MCP_CANSTAT);
+	uint8_t status = CAN_controller_read(MCP_CANSTAT);
 	printf("Data: %i\n\r", status);
 
 }
@@ -119,4 +122,27 @@ void CAN_controller_RTS(uint8_t buffer) {
 	SPI_setChipSelect(PB4, 1);
 }
 
+void CAN_controller_setMode(uint8_t mode) {
+	
+	CAN_controller_reset();
+	uint8_t status = CAN_controller_read(MCP_CANSTAT);
+	uint8_t mode_bits = (status & MODE_MASK);
+	
+	if (mode_bits != MODE_CONFIG) {
+		printf("Not in config mode, \t %i\n\r", mode_bits);
+		return;
+	}
+	
+	
+	 //set in loopback mode p.60 MCP2515
+	CAN_controller_bitModify(0b11101110, MCP_CANCTRL, mode | (0b1100));
+	_delay_ms(200);
+	status = CAN_controller_read(MCP_CANSTAT);
+	mode_bits = (status & MODE_MASK);
+	if (mode_bits != mode) {
+			printf("Not in correct mode: Mode: %i\n\r", mode_bits);
+
+	}
+
+}
 
