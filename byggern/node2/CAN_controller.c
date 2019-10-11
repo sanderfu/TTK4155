@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 #include "CAN_controller.h"
 #include "SPI.h"
 
@@ -65,7 +66,7 @@ void CAN_controller_init() {
 	
 	//set interrupt on 2560
 	//Global interrupt enable
-
+	sei();
 	//SREG |= (1 << I);
 	EIMSK |= 1 << INT4;	//interrupt on pin INT4
 	EICRB |= 1 << ISC41; //Turn on falling edge
