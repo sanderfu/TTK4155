@@ -39,7 +39,6 @@ ISR (INT0_vect) {
 	flag= 1;
 	
 	
-	
 	//sei();
 	
 }
@@ -58,12 +57,12 @@ int main(void)
 	message.data[1] = 22;
 	message.data[2] = 33;
 	
-	printf("Starting program\n\n\n\n\n\n\n\n\n\n\r");
+	printf("Starting program\n\r");
 	printf("---------------------------------------\n\r");
 	_delay_ms(500);
-	CAN_transmit_message(&message);
+	//CAN_transmit_message(&message);
 	
-	//CAN_controller_setMode(MODE_NORMAL);
+	CAN_controller_setMode(MODE_NORMAL);
 	
 
 	//test_SRAM();
@@ -75,10 +74,9 @@ int main(void)
 		//Put microcontroller to sleep until next interrupt. 
 
 		sleep_now();
-		if (!strcmp(currentMenu.currentMenuItem->children[currentMenu.childIndex]->name, "Rick")) {
-		}
+		
 		if (flag) {
-			//printf("Message received");
+			printf("Message received");
 			flag=0;
 			CAN_receiveMessage(&received_message);
 			//printf("This is the data: %i", received_message.data);
@@ -86,16 +84,8 @@ int main(void)
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
 			
 		}
-		//test_resetMenu();
-		//test_outputControllers(joystick_pos, slider_pos, buttons);
-				
-		_delay_ms(500);	
+		
+		joystick_sendPositionOverCAN();
 	
-		CAN_transmit_message(&message);
-		_delay_ms(500);	
-		printf("\n\r-------------------------------------------\n\r");
-		
-		//CAN_controller_setMode(MODE_LOOPBACK);
-		
 	}
 }

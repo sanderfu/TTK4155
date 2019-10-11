@@ -129,12 +129,12 @@ void CAN_receiveMessage(CAN_message_t * received_message) {
 		case 0:
 				received_message->ID = ((CAN_controller_read(MCP_RXB0SIDL) & 0b11100000) >> 5) + (CAN_controller_read(MCP_RXB0SIDH) << 3); 
 				
-				printf("Whole id: %i\n\r", received_message->ID);
+				//printf("Whole id: %i\n\r", received_message->ID);
 				received_message->data_length = (CAN_controller_read(MCP_RXB0DLC) & 0b00001111);
-				printf("data length read: %i\n\r",(CAN_controller_read(MCP_RXB0DLC) & 0b00001111));
+				//printf("data length read: %i\n\r",(CAN_controller_read(MCP_RXB0DLC) & 0b00001111));
 				for (uint8_t i = 0; i != received_message->data_length; i++) {
 					received_message->data[i] = CAN_controller_read(MCP_RXB0D0 + i);
-					printf("data: %i\t", received_message->data[i]);
+					//printf("data: %i\t", received_message->data[i]);
 
 				}
 				break;

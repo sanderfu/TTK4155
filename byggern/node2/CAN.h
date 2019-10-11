@@ -8,6 +8,7 @@
 
 #ifndef CAN_H_
 #define CAN_H_
+#include <avr/io.h>
 
 typedef struct {
 	volatile uint8_t data[8];

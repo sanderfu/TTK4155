@@ -22,6 +22,8 @@
 #include "CAN_controller.h"
 #include "MCP2515.h"
 #include "CAN.h"
+#include "joystick.h"
+
 volatile CAN_message_t received_message;
 volatile uint8_t flag = 0;
 ISR (INT4_vect) {
@@ -50,8 +52,8 @@ int main(void)
 	message.data[1] = 22;
 	message.data[2] = 33;
 	
-	
-	//CAN_controller_setMode(MODE_NORMAL);
+	_delay_ms(2000);
+	CAN_controller_setMode(MODE_NORMAL);
 	
 
 	//test_SRAM();
@@ -67,15 +69,15 @@ int main(void)
 		if (flag) {
 			printf("Message received");
 			flag=0;
-			CAN_receiveMessage(&received_message);
-			//printf("This is the data: %i", received_message.data);
+			joystick_readPositionOverCAN();
+			joystick_printPosition();
 			uint8_t mask = 0b11; 
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
 			
 		}
-		_delay_ms(500);	
+		_delay_ms(50);	
 	
-		CAN_transmit_message(&message);
+		//CAN_transmit_message(&message);
 		printf("\n\r-------------------------------------------\n\r");
 
 		/*

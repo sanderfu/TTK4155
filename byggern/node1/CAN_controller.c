@@ -10,6 +10,7 @@
 #define F_CPU 4915200
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include "MCP2515.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -56,42 +57,19 @@ void CAN_controller_init() {
 	
 	
 	SPI_masterInit();
-	/*
-	//reset with spi command
-	CAN_controller_reset();
-	
-	
-	//printf("After spi write\n");
-	_delay_ms(20);
-	
-	//Check CANSTAT register
-	
-	uint8_t status = CAN_controller_read(MCP_CANSTAT);
-	_delay_ms(20);
-	
-	//uint8_t data = 0x44;
-	uint8_t mode_bits = (status & MODE_MASK);
-	
-	if (mode_bits != MODE_CONFIG) {
-		printf("Not in config mode, \t %i\n\r", mode_bits);
-	}
-	
-	
-	 //set in loopback mode p.60 MCP2515
-	CAN_controller_bitModify(0b11101110, MCP_CANCTRL, MODE_LOOPBACK | (0b1100));
-	
-	*/
+
 	CAN_controller_setMode(MODE_LOOPBACK);
-	CAN_controller_bitModify(0b01100000, MCP_RXB0CTRL, 0b01100000); //receive any type of message, no filter p. 27
-	CAN_controller_bitModify(0b11111111, MCP_CANINTE, 0b1);
+	
 	
 	//set interrupt on atm162
+	
+	cli();
 	 GICR |= (1<< INT0); //turn on interrupt 0
 	MCUCR |= (1 << ISC01); //Turn on falling edge
 	MCUCR &= ~(1 << ISC00);
 //set PD2 as input
 	DDRD  &= (1 << PD2); //set as input.
-	
+	sei();
 	
 	
 	_delay_ms(200);
@@ -136,6 +114,9 @@ void CAN_controller_setMode(uint8_t mode) {
 	
 	 //set in loopback mode p.60 MCP2515
 	CAN_controller_bitModify(0b11101110, MCP_CANCTRL, mode | (0b1100));
+	CAN_controller_bitModify(0b11111111, MCP_CANINTE, 0b1);
+	CAN_controller_bitModify(0b01100000, MCP_RXB0CTRL, 0b01100000); //receive any type of message, no filter p. 27
+
 	_delay_ms(200);
 	status = CAN_controller_read(MCP_CANSTAT);
 	mode_bits = (status & MODE_MASK);
@@ -143,6 +124,6 @@ void CAN_controller_setMode(uint8_t mode) {
 			printf("Not in correct mode: Mode: %i\n\r", mode_bits);
 
 	}
-
+	printf("Mode set: %i\n\r", status & MODE_MASK);
 }
 

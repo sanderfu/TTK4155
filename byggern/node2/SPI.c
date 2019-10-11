@@ -12,7 +12,7 @@
 void SPI_masterInit(void)
 {
 	/* Set MOSI and SCK output, all others input */	
-	DDRB |= (1 << PB2) | (1 << PB1) | (1 <<PB0);
+	DDRB |= (1 << PB2) | (1 << PB1) | (1 << PB0);
 	//define select slave as output
 	DDRB |= (1 << PB7);
 	/* Enable SPI, Master, set clock rate fck/16 */

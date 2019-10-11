@@ -1,5 +1,7 @@
 #include "joystick.h"
 #include "adc.h"
+#include "CAN.h"
+
 #include <stdlib.h>
 #include <math.h>
 #define X_POS_CHANNEL 0
@@ -68,4 +70,17 @@ void joystick_printDirection(DIRECTION_t dir) {
 			return;
 		
 	}
+}
+
+void joystick_sendPositionOverCAN() {
+	CAN_message_t message;
+	
+	message.ID = 0x01;
+	message.data_length = 2;
+	
+	message.data[0] = joystick_pos.x_pos;
+	message.data[1] = joystick_pos.y_pos;
+
+	
+	CAN_transmit_message(&message);
 }

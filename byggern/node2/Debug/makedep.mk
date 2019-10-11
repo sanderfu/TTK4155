@@ -8,6 +8,8 @@ CAN.c
 
 CAN_controller.c
 
+joystick.c
+
 setup.c
 
 SPI.c

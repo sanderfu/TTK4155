@@ -23,5 +23,6 @@ joystick_position_t joystick_pos;
 void joystick_readPosition();
 DIRECTION_t joystick_getDirection(joystick_position_t * pos);
 void joystick_printDirection(DIRECTION_t dir);
+void joystick_sendPositionOverCAN();
 
 #endif
