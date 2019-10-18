@@ -10,6 +10,8 @@ CAN_controller.c
 
 joystick.c
 
+pwm.c
+
 setup.c
 
 SPI.c

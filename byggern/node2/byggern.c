@@ -23,6 +23,8 @@
 #include "MCP2515.h"
 #include "CAN.h"
 #include "joystick.h"
+#include "pwm.h"
+
 
 volatile CAN_message_t received_message;
 volatile uint8_t flag = 0;
@@ -37,12 +39,14 @@ ISR (INT4_vect) {
 }
 
 
+#define PERIOD_MS					20
+#define PWM_PRESCALER				8
 int main(void)
 //p.23 for can read instructions
 {
 	setupInit();
 	printf("\n\r---------------------------------------\n\n\n\n\n\n\r");
-
+	printf("her: %i\n\r", F_CPU);
 
 	//test_SRAM();
 	volatile CAN_message_t message;
@@ -54,15 +58,11 @@ int main(void)
 	
 	_delay_ms(2000);
 	CAN_controller_setMode(MODE_NORMAL);
-	
-
-	//test_SRAM();
-	//pwm_testPlayNote();
-	//pwm_init();
-	//music_playLisaGikk();                 
+	pwm_setPulseWidth(2.1);
+              
 	while (1) {
-		//
-		_delay_ms(500);
+		
+		_delay_ms(50);
 		//Put microcontroller to sleep until next interrupt. 
 
 		
@@ -77,18 +77,8 @@ int main(void)
 		}
 		_delay_ms(50);	
 	
-		//CAN_transmit_message(&message);
-		printf("\n\r-------------------------------------------\n\r");
 
-		/*
-		//test_outputControllers(joystick_pos, slider_pos, buttons);
-				
-		_delay_ms(500);	
-	
-		CAN_transmit_message(&message);
-		_delay_ms(500);	
 		
-		//CAN_controller_setMode(MODE_LOOPBACK);
-		*/
+		
 	}
 }

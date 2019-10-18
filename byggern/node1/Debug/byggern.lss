@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000006f8  00000000  00000000  000089e4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000a4f  00000000  00000000  000090dc  2**0
+ 10 .debug_str    00000a1d  00000000  00000000  000090dc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000014eb  00000000  00000000  00009b2b  2**0
+ 11 .debug_loc    000014eb  00000000  00000000  00009af9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000002a0  00000000  00000000  0000b016  2**0
+ 12 .debug_ranges 000002a0  00000000  00000000  0000afe4  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -505,14 +505,33 @@ Disassembly of section .text:
      3d0:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 000003d4 <adcInit>:
+
+
+
+void adcInit(void) {
+	
+	DDRE &= ~(1<<PINE0);
      3d4:	30 98       	cbi	0x06, 0	; 6
      3d6:	08 95       	ret
 
 000003d8 <readAdc>:
+
+ 
+uint8_t readAdc(uint8_t channel){ //for ch1 channel = 0;
+	volatile char * adc = (char *) 0x1400;
+	
+	*adc = 0x04 | channel;
      3d8:	84 60       	ori	r24, 0x04	; 4
      3da:	80 93 00 14 	sts	0x1400, r24	; 0x801400 <__bss_end+0x113a>
+	
+
+	while (test_bit(PINE, PINE0)) {
      3de:	28 99       	sbic	0x05, 0	; 5
      3e0:	fe cf       	rjmp	.-4      	; 0x3de <readAdc+0x6>
+
+	}
+	
+	return *adc;
      3e2:	80 91 00 14 	lds	r24, 0x1400	; 0x801400 <__bss_end+0x113a>
      3e6:	08 95       	ret
 
@@ -1438,12 +1457,29 @@ void CAN_controller_init() {
      93a:	08 95       	ret
 
 0000093c <sleep_init>:
+
+#include "sleep.h"
+#include <avr/sleep.h>
+#include <avr/interrupt.h>
+
+void sleep_init() {
      93c:	08 95       	ret
 
 0000093e <sleep_now>:
+}
+
+void sleep_now() {
+	
+	//disable analog reading
+	ACSR |= (1 << ACD | 1 << ACIE);
      93e:	88 b1       	in	r24, 0x08	; 8
      940:	88 68       	ori	r24, 0x88	; 136
      942:	88 b9       	out	0x08, r24	; 8
+
+
+
+	// Put the device to sleep:
+	sleep_mode();
      944:	85 b7       	in	r24, 0x35	; 53
      946:	80 62       	ori	r24, 0x20	; 32
      948:	85 bf       	out	0x35, r24	; 53
@@ -1451,7 +1487,11 @@ void CAN_controller_init() {
      94c:	85 b7       	in	r24, 0x35	; 53
      94e:	8f 7d       	andi	r24, 0xDF	; 223
      950:	85 bf       	out	0x35, r24	; 53
+	sleep_cpu();
      952:	88 95       	sleep
+
+	// Upon waking up, sketch continues from this point.
+	sleep_disable();
      954:	85 b7       	in	r24, 0x35	; 53
      956:	8f 7d       	andi	r24, 0xDF	; 223
      958:	85 bf       	out	0x35, r24	; 53
@@ -2130,6 +2170,12 @@ void menu_printCurrentMenu() {
      d9e:	08 95       	ret
 
 00000da0 <oled_pos>:
+void oled_clearLine(uint8_t page){
+	oled_pos(page, 0);
+	for (int col = 0; col < 128; col++ ) {
+		oled_write_d(0x00);
+	}
+}
      da0:	80 55       	subi	r24, 0x50	; 80
      da2:	e0 e0       	ldi	r30, 0x00	; 0
      da4:	f0 e1       	ldi	r31, 0x10	; 16
@@ -2241,13 +2287,19 @@ void menu_printCurrentMenu() {
      e6e:	08 95       	ret
 
 00000e70 <oled_print>:
+
+void oled_print(char* character){
      e70:	cf 93       	push	r28
      e72:	df 93       	push	r29
      e74:	dc 01       	movw	r26, r24
+	while (*character != '\0')
      e76:	8c 91       	ld	r24, X
      e78:	81 11       	cpse	r24, r1
      e7a:	1a c0       	rjmp	.+52     	; 0xeb0 <oled_print+0x40>
      e7c:	1e c0       	rjmp	.+60     	; 0xeba <oled_print+0x4a>
+	{
+		for (int col = 0; col < 8; col++ ) {
+			oled_write_d(pgm_read_byte(&(font8[*character-ASCII_SPACE][col])));
      e7e:	ec 91       	ld	r30, X
      e80:	f0 e0       	ldi	r31, 0x00	; 0
      e82:	b0 97       	sbiw	r30, 0x20	; 32
@@ -2262,22 +2314,61 @@ void menu_printCurrentMenu() {
      e94:	e2 56       	subi	r30, 0x62	; 98
      e96:	ff 4f       	sbci	r31, 0xFF	; 255
      e98:	e4 91       	lpm	r30, Z
+	volatile char *ext_mem = (char *) OLED_COMMAND_BASE_ADDRESS;
+	*ext_mem = data;
+}
+void oled_write_d(uint8_t data) {
+	volatile char *ext_mem = (char *) OLED_DATA_BASE_ADDRESS;
+	*ext_mem = data;
      e9a:	e8 83       	st	Y, r30
+}
+
+void oled_print(char* character){
+	while (*character != '\0')
+	{
+		for (int col = 0; col < 8; col++ ) {
      e9c:	2f 5f       	subi	r18, 0xFF	; 255
      e9e:	3f 4f       	sbci	r19, 0xFF	; 255
      ea0:	28 30       	cpi	r18, 0x08	; 8
      ea2:	31 05       	cpc	r19, r1
      ea4:	61 f7       	brne	.-40     	; 0xe7e <oled_print+0xe>
+			oled_write_d(pgm_read_byte(&(font8[*character-ASCII_SPACE][col])));
+		}
+		character++;
      ea6:	11 96       	adiw	r26, 0x01	; 1
+		oled_write_d(0x00);
+	}
+}
+
+void oled_print(char* character){
+	while (*character != '\0')
      ea8:	8c 91       	ld	r24, X
      eaa:	81 11       	cpse	r24, r1
      eac:	03 c0       	rjmp	.+6      	; 0xeb4 <oled_print+0x44>
      eae:	05 c0       	rjmp	.+10     	; 0xeba <oled_print+0x4a>
+	volatile char *ext_mem = (char *) OLED_COMMAND_BASE_ADDRESS;
+	*ext_mem = data;
+}
+void oled_write_d(uint8_t data) {
+	volatile char *ext_mem = (char *) OLED_DATA_BASE_ADDRESS;
+	*ext_mem = data;
      eb0:	c0 e0       	ldi	r28, 0x00	; 0
      eb2:	d2 e1       	ldi	r29, 0x12	; 18
+	for (int col = 0; col < 128; col++ ) {
+		oled_write_d(0x00);
+	}
+}
+
+void oled_print(char* character){
      eb4:	20 e0       	ldi	r18, 0x00	; 0
      eb6:	30 e0       	ldi	r19, 0x00	; 0
      eb8:	e2 cf       	rjmp	.-60     	; 0xe7e <oled_print+0xe>
+			oled_write_d(pgm_read_byte(&(font8[*character-ASCII_SPACE][col])));
+		}
+		character++;
+	}
+	
+}
      eba:	df 91       	pop	r29
      ebc:	cf 91       	pop	r28
      ebe:	08 95       	ret
@@ -2317,13 +2408,20 @@ void menu_printCurrentMenu() {
      ef0:	08 95       	ret
 
 00000ef2 <slider_readPosition>:
+#define LEFT_POS_CHANNEL 2
+#define RIGHT_POS_CHANNEL 3
+#include "slider.h"
+#include "adc.h"
+void slider_readPosition(slider_position_t * pos) {
      ef2:	cf 93       	push	r28
      ef4:	df 93       	push	r29
+	slider_pos.left_pos = readAdc(LEFT_POS_CHANNEL);
      ef6:	82 e0       	ldi	r24, 0x02	; 2
      ef8:	0e 94 ec 01 	call	0x3d8	; 0x3d8 <readAdc>
      efc:	cb ea       	ldi	r28, 0xAB	; 171
      efe:	d2 e0       	ldi	r29, 0x02	; 2
      f00:	88 83       	st	Y, r24
+	slider_pos.right_pos = readAdc(RIGHT_POS_CHANNEL);
      f02:	83 e0       	ldi	r24, 0x03	; 3
      f04:	0e 94 ec 01 	call	0x3d8	; 0x3d8 <readAdc>
      f08:	89 83       	std	Y+1, r24	; 0x01
@@ -2332,6 +2430,12 @@ void menu_printCurrentMenu() {
      f0e:	08 95       	ret
 
 00000f10 <SPI_masterInit>:
+	SPI_setChipSelect(PB4, 1);
+}
+
+void SPI_slaveInit(void) {
+	DDRB = (1 << PB6);
+	SPCR = (1 << SPE);
      f10:	87 b3       	in	r24, 0x17	; 23
      f12:	80 6a       	ori	r24, 0xA0	; 160
      f14:	87 bb       	out	0x17, r24	; 23
@@ -2343,21 +2447,39 @@ void menu_printCurrentMenu() {
      f20:	08 95       	ret
 
 00000f22 <SPI_masterWrite>:
+	
+}
+void SPI_masterWrite(char cData)
+{
+	SPDR = cData;
      f22:	8f b9       	out	0x0f, r24	; 15
+	while (!(SPSR & (1<<SPIF)));
      f24:	77 9b       	sbis	0x0e, 7	; 14
      f26:	fe cf       	rjmp	.-4      	; 0xf24 <SPI_masterWrite+0x2>
+
+}
      f28:	08 95       	ret
 
 00000f2a <SPI_masterRead>:
+
+uint8_t SPI_masterRead() {
+	SPDR = 0;
      f2a:	1f b8       	out	0x0f, r1	; 15
+	while (!(SPSR & (1<<SPIF)));
      f2c:	77 9b       	sbis	0x0e, 7	; 14
      f2e:	fe cf       	rjmp	.-4      	; 0xf2c <SPI_masterRead+0x2>
+	return SPDR;
      f30:	8f b1       	in	r24, 0x0f	; 15
+}
      f32:	08 95       	ret
 
 00000f34 <SPI_setChipSelect>:
+
+void SPI_setChipSelect(uint8_t pin, uint8_t setHigh ) {
+	if (setHigh) {
      f34:	66 23       	and	r22, r22
      f36:	69 f0       	breq	.+26     	; 0xf52 <SPI_setChipSelect+0x1e>
+		PORTB |= (1 << pin); //chip select high
      f38:	48 b3       	in	r20, 0x18	; 24
      f3a:	21 e0       	ldi	r18, 0x01	; 1
      f3c:	30 e0       	ldi	r19, 0x00	; 0
@@ -2371,6 +2493,9 @@ void menu_printCurrentMenu() {
      f4c:	84 2b       	or	r24, r20
      f4e:	88 bb       	out	0x18, r24	; 24
      f50:	08 95       	ret
+	}
+	else {
+		PORTB &= ~(1 << pin); //chip select low
      f52:	48 b3       	in	r20, 0x18	; 24
      f54:	21 e0       	ldi	r18, 0x01	; 1
      f56:	30 e0       	ldi	r19, 0x00	; 0
@@ -2488,6 +2613,12 @@ ISR (TIMER1_COMPB_vect) {
      ff8:	08 95       	ret
 
 00000ffa <touchButton_init>:
+
+#include "touchButton.h"
+#include "adc.h"
+
+void touchButton_init() {
+	DDRB &= ~(1 << BUTTON_LEFT | 1 << BUTTON_RIGHT);
      ffa:	36 b3       	in	r19, 0x16	; 22
      ffc:	26 b3       	in	r18, 0x16	; 22
      ffe:	47 b3       	in	r20, 0x17	; 23
@@ -2515,12 +2646,16 @@ ISR (TIMER1_COMPB_vect) {
     102a:	08 95       	ret
 
 0000102c <touchButton_readButtons>:
+}
+void touchButton_readButtons() {
+	buttons.left_button = !!(BUTTON_LEFT);
     102c:	86 b3       	in	r24, 0x16	; 22
     102e:	e9 ea       	ldi	r30, 0xA9	; 169
     1030:	f2 e0       	ldi	r31, 0x02	; 2
     1032:	86 95       	lsr	r24
     1034:	81 70       	andi	r24, 0x01	; 1
     1036:	80 83       	st	Z, r24
+	buttons.right_button = !!(BUTTON_RIGHT);
     1038:	86 b3       	in	r24, 0x16	; 22
     103a:	82 fb       	bst	r24, 2
     103c:	88 27       	eor	r24, r24
@@ -2529,24 +2664,58 @@ ISR (TIMER1_COMPB_vect) {
     1042:	08 95       	ret
 
 00001044 <USART_transmitChar>:
+	uart = fdevopen(&USART_transmitChar, &USART_receiveChar);
+}
+
+void USART_transmitChar(unsigned char data) {
+	/* wait for empty transmit buffer */
+	while ( ! ( UCSR0A & (1<<UDRE0)))
     1044:	5d 9b       	sbis	0x0b, 5	; 11
     1046:	fe cf       	rjmp	.-4      	; 0x1044 <USART_transmitChar>
+		;
+		
+	/* Put data in buffer, send data */
+	UDR0 = data;
     1048:	8c b9       	out	0x0c, r24	; 12
     104a:	08 95       	ret
 
 0000104c <USART_receiveChar>:
+}
+
+unsigned char USART_receiveChar( void ) {
+	/* wait for data to be received*/
+	while ( !(UCSR0A & (1<<RXC0) ) ) 
     104c:	5f 9b       	sbis	0x0b, 7	; 11
     104e:	fe cf       	rjmp	.-4      	; 0x104c <USART_receiveChar>
+		;
+	
+	return UDR0;
     1050:	8c b1       	in	r24, 0x0c	; 12
     1052:	08 95       	ret
 
 00001054 <USART_init>:
+
+#include "uart.h"
+FILE *uart ;
+void USART_init(unsigned int ubrr) {
+	
+	UBRR0H = (unsigned char) (ubrr >> 8);
     1054:	90 bd       	out	0x20, r25	; 32
+	UBRR0L = (unsigned char) (ubrr);
     1056:	89 b9       	out	0x09, r24	; 9
+	
+	/*Enable receiver and transmitter*/
+	
+	UCSR0B = (1<<RXEN0) | (1 <<TXEN0);
     1058:	88 e1       	ldi	r24, 0x18	; 24
     105a:	8a b9       	out	0x0a, r24	; 10
+	
+	/* SET FRAME FORMAT: 8data, 2 stop bit */
+	UCSR0C = (1 << URSEL0) | (1<<USBS0) | (3<<UCSZ00);
     105c:	8e e8       	ldi	r24, 0x8E	; 142
     105e:	80 bd       	out	0x20, r24	; 32
+	
+	uart = fdevopen(&USART_transmitChar, &USART_receiveChar);
     1060:	66 e2       	ldi	r22, 0x26	; 38
     1062:	78 e0       	ldi	r23, 0x08	; 8
     1064:	82 e2       	ldi	r24, 0x22	; 34
@@ -2557,9 +2726,16 @@ ISR (TIMER1_COMPB_vect) {
     1074:	08 95       	ret
 
 00001076 <xmem_init>:
+#define BASE_ADDRESS 0x1000;
+#include <avr/io.h>
+#include "xmem.h"
+
+void xmem_init(void) {
+	MCUCR |= (1<<SRE);
     1076:	85 b7       	in	r24, 0x35	; 53
     1078:	80 68       	ori	r24, 0x80	; 128
     107a:	85 bf       	out	0x35, r24	; 53
+	SFIOR |= (1<<XMM0);
     107c:	80 b7       	in	r24, 0x30	; 48
     107e:	88 60       	ori	r24, 0x08	; 8
     1080:	80 bf       	out	0x30, r24	; 48

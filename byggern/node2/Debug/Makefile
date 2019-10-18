@@ -41,6 +41,7 @@ C_SRCS +=  \
 ../CAN.c \
 ../CAN_controller.c \
 ../joystick.c \
+../pwm.c \
 ../setup.c \
 ../SPI.c \
 ../timer.c \
@@ -58,6 +59,7 @@ byggern.o \
 CAN.o \
 CAN_controller.o \
 joystick.o \
+pwm.o \
 setup.o \
 SPI.o \
 timer.o \
@@ -68,6 +70,7 @@ byggern.o \
 CAN.o \
 CAN_controller.o \
 joystick.o \
+pwm.o \
 setup.o \
 SPI.o \
 timer.o \
@@ -78,6 +81,7 @@ byggern.d \
 CAN.d \
 CAN_controller.d \
 joystick.d \
+pwm.d \
 setup.d \
 SPI.d \
 timer.d \
@@ -88,6 +92,7 @@ byggern.d \
 CAN.d \
 CAN_controller.d \
 joystick.d \
+pwm.d \
 setup.d \
 SPI.d \
 timer.d \
@@ -129,6 +134,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./joystick.o: .././joystick.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./pwm.o: .././pwm.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
