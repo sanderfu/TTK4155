@@ -12,6 +12,7 @@
 
 
 void pwm_init();
-void pwm_setPulseWidth(float width_ms);
+
+void pwm_setPulseWidth(float width_ms); 
 
 #endif /* PWM_H_ */

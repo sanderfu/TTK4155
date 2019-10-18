@@ -73,6 +73,8 @@ void joystick_printDirection(DIRECTION_t dir) {
 }
 
 void joystick_sendPositionOverCAN() {
+		printf("sending");
+
 	CAN_message_t message;
 	
 	message.ID = 0x01;

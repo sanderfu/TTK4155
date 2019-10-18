@@ -23,8 +23,9 @@ typedef enum DIRECTION {
 	NEUTRAL
 } DIRECTION_t ;
 
-joystick_position_t joystick_pos;
+volatile joystick_position_t joystick_pos;
 void joystick_readPositionOverCAN();
 void joystick_printPosition();
+void joystick_setServo();
 
 #endif /* JOYSTICK_H_ */

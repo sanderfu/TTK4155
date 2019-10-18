@@ -6,7 +6,10 @@
  */ 
 #include "joystick.h"
 #include "CAN.h"
-
+#include "pwm.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 void joystick_readPositionOverCAN() {
 	CAN_message_t mess;
 	CAN_receiveMessage(&mess);
@@ -20,4 +23,11 @@ void joystick_readPositionOverCAN() {
 
 void joystick_printPosition() {
 	printf("X: %i\tY: %i\n\rAngle: %i\n\r", joystick_pos.x_pos, joystick_pos.y_pos, joystick_pos.angle);
-};
+}
+
+void joystick_setServo() {
+		float var = ((float)joystick_pos.x_pos+100.0)/200.0*(2.1-0.9)+0.9;
+		printf("servo value: %.6f\n\r",(var));
+		pwm_setPulseWidth((joystick_pos.x_pos+100.0)/200.0*(2.1-0.9)+0.9);
+	
+}

@@ -39,14 +39,13 @@ ISR (INT4_vect) {
 }
 
 
-#define PERIOD_MS					20
-#define PWM_PRESCALER				8
+
 int main(void)
 //p.23 for can read instructions
 {
 	setupInit();
 	printf("\n\r---------------------------------------\n\n\n\n\n\n\r");
-	printf("her: %i\n\r", F_CPU);
+
 
 	//test_SRAM();
 	volatile CAN_message_t message;
@@ -58,11 +57,11 @@ int main(void)
 	
 	_delay_ms(2000);
 	CAN_controller_setMode(MODE_NORMAL);
-	pwm_setPulseWidth(2.1);
+	pwm_setPulseWidth(2);
               
 	while (1) {
 		
-		_delay_ms(50);
+
 		//Put microcontroller to sleep until next interrupt. 
 
 		
@@ -71,11 +70,12 @@ int main(void)
 			flag=0;
 			joystick_readPositionOverCAN();
 			joystick_printPosition();
+			joystick_setServo();
 			uint8_t mask = 0b11; 
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
 			
 		}
-		_delay_ms(50);	
+		_delay_ms(5);	
 	
 
 		

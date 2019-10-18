@@ -18,7 +18,7 @@ typedef enum {
 
 #define PERIOD_MS					20
 #define PWM_PRESCALER				8
-#define ICR_PERIOD					40000 //F_CPU/PWM_PRESCALER*(PERIOD_MS/1000)
+#define ICR_PERIOD					(F_CPU*PERIOD_MS)/PWM_PRESCALER/1000
 
 void pwm_init() {
 	//set output pin
