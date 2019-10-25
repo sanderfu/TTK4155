@@ -37,10 +37,10 @@ ISR (TIMER3_COMPB_vect) {
 }
 
 volatile CAN_message_t received_message;
-volatile uint8_t flag = 0;
+volatile uint8_t CANFlag = 0;
 ISR (INT4_vect) {
 	//cli();
-	flag= 1;
+	CANFlag= 1;
 	
 	
 	
@@ -75,14 +75,14 @@ int main(void)
 		//Put microcontroller to sleep until next interrupt. 
 
 		sleep_now();
-		if (flag) {
+		if (CANFlag) {
 			
 			//cli();
 			//printf("Message received");
-			flag=0;
+			CANFlag=0;
 			
 			joystick_readPositionOverCAN();
-			//joystick_printPosition();
+			joystick_printPosition();
 			joystick_setServo();
 			uint8_t mask = 0b11; 
 			

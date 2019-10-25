@@ -18,8 +18,6 @@ void ADC_init() {
 	//Set adlar = 0, right adjusted ADCH
 	ADMUX &= ~(1 << ADLAR);
 	
-	//enable adc conversion complete interrupt
-	//ADCSRA |= (1 << ADIE);
 	
 	
 	//Select AVCC as voltage reference

@@ -65,7 +65,6 @@ void CAN_controller_init() {
 	printf("Modes set \n\r");
 
 	//set interrupt on 2560
-	//Global interrupt enable
 	
 	EIMSK |= 1 << INT4;	//interrupt on pin INT4
 	EICRB |= 1 << ISC41; //Turn on falling edge
