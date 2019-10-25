@@ -17,7 +17,9 @@
 	oled_init();
 	timer_init();
 	sleep_init();
-	menuInit();
+	//menuInit();
+	this_init();
+	printf("Finished this");
 	CAN_controller_init();
 	sei();
 }

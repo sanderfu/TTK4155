@@ -47,6 +47,8 @@ ISR (INT0_vect) {
 int main(void)
 //p.23 for can read instructions
 {
+	printf("---------------------------------------\n\r");
+
 	setupInit();
 	
 	//test_SRAM();
@@ -85,7 +87,7 @@ int main(void)
 			
 		}
 		
-		joystick_sendPositionOverCAN();
+		//joystick_sendPositionOverCAN();
 	
 	}
 }
