@@ -1,8 +1,8 @@
 /*
  * sleep.c
  *
- * Created: 20.09.2019 15:16:02
- *  Author: torsteoe
+ * Created: 25.10.2019 13:50:44
+ *  Author: haavaei
  */ 
 
 #include "sleep.h"
@@ -13,6 +13,8 @@ void sleep_init() {
 	
 	//Choose sleep mode
 	set_sleep_mode(SLEEP_MODE_IDLE);
+	
+	
    
 }
 
@@ -28,4 +30,5 @@ void sleep_now() {
 	
 	
 	// Upon waking up, sketch continues from this point.
+	
 }

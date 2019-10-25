@@ -6,7 +6,7 @@
  */ 
 #include "pwm.h"
 #include "setup.h"
-
+#include <avr/interrupt.h>
 typedef enum {
 	PRESC_OFF =   ~(1 << CS12 | 1 << CS11   |   1 << CS10) ,
 	PRESC_1   =                                 (1 << CS10) ,
@@ -46,7 +46,6 @@ void pwm_init() {
 	
 	//Set initial pulsewidth
 	OCR1A = ICR_PERIOD/(20)*(2.1+0.9)/2;
-
 }
 
 void pwm_setPulseWidth(float width_ms) {

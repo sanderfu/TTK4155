@@ -40,10 +40,12 @@ C_SRCS +=  \
 ../byggern.c \
 ../CAN.c \
 ../CAN_controller.c \
+../ADC.c \
 ../IR.c \
 ../joystick.c \
 ../pwm.c \
 ../setup.c \
+../sleep.c \
 ../SPI.c \
 ../timer.c \
 ../uart.c
@@ -59,10 +61,12 @@ OBJS +=  \
 byggern.o \
 CAN.o \
 CAN_controller.o \
+ADC.o \
 IR.o \
 joystick.o \
 pwm.o \
 setup.o \
+sleep.o \
 SPI.o \
 timer.o \
 uart.o
@@ -71,10 +75,12 @@ OBJS_AS_ARGS +=  \
 byggern.o \
 CAN.o \
 CAN_controller.o \
+ADC.o \
 IR.o \
 joystick.o \
 pwm.o \
 setup.o \
+sleep.o \
 SPI.o \
 timer.o \
 uart.o
@@ -83,10 +89,12 @@ C_DEPS +=  \
 byggern.d \
 CAN.d \
 CAN_controller.d \
+ADC.d \
 IR.d \
 joystick.d \
 pwm.d \
 setup.d \
+sleep.d \
 SPI.d \
 timer.d \
 uart.d
@@ -95,10 +103,12 @@ C_DEPS_AS_ARGS +=  \
 byggern.d \
 CAN.d \
 CAN_controller.d \
+ADC.d \
 IR.d \
 joystick.d \
 pwm.d \
 setup.d \
+sleep.d \
 SPI.d \
 timer.d \
 uart.d
@@ -138,6 +148,13 @@ LINKER_SCRIPT_DEP+=
 	@echo Finished building: $<
 	
 
+./ADC.o: .././ADC.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./IR.o: .././IR.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -160,6 +177,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./setup.o: .././setup.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./sleep.o: .././sleep.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

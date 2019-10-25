@@ -1,73 +1,71 @@
 
 
-/*
+
 
 
 #define PRESCALE 1024
 #define TIMER1_SECONDS 0.05
 #define TIMER1_RESET (F_CPU/PRESCALE)*TIMER1_SECONDS
 
-#define TIMER0_SECONDS 0.2
-#define TIMER0_RESET (F_CPU/PRESCALE)*TIMER0_SECONDS
+#define TIMER3_SECONDS 0.2
+#define TIMER3_RESET (F_CPU/PRESCALE)*TIMER3_SECONDS
 #include "timer.h"
 
-
+/*
 
 ISR (TIMER1_COMPB_vect) {
 	cli();
 	TCNT1 = 0x00;
 
-	joystick_readPosition(&joystick_pos);
-	slider_readPosition(&slider_pos);
-	touchButton_readButtons(&buttons);
-	navigateMenu(&joystick_pos);
-	menu_printCurrentMenu();
-	
 	sei();
 }
-/*
-ISR (TIMER0_COMP_vect) {
-	cli();
-	TCNT1 = 0x00;
-	navigateMenu(&joystick_pos);
-	menu_printCurrentMenu();
-	sei();
-}
+*/
 
 
 void timer_init() {
 
 	
 	//////////////////////////TIMER 1 (16 bit)//////////////////////////////////
+	/*
 	
-	//Enable "compare output match" interrupt
-	TIMSK |= (1 << OCIE1B);
-
-	
-	//This register cointains counter value
-	TCNT1 = 0x00;
-	
-	//set up compare output mode & clock select (prescaling)
-	TCCR1A = (1 << COM1B0 | 1 << COM1B1);
-	TCCR1B = (1 << CS12 | 1 << CS00);
-	
-	//Output compare register containing value compared to counter
-	OCR1B = TIMER1_RESET;
-	
+	*/
 	
 	////////////////////////TIMER 0////////////////////////////////////
 	/*
-	TIMSK |= (1 << OCIE0);
-	TCNT0 = 0x0; 
+	TIMSK3 |= (1 << OCIE3A);
+	TCNT3 = 0x0; 
 	
-	TCCR0 = (1 << COM01 | 1 << COM00 | 1 << CS02 | 1 << CS00);
+	//set oc0a on compare match
+	TCCR3A |= (1 << COM3A1 | 1 << COM3A0);
 	
-	OCR0 = TIMER0_RESET;
+	//Set prescaler
+	TCCR3B |= (1 << CS02 | 1 << CS00);
+	TCCR3B &= ~(1 << CS01);
 	
+	//Set value to be compared
+	//OCR3A = TIMER3_RESET;
+	uint16_t val = TIMER3_RESET;
+	OCR3AH = val >> 8;
+	OCR3AL = val;
+	
+	*/
+	//Enable "compare output match" interrupt
+	
+	TIMSK3 |= (1 << OCIE3B);
+
+	
+	//This register contains counter value
+	TCNT3 = 0x00;
+	
+	//set up compare output mode & clock select (prescaling)
+	TCCR3A = (1 << COM3B0 | 1 << COM3B1);
+	TCCR3B = (1 << CS12 | 1 << CS00);
+	
+	//Output compare register containing value compared to counter
+	OCR3B = TIMER3_RESET;
 	
 	//Enable global interrupts
 
 	//printf("Timer initialized");
 }
 
-*/

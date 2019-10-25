@@ -1,12 +1,19 @@
 #include "uart.h"
 #include "setup.h"
 #include "timer.h"
-#include "IR.h"
-	void setupInit(void){
-	//cli();
+#include "ADC.h"
+#include "sleep.h"
+void setupInit(void){
+	cli();
 	USART_init(MYUBRR);
+	printf("finished uart setup2)");
 	CAN_controller_init();
+	printf("finished can setup");
 	pwm_init();
-	IR_init();
-	//sei();
+	printf("finished pwm");
+	ADC_init();
+	printf("Finished setup");
+	timer_init();
+	sleep_init();
+	sei();
 }

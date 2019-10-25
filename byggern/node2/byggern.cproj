@@ -153,6 +153,12 @@
     <Compile Include="CAN_controller.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="ADC.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ADC.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="IR.c">
       <SubType>compile</SubType>
     </Compile>
@@ -178,6 +184,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="setup.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sleep.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sleep.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="SPI.c">

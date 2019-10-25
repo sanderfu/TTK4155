@@ -1,18 +1,17 @@
 /*
  * IR.h
  *
- * Created: 25.10.2019 09:59:17
+ * Created: 25.10.2019 11:44:45
  *  Author: haavaei
  */ 
 
 
 #ifndef IR_H_
 #define IR_H_
+#include <stdlib.h>
 #include <avr/io.h>
+uint8_t goals = 0;
 
-void IR_init();
-
-uint16_t IR_read();
 
 
 

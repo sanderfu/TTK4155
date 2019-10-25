@@ -50,14 +50,13 @@ void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data) {
 		SPI_setChipSelect(PB7, 1);
 
 }
-CAN_controller_reset() {
+void CAN_controller_reset() {
 	SPI_setChipSelect(PB7, 0);
 	printf("CAN reset\n\r");
 	SPI_masterWrite(MCP_RESET);
 	SPI_setChipSelect(PB7, 1);
 }
 void CAN_controller_init() {
-	
 	printf("Can controller init \n\r");
 	SPI_masterInit();
 	printf("SPI master init done \n\r");
@@ -67,8 +66,7 @@ void CAN_controller_init() {
 
 	//set interrupt on 2560
 	//Global interrupt enable
-	sei();
-	//SREG |= (1 << I);
+	
 	EIMSK |= 1 << INT4;	//interrupt on pin INT4
 	EICRB |= 1 << ISC41; //Turn on falling edge
 	EICRB &= ~(1 << ISC40); //....
@@ -84,7 +82,6 @@ void CAN_controller_init() {
 	//Check CANSTAT register
 	uint8_t status = CAN_controller_read(MCP_CANSTAT);
 	printf("Data: %i\n\r", status);
-
 }
 
 void CAN_controller_RTS(uint8_t buffer) {

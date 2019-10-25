@@ -24,8 +24,17 @@
 #include "CAN.h"
 #include "joystick.h"
 #include "pwm.h"
-#include "IR.h"
+#include "ADC.h"
+#include "sleep.h"
+uint8_t timerFlag = 0;
 
+ISR (TIMER3_COMPB_vect) {
+	
+	
+	timerFlag = 1;
+	
+	
+}
 
 volatile CAN_message_t received_message;
 volatile uint8_t flag = 0;
@@ -57,30 +66,34 @@ int main(void)
 	message.data[2] = 33;
 	
 	_delay_ms(2000);
-	//CAN_controller_setMode(MODE_NORMAL);
 	pwm_setPulseWidth(2);
-              
+    CAN_controller_setMode(MODE_NORMAL);
+    
 	while (1) {
 		
 
 		//Put microcontroller to sleep until next interrupt. 
 
-		
+		sleep_now();
 		if (flag) {
 			
+			//cli();
 			//printf("Message received");
 			flag=0;
 			
 			joystick_readPositionOverCAN();
-			joystick_printPosition();
+			//joystick_printPosition();
 			joystick_setServo();
 			uint8_t mask = 0b11; 
 			
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
+			//sei();
 			
 		}
-		printf("Analog value: %i\n\r", IR_read());
-		_delay_ms(500);	
+		if (timerFlag) {
+			TCNT3 = 0x00;
+			printf("Analog value: %d\n\r", ADC_read());
+		}
 	
 
 		
