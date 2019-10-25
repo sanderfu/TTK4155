@@ -1,15 +1,18 @@
 /*
  * IR.h
  *
- * Created: 18.10.2019 14:20:57
- *  Author: torsteoe
+ * Created: 25.10.2019 09:59:17
+ *  Author: haavaei
  */ 
 
 
 #ifndef IR_H_
 #define IR_H_
+#include <avr/io.h>
 
+void IR_init();
 
+uint16_t IR_read();
 
 
 

@@ -8,6 +8,8 @@ CAN.c
 
 CAN_controller.c
 
+IR.c
+
 joystick.c
 
 pwm.c

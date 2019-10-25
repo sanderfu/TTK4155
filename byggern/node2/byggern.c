@@ -24,6 +24,7 @@
 #include "CAN.h"
 #include "joystick.h"
 #include "pwm.h"
+#include "IR.h"
 
 
 volatile CAN_message_t received_message;
@@ -56,7 +57,7 @@ int main(void)
 	message.data[2] = 33;
 	
 	_delay_ms(2000);
-	CAN_controller_setMode(MODE_NORMAL);
+	//CAN_controller_setMode(MODE_NORMAL);
 	pwm_setPulseWidth(2);
               
 	while (1) {
@@ -66,16 +67,20 @@ int main(void)
 
 		
 		if (flag) {
-			printf("Message received");
+			
+			//printf("Message received");
 			flag=0;
+			
 			joystick_readPositionOverCAN();
 			joystick_printPosition();
 			joystick_setServo();
 			uint8_t mask = 0b11; 
+			
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
 			
 		}
-		_delay_ms(5);	
+		printf("Analog value: %i\n\r", IR_read());
+		_delay_ms(500);	
 	
 
 		

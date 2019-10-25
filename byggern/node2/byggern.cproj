@@ -153,10 +153,10 @@
     <Compile Include="CAN_controller.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="IncFile1.h">
+    <Compile Include="IR.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="IR.c">
+    <Compile Include="IR.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="joystick.c">
