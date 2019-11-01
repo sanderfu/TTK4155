@@ -10,11 +10,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-void joystick_readPositionOverCAN() {
-	CAN_message_t mess;
-	CAN_receiveMessage(&mess);
+void joystick_readPositionOverCAN(CAN_message_t mess) {
 	
-	if (mess.ID = 0x01) {
+	if (mess.ID == 0x01) {
 		joystick_pos.x_pos = mess.data[0];
 		joystick_pos.y_pos = mess.data[1];
 		joystick_pos.angle = atan2(joystick_pos.y_pos, joystick_pos.x_pos)*360/2.0/3.14;

@@ -45,7 +45,7 @@ const uint8_t PROGMEM lisaTempo[33] = {
 	200
 
 };
-
+*/
 
 const uint32_t PROGMEM song1_chorus_melody[79] =
 { NOTE_AS4, NOTE_AS4, NOTE_GS4, 0, 
@@ -72,7 +72,7 @@ const uint32_t PROGMEM song1_chorus_melody[79] =
 	 NOTE_C5, NOTE_AS4, NOTE_GS4, 0, 
 	 NOTE_GS4, NOTE_DS5, NOTE_CS5, 0
 };
-
+/*
 const char* lyrics_chorus[79] =
 { "Never ", "", "gonna ", "",
   "", "give ", "", "you ", "up\r\n",
@@ -94,7 +94,7 @@ const char* lyrics_chorus[79] =
 	"a ", "lie ", "","",
    "and ","", "hurt ",  "you", "\r\n", ""
 };
-
+*/
 const uint8_t PROGMEM song1_chorus_rhythmn[79] =
 { 10, 10, 10, 1, 
 	10,30,  1, 30,
@@ -122,7 +122,7 @@ const uint8_t PROGMEM song1_chorus_rhythmn[79] =
 };
 
 
-
+/*
 void music_playLisaGikk() {
 	cli();
 	printf("playing Lisa Gikk til Skolen, not by Toto\n\n\r");
@@ -138,11 +138,12 @@ void music_playLisaGikk() {
 	sei();
 
 }
+*/
 void music_playRick() {
 	
-	printf("You got rickrolled\n\n\r");
+	//printf("You got rickrolled\n\n\r");
 	for (int i = 0; i< sizeof(song1_chorus_melody)/sizeof(uint32_t); i++) {
-		printf(lyrics_chorus[i]);
+		//printf(lyrics_chorus[i]);
 		pwm_setFreq(pgm_read_word(&(song1_chorus_melody[i])));
 		uint32_t duration = 20*pgm_read_byte(&(song1_chorus_rhythmn[i]));
 		while (duration--) {
@@ -153,4 +154,3 @@ void music_playRick() {
 	
 
 }
-*/

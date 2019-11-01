@@ -9,6 +9,7 @@
 #ifndef JOYSTICK_H_
 #define JOYSTICK_H_
 #include <avr/io.h>
+#include "CAN.h"
 typedef struct {
 	int8_t x_pos;
 	int8_t y_pos;
@@ -24,7 +25,7 @@ typedef enum DIRECTION {
 } DIRECTION_t ;
 
 volatile joystick_position_t joystick_pos;
-void joystick_readPositionOverCAN();
+void joystick_readPositionOverCAN(CAN_message_t mess);
 void joystick_printPosition();
 void joystick_setServo();
 

@@ -16,7 +16,6 @@ void this_init() {
 	printf("this_init initiating");
 	
 	strcpy(nodes[0].name, "Main menu");
-
 	strcpy(nodes[1].name, "Play game");
 	strcpy(nodes[2].name, "High scores");
 	strcpy(nodes[3].name, "Music");
@@ -31,7 +30,6 @@ void this_init() {
 	
 	
 	nodes[0].numChildren = 3;
-	
 	nodes[1].numChildren = 2;
 	nodes[2].numChildren = 5;
 	nodes[3].numChildren = 0;
@@ -70,7 +68,7 @@ void this_init() {
 	nodes[9].parent = nodes+2;
 	nodes[10].parent = nodes+2;
 	*/
-	
+	/*
 	for (int i = 0; i<11; i++) {
 		printf("Node %i\n\r", i);
 		printf( nodes[i].name);
@@ -88,10 +86,11 @@ void this_init() {
 		}
 		
 	}
+	*/
 	currentMenu.currentMenuItem = nodes; //set main menu as current
 	currentMenu.childIndex = 0;
 	currentMenu.lastDir = NEUTRAL;
-	printf("MENU INITIATED\n\r");
+	//printf("MENU INITIATED\n\r");
 }
 
 

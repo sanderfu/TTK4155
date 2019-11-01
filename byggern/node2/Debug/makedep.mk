@@ -20,9 +20,13 @@ setup.c
 
 sleep.c
 
+slider.c
+
 SPI.c
 
 timer.c
+
+TWI_Master.c
 
 uart.c
 

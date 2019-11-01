@@ -120,9 +120,9 @@ void CAN_transmit_message(CAN_message_t *message) {
 	//ERROR HANDLING?	
 }
 
-void CAN_receiveMessage(CAN_message_t * received_message) {
-	
-	
+void CAN_receiveMessage() {
+	printf("Receiving message");
+	CAN_message_t * received_message;
 	uint8_t buffer = 0;
 	switch (buffer) {
 		case 0:
@@ -149,6 +149,15 @@ void CAN_receiveMessage(CAN_message_t * received_message) {
 
 				}
 				break;
+	}
+	
+	switch(received_message->ID) {
+		case 1:
+			joystick_readPositionOverCAN(*received_message);
+			break;
+		case 2:
+			slider_readPositionOverCAN(*received_message);
+			break;
 	}
 	
 	

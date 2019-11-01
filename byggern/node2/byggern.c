@@ -26,6 +26,7 @@
 #include "pwm.h"
 #include "ADC.h"
 #include "sleep.h"
+#include "TWI_Master.h"
 uint8_t timerFlag = 0;
 
 ISR (TIMER3_COMPB_vect) {
@@ -67,7 +68,7 @@ int main(void)
 	
 	_delay_ms(2000);
 	pwm_setPulseWidth(2);
-    CAN_controller_setMode(MODE_NORMAL);
+    //CAN_controller_setMode(MODE_NORMAL);
     
 	while (1) {
 		
@@ -77,22 +78,22 @@ int main(void)
 		sleep_now();
 		if (CANFlag) {
 			
-			//cli();
-			//printf("Message received");
+			cli();
+			printf("Message received");
 			CANFlag=0;
-			
-			joystick_readPositionOverCAN();
+			CAN_receiveMessage();
+			//joystick_readPositionOverCAN();
 			joystick_printPosition();
 			joystick_setServo();
 			uint8_t mask = 0b11; 
 			
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
-			//sei();
+			sei();
 			
 		}
 		if (timerFlag) {
 			TCNT3 = 0x00;
-			printf("Analog value: %d\n\r", ADC_read());
+			//printf("Analog value: %d\n\r", ADC_read());
 		}
 	
 

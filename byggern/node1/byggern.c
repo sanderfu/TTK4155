@@ -47,7 +47,6 @@ ISR (INT0_vect) {
 int main(void)
 //p.23 for can read instructions
 {
-	printf("---------------------------------------\n\r");
 
 	setupInit();
 	
@@ -64,8 +63,8 @@ int main(void)
 	_delay_ms(500);
 	//CAN_transmit_message(&message);
 	
-	CAN_controller_setMode(MODE_NORMAL);
-	
+	//CAN_controller_setMode(MODE_NORMAL);
+	//music_playRick();
 
 	//test_SRAM();
 	//pwm_testPlayNote();
@@ -87,7 +86,7 @@ int main(void)
 			
 		}
 		
-		//joystick_sendPositionOverCAN();
-	
+		joystick_sendPositionOverCAN();
+		slider_sendPositionOverCAN();
 	}
 }

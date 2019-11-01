@@ -7,6 +7,8 @@ typedef struct {
 	uint8_t right_pos;
 } slider_position_t;
 void slider_readPosition(slider_position_t * pos);
+void slider_sendPositionOverCAN();
+
 slider_position_t slider_pos;
 
 #endif

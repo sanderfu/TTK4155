@@ -58,18 +58,18 @@ void CAN_controller_init() {
 	
 	SPI_masterInit();
 
-	CAN_controller_setMode(MODE_LOOPBACK);
+	CAN_controller_setMode(MODE_NORMAL);
 	
 	
 	//set interrupt on atm162
 	
-	cli();
+	
 	 GICR |= (1<< INT0); //turn on interrupt 0
 	MCUCR |= (1 << ISC01); //Turn on falling edge
 	MCUCR &= ~(1 << ISC00);
 //set PD2 as input
 	DDRD  &= (1 << PD2); //set as input.
-	sei();
+	
 	
 	
 	_delay_ms(200);

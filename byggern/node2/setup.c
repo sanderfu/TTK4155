@@ -3,6 +3,8 @@
 #include "timer.h"
 #include "ADC.h"
 #include "sleep.h"
+#include "TWI_Master.h"
+
 void setupInit(void){
 	cli();
 	USART_init(MYUBRR);
@@ -15,5 +17,6 @@ void setupInit(void){
 	printf("Finished setup");
 	timer_init();
 	sleep_init();
+	TWI_Master_Initialise();
 	sei();
 }
