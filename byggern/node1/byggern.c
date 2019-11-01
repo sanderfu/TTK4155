@@ -63,7 +63,7 @@ int main(void)
 	_delay_ms(500);
 	//CAN_transmit_message(&message);
 	
-	//CAN_controller_setMode(MODE_NORMAL);
+	CAN_controller_setMode(MODE_NORMAL);
 	//music_playRick();
 
 	//test_SRAM();

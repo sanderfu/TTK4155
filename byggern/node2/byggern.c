@@ -68,7 +68,7 @@ int main(void)
 	
 	_delay_ms(2000);
 	pwm_setPulseWidth(2);
-    //CAN_controller_setMode(MODE_NORMAL);
+    CAN_controller_setMode(MODE_NORMAL);
     
 	while (1) {
 		

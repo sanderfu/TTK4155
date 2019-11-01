@@ -61,7 +61,7 @@ void CAN_controller_init() {
 	SPI_masterInit();
 	printf("SPI master init done \n\r");
 
-	CAN_controller_setMode(MODE_NORMAL);
+	CAN_controller_setMode(MODE_LOOPBACK);
 	printf("Modes set \n\r");
 
 	//set interrupt on 2560

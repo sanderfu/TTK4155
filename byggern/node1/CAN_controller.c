@@ -58,7 +58,7 @@ void CAN_controller_init() {
 	
 	SPI_masterInit();
 
-	CAN_controller_setMode(MODE_NORMAL);
+	CAN_controller_setMode(MODE_LOOPBACK);
 	
 	
 	//set interrupt on atm162
