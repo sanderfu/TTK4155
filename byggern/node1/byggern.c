@@ -86,6 +86,7 @@ int main(void)
 		}
 		
 		joystick_sendPositionOverCAN();
+		slider_sendPositionOverCAN();
 	
 	}
 }

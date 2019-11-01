@@ -19,5 +19,6 @@
 	sleep_init();
 	menuInit();
 	CAN_controller_init();
+	//pwm_init();
 	sei();
 }
