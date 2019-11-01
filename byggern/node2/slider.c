@@ -12,3 +12,4 @@ void slider_readPositionOverCAN(CAN_message_t mess) {
 		slider_pos.right_pos = mess.data[1];
 	}
 }
+

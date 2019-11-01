@@ -27,6 +27,8 @@
 #include "ADC.h"
 #include "sleep.h"
 #include "TWI_Master.h"
+#include "motor.h"
+#include "encoder.h"
 uint8_t timerFlag = 0;
 
 ISR (TIMER3_COMPB_vect) {
@@ -69,9 +71,9 @@ int main(void)
 	_delay_ms(2000);
 	pwm_setPulseWidth(2);
     CAN_controller_setMode(MODE_NORMAL);
-    
 	while (1) {
-		
+		encoder_readValues();
+		motor_control();
 
 		//Put microcontroller to sleep until next interrupt. 
 
@@ -83,7 +85,7 @@ int main(void)
 			CANFlag=0;
 			CAN_receiveMessage();
 			//joystick_readPositionOverCAN();
-			joystick_printPosition();
+			//joystick_printPosition();
 			joystick_setServo();
 			uint8_t mask = 0b11; 
 			
@@ -96,7 +98,7 @@ int main(void)
 			//printf("Analog value: %d\n\r", ADC_read());
 		}
 	
-
+		
 		
 		
 	}

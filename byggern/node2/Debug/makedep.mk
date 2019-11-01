@@ -10,9 +10,13 @@ CAN_controller.c
 
 ADC.c
 
+encoder.c
+
 IR.c
 
 joystick.c
+
+motor.c
 
 pwm.c
 

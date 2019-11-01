@@ -18,5 +18,7 @@ void setupInit(void){
 	timer_init();
 	sleep_init();
 	TWI_Master_Initialise();
+	motor_init();
+	encoder_init();
 	sei();
 }
