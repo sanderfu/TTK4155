@@ -22,6 +22,6 @@
 	this_init();
 	printf("Finished this");
 	CAN_controller_init();
-	pwm_init();
+	//pwm_init(); uncommenting this breaks can on node 2.
 	sei();
 }
