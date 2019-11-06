@@ -20,4 +20,5 @@ void CAN_transmit_message(CAN_message_t * message);
 void CAN_receiveMessage(CAN_message_t * received_message);
 void CAN_init();
 
+void CAN_sendInputData();
 #endif /* CAN_H_ */

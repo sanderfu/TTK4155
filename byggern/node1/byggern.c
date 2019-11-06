@@ -34,10 +34,11 @@
 #include "CAN.h"
 volatile CAN_message_t received_message;
 volatile uint8_t flag = 0;
+
 ISR (INT0_vect) {
 	//cli();
 	flag= 1;
-	
+	printf("in int0 interrupt");
 	
 	//sei();
 	
@@ -73,11 +74,11 @@ int main(void)
 	while (1) {
 		//
 		//Put microcontroller to sleep until next interrupt. 
-
+		printf("node 1 alive");
 		sleep_now();
 		
 		if (flag) {
-			printf("Message received");
+			//printf("Message received");
 			flag=0;
 			CAN_receiveMessage(&received_message);
 			//printf("This is the data: %i", received_message.data);
@@ -85,8 +86,11 @@ int main(void)
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
 			
 		}
-		
-		joystick_sendPositionOverCAN();
-		slider_sendPositionOverCAN();
+		if (flag_2) {
+			flag_2 = 0;
+
+			
+		}
+	
 	}
 }

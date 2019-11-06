@@ -30,6 +30,8 @@
 #include "motor.h"
 #include "encoder.h"
 #include "slider.h"
+#include "touchButton.h"
+#include "solenoid.h"
 uint8_t timerFlag = 0;
 uint8_t regulatorOn = 0;
 ISR (TIMER3_COMPB_vect) {
@@ -62,38 +64,34 @@ int main(void)
 
 
 	//test_SRAM();
+	/*
 	volatile CAN_message_t message;
 	message.ID = 0b10101010111;
 	message.data_length = 3;
 	message.data[0] = 13;
 	message.data[1] = 22;
 	message.data[2] = 33;
-	
+	*/
 	_delay_ms(2000);
 	pwm_setPulseWidth(2);
     CAN_controller_setMode(MODE_NORMAL);
 	while (1) {
-		encoder_readValues();
 
 		//Put microcontroller to sleep until next interrupt. 
-
+		printf("alive");
 		sleep_now();
 		if (CANFlag) {
-			
+			printf("REceived message\n\r");
 			cli();
-			//printf("Message received");
 			CANFlag=0;
 			CAN_receiveMessage();
-			//printf("slider left%i", slider_pos.left_pos);
 			if (slider_pos.left_pos>0) {
-				//printf("reg on2");
 				regulatorOn = 1;
 			} else {
 				motor_setSpeed(0);
 				regulatorOn = 0;
 			}
-			//joystick_readPositionOverCAN();
-			//joystick_printPosition();
+			
 			joystick_setServo();
 			uint8_t mask = 0b11; 
 			
@@ -102,11 +100,23 @@ int main(void)
 			
 		}
 		if (timerFlag) {
+			cli();
 			TCNT3 = 0x00;
 			encoder_readValues();
 			if (regulatorOn) {
 				motor_control();
 			}
+			
+			if (buttons.left_button && !(shooting)) {
+				solenoid_setPulse();
+			} 
+			else if (buttons.left_button == 0) {
+				
+				shooting = 0;
+			}
+			sei();
+			
+			
 		}
 	
 		

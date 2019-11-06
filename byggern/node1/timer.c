@@ -1,5 +1,5 @@
 #define PRESCALE 1024
-#define TIMER1_SECONDS 0.05
+#define TIMER1_SECONDS 0.1
 #define TIMER1_RESET (F_CPU/PRESCALE)*TIMER1_SECONDS
 
 #define TIMER0_SECONDS 0.2
@@ -9,18 +9,24 @@
 #include "slider.h"
 #include "touchButton.h"
 #include "menu.h"
+#include "CAN.h"
 
 
 ISR (TIMER1_COMPB_vect) {
 	cli();
+	printf("In interrupt\n\r");
 	TCNT1 = 0x00;
-	joystick_readPosition(&joystick_pos);
-	slider_readPosition(&slider_pos);
-	touchButton_readButtons(&buttons);
+	joystick_readPosition();
+	slider_readPosition();
+	touchButton_readButtons();
 	navigateMenu(&joystick_pos);
 	menu_printCurrentMenu();
+	CAN_sendInputData();
+
 	sei();
 }
+
+
 /*
 ISR (TIMER0_COMP_vect) {
 	cli();

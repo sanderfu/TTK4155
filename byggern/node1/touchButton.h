@@ -13,5 +13,6 @@ typedef struct {
 buttonValues_t buttons;
 void touchButton_init();
 void touchButton_readButtons();
+void touchButton_sendButtonsOverCAN();
 
 #endif

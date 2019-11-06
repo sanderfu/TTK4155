@@ -9,6 +9,10 @@
 #include "CAN_controller.h"
 #include "CAN.h"
 #include "MCP2515.h"
+#include "joystick.h"
+#include "slider.h"
+#include "touchButton.h"
+#include "solenoid.h"
 #define F_CPU 16000000
 
 #include <util/delay.h>
@@ -152,7 +156,8 @@ void CAN_receiveMessage() {
 				break;
 				*/
 	}
-	
+	CAN_readPosition(received_message);
+	/*
 	switch(received_message.ID) {
 		case 1:
 			joystick_readPositionOverCAN(received_message);
@@ -160,9 +165,29 @@ void CAN_receiveMessage() {
 		case 2:
 			slider_readPositionOverCAN(received_message);
 			break;
+		case 3:
+			touchButton_readButtonsOverCAN(received_message);
+			break;
 	}
 	
+	*/
 	
 	
+}
+
+void CAN_readPosition(CAN_message_t mess) {
 	
+	int32_t dataLeft = mess.data[0];
+	int32_t dataRight = mess.data[1];
+
+	slider_pos.left_pos = (dataLeft*200)/255-100;
+	slider_pos.right_pos = (dataRight*200)/255-100;
+	buttons.left_button = mess.data[2];
+	buttons.right_button = mess.data[3];
+	if (buttons.left_button == 0) {
+		shooting = 0;
+	}
+	joystick_pos.x_pos = mess.data[4];
+	joystick_pos.y_pos = mess.data[5];
+	joystick_pos.angle = atan2(joystick_pos.y_pos, joystick_pos.x_pos)*360/2.0/3.14;
 }

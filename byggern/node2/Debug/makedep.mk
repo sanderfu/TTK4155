@@ -26,9 +26,13 @@ sleep.c
 
 slider.c
 
+solenoid.c
+
 SPI.c
 
 timer.c
+
+touchButton.c
 
 TWI_Master.c
 
