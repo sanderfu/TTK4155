@@ -11,8 +11,8 @@
 #include <avr/io.h>
 #include "CAN.h"
 typedef struct {
-	uint8_t left_pos;
-	uint8_t right_pos;
+	int32_t left_pos;
+	int32_t right_pos;
 } slider_position_t;
 volatile slider_position_t slider_pos;
 

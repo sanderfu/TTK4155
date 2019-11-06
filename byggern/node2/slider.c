@@ -8,8 +8,11 @@
 void slider_readPositionOverCAN(CAN_message_t mess) {
 	
 	if (mess.ID == 0x02) {
-		slider_pos.left_pos = mess.data[0];
-		slider_pos.right_pos = mess.data[1];
+		int32_t dataLeft = mess.data[0];
+		int32_t dataRight = mess.data[1];
+
+		slider_pos.left_pos = (dataLeft*200)/255-100;
+		slider_pos.right_pos = (dataRight*200)/255-100;
 	}
 }
 
