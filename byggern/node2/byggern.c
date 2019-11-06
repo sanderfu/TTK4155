@@ -29,8 +29,9 @@
 #include "TWI_Master.h"
 #include "motor.h"
 #include "encoder.h"
+#include "slider.h"
 uint8_t timerFlag = 0;
-
+uint8_t regulatorOn = 0;
 ISR (TIMER3_COMPB_vect) {
 	
 	
@@ -73,7 +74,6 @@ int main(void)
     CAN_controller_setMode(MODE_NORMAL);
 	while (1) {
 		encoder_readValues();
-		motor_control();
 
 		//Put microcontroller to sleep until next interrupt. 
 
@@ -81,9 +81,17 @@ int main(void)
 		if (CANFlag) {
 			
 			cli();
-			printf("Message received");
+			//printf("Message received");
 			CANFlag=0;
 			CAN_receiveMessage();
+			//printf("slider left%i", slider_pos.left_pos);
+			if (slider_pos.left_pos>0) {
+				//printf("reg on2");
+				regulatorOn = 1;
+			} else {
+				motor_setSpeed(0);
+				regulatorOn = 0;
+			}
 			//joystick_readPositionOverCAN();
 			//joystick_printPosition();
 			joystick_setServo();
@@ -95,7 +103,10 @@ int main(void)
 		}
 		if (timerFlag) {
 			TCNT3 = 0x00;
-			//printf("Analog value: %d\n\r", ADC_read());
+			encoder_readValues();
+			if (regulatorOn) {
+				motor_control();
+			}
 		}
 	
 		

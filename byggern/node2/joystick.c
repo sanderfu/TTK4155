@@ -26,7 +26,7 @@ void joystick_printPosition() {
 
 void joystick_setServo() {
 		float var = 3-(((float)joystick_pos.x_pos+100.0)/200.0*(2.1-0.9)+0.9);
-		printf("servo value: %i\n\r",(int)(var*100));
+		//printf("servo value: %i\n\r",(int)(var*100));
 		pwm_setPulseWidth(var);
 	
 }

@@ -3,12 +3,9 @@
 
 
 
-#define PRESCALE 1024
-#define TIMER1_SECONDS 0.05
-#define TIMER1_RESET (F_CPU/PRESCALE)*TIMER1_SECONDS
 
-#define TIMER3_SECONDS 0.2
-#define TIMER3_RESET (F_CPU/PRESCALE)*TIMER3_SECONDS
+
+
 #include "timer.h"
 
 /*
