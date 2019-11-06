@@ -85,8 +85,9 @@ int main(void)
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
 			
 		}
-		
+		touchButton_sendButtonsOverCAN();
 		joystick_sendPositionOverCAN();
 		slider_sendPositionOverCAN();
+		
 	}
 }

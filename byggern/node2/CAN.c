@@ -160,6 +160,9 @@ void CAN_receiveMessage() {
 		case 2:
 			slider_readPositionOverCAN(received_message);
 			break;
+		case 3:
+			touchButton_readButtonsOverCAN(received_message);
+			break;
 	}
 	
 	

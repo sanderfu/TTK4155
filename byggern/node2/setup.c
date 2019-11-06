@@ -4,7 +4,7 @@
 #include "ADC.h"
 #include "sleep.h"
 #include "TWI_Master.h"
-
+#include "solenoid.h"
 void setupInit(void){
 	cli();
 	USART_init(MYUBRR);
@@ -20,5 +20,6 @@ void setupInit(void){
 	TWI_Master_Initialise();
 	motor_init();
 	encoder_init();
+	solenoid_init();
 	sei();
 }

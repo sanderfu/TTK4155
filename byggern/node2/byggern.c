@@ -30,6 +30,8 @@
 #include "motor.h"
 #include "encoder.h"
 #include "slider.h"
+#include "touchbutton.h"
+#include "solenoid.h"
 uint8_t timerFlag = 0;
 uint8_t regulatorOn = 0;
 ISR (TIMER3_COMPB_vect) {
@@ -73,8 +75,7 @@ int main(void)
 	pwm_setPulseWidth(2);
     CAN_controller_setMode(MODE_NORMAL);
 	while (1) {
-		encoder_readValues();
-
+		_delay_ms(5);
 		//Put microcontroller to sleep until next interrupt. 
 
 		sleep_now();
@@ -102,11 +103,17 @@ int main(void)
 			
 		}
 		if (timerFlag) {
+			cli();
 			TCNT3 = 0x00;
 			encoder_readValues();
 			if (regulatorOn) {
 				motor_control();
 			}
+			if (buttons.left_button && !(shooting)) {
+				solenoid_setPulse();
+			}
+			sei();
+			
 		}
 	
 		

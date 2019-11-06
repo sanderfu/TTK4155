@@ -21,7 +21,7 @@ void CAN_init() {
 	
 }
 void CAN_transmit_message(CAN_message_t *message) {
-	printf("Transmitting message");
+	//printf("Transmitting message");
 	static int buffer_number = 0;
 	
 	buffer_number++;
@@ -60,7 +60,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 				CAN_controller_bitModify(0b11100000, TXB0SIDL, (uint8_t) ((message->ID & 0b111) << 5));
 				CAN_controller_write(TXB0SIDH, (uint8_t) ( message->ID >> 3) );
 				
-				printf("Sending whole id: %i", message->ID );
+				//printf("Sending whole id: %i", message->ID );
 
 
 				break;
@@ -80,7 +80,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 	//Load length in register TXBnDLC
 	switch(buffer_number) {
 			case 0:
-				printf("\n\rtransmitting data length: %i\n\r", message->data_length);
+				//printf("\n\rtransmitting data length: %i\n\r", message->data_length);
 				CAN_controller_bitModify(0b1111, TXB0DLC, message->data_length);
 				break;
 			case 1:
@@ -97,7 +97,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 	for (uint8_t i = 0; i != message->data_length; i++) {
 		switch(buffer_number) {
 			case 0:
-				printf("transmitting data: %i\t", message->data[i]);
+				//printf("transmitting data: %i\t", message->data[i]);
 				CAN_controller_write(TXB0D0 + i, message->data[i]);
 				break;
 			case 1:
