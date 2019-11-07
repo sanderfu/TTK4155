@@ -17,5 +17,6 @@ void motor_disable();
 void motor_set(uint8_t dir) ;
 void motor_setSpeed(uint8_t speed);
 void motor_control();
-
+void motor_setDirection(uint8_t dir);
+void motor_moveUntilEdge(uint8_t dir);
 #endif /* MOTOR_H_ */

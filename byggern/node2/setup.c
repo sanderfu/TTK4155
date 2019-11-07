@@ -5,6 +5,8 @@
 #include "sleep.h"
 #include "TWI_Master.h"
 #include "solenoid.h"
+#define F_CPU 16000000
+#include <util/delay.h>
 void setupInit(void){
 	cli();
 	USART_init(MYUBRR);
@@ -18,8 +20,8 @@ void setupInit(void){
 	timer_init();
 	sleep_init();
 	TWI_Master_Initialise();
-	motor_init();
 	encoder_init();
+	motor_init();
 	solenoid_init();
 	sei();
 }

@@ -116,10 +116,11 @@ int main(void)
 			}
 			TCNT3 = 0x00;
 			encoder_readValues();
+			printf("Converted: %i\n\r", converted_encoderValue);
 			if (regulatorOn) {
 				motor_control();
 			}
-			printf("ADC-value: %i", ADC_read());
+			//printf("ADC-value: %i", ADC_read());
 			
 			
 			sei();

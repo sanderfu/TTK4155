@@ -8,7 +8,6 @@
 #include "encoder.h"
 #include <stdio.h>
 #define F_CPU 16000000
-
 #include <util/delay.h>
 #include <avr/io.h>
 
@@ -32,7 +31,7 @@ void encoder_init() {
 		_delay_us(20);
 
 	PORTH |= (1 << PH5);
-
+	encoder_maxValue = -15000;
 
 }
 void encoder_readValues() {
@@ -78,15 +77,15 @@ void encoder_readValues() {
 	if (encoder_value>0) {
 		encoder_value = 0;
 		
-	} else if (encoder_value <-8368) {
-		encoder_value = -8368;
+	} else if (encoder_value <encoder_maxValue) {
+		encoder_value = encoder_maxValue;
 	}
 	encoder_convertValues();
 	//printf("Encoder_values: %d\n\r", encoder_value);
 }
 
 void encoder_convertValues() {
-	float a = -0.02309;
+	float a = (100.0-(-100.0))/encoder_maxValue;
 	float b = -100;
 	converted_encoderValue = a*encoder_value + b;
 	//printf("Converted encoder_values: %d\n\r", converted_encoderValue);
