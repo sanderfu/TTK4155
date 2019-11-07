@@ -28,7 +28,7 @@ void ADC_init() {
 	ADCSRA |= (1 << ADEN);
 		
 		
-
+	adc_0 = -1;
 	
 }
 
@@ -51,6 +51,7 @@ uint16_t ADC_read() {
 	uint8_t high = ADCH;
 	
 	uint16_t adcValue = low + (high << 8);
+	adc_0 = adcValue;
 	return adcValue;/// adcValue;
 	//adc = v-in*1024/v-ref
 }

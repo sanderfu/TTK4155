@@ -108,8 +108,8 @@ int main(void)
 			cli();
 			//printf("joystick x:%i\n\rslider left: %i\n\r, button left: %i\n\r", joystick_pos.x_pos, slider_pos.left_pos, buttons.left_button);
 			
-			printf("in timer");
-			printf("shooting VALUE: %i\n\r", shooting);
+			//printf("in timer");
+			//printf("shooting VALUE: %i\n\r", shooting);
 			if (buttons.left_button && !(shooting)) {
 				printf("shooting");
 				solenoid_setPulse();
@@ -119,7 +119,7 @@ int main(void)
 			if (regulatorOn) {
 				motor_control();
 			}
-			
+			printf("ADC-value: %i", ADC_read());
 			
 			
 			sei();

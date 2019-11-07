@@ -14,7 +14,7 @@
 void ADC_init();
 
 uint16_t ADC_read();
-
+int adc_0;
 
 
 #endif /* ADC_H_ */
