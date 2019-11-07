@@ -9,6 +9,10 @@
 #include "CAN_controller.h"
 #include "CAN.h"
 #include "MCP2515.h"
+#include "slider.h"
+#include "joystick.h"
+#include "touchButton.h"
+
 #define F_CPU 4915200
 
 #include <util/delay.h>
@@ -155,4 +159,21 @@ void CAN_receiveMessage(CAN_message_t * received_message) {
 	
 	
 	
+}
+
+void CAN_sendInputData() {
+	printf("sending input data");
+	CAN_message_t message;
+	
+	message.ID = 0x01;
+	message.data_length = 6;
+	
+	message.data[0] = slider_pos.left_pos;
+	message.data[1] = slider_pos.right_pos;
+	message.data[2] = buttons.left_button;
+	printf("button left: %i\n\r", buttons.left_button);
+	message.data[3] = buttons.right_button;
+	message.data[4] = joystick_pos.x_pos;
+	message.data[5] = joystick_pos.y_pos;
+	CAN_transmit_message(&message);
 }

@@ -64,15 +64,16 @@ int main(void)
 
 
 	//test_SRAM();
+	/*
 	volatile CAN_message_t message;
 	message.ID = 0b10101010111;
 	message.data_length = 3;
 	message.data[0] = 13;
 	message.data[1] = 22;
 	message.data[2] = 33;
-	
+	*/
 	_delay_ms(2000);
-	pwm_setPulseWidth(2);
+	//pwm_setPulseWidth(2);
     CAN_controller_setMode(MODE_NORMAL);
 	while (1) {
 		_delay_ms(5);
@@ -97,26 +98,33 @@ int main(void)
 			//joystick_printPosition();
 			joystick_setServo();
 			uint8_t mask = 0b11; 
-			
+
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
 			sei();
 			
 		}
+		
 		if (timerFlag) {
 			cli();
+			//printf("joystick x:%i\n\rslider left: %i\n\r, button left: %i\n\r", joystick_pos.x_pos, slider_pos.left_pos, buttons.left_button);
+			
+			printf("in timer");
+			printf("shooting VALUE: %i\n\r", shooting);
+			if (buttons.left_button && !(shooting)) {
+				printf("shooting");
+				solenoid_setPulse();
+			}
 			TCNT3 = 0x00;
 			encoder_readValues();
 			if (regulatorOn) {
 				motor_control();
 			}
-			if (buttons.left_button && !(shooting)) {
-				solenoid_setPulse();
-			}
-			sei();
 			
+			
+			
+			sei();
 		}
 	
-		
 		
 		
 	}
