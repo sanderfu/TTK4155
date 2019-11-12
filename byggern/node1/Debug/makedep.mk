@@ -10,6 +10,8 @@ CAN.c
 
 CAN_controller.c
 
+game.c
+
 music.c
 
 pwm.c

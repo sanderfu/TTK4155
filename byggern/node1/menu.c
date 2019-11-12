@@ -13,12 +13,14 @@ MenuNode nodes[11];
 
 void this_init() {
 	
-	printf("this_init initiating");
-	
+	//printf("this_init initiating");
+	//Setting the name of the main menu
 	strcpy(nodes[0].name, "Main menu");
+	//Setting the names of the subm
 	strcpy(nodes[1].name, "Play game");
 	strcpy(nodes[2].name, "High scores");
 	strcpy(nodes[3].name, "Music");
+	//Setting the names of the actions
 	strcpy(nodes[4].name, "Game 1");
 	strcpy(nodes[5].name, "Game 2");
 	strcpy(nodes[6].name, "Score 1");
@@ -26,7 +28,19 @@ void this_init() {
 	strcpy(nodes[8].name, "Score 3");
 	strcpy(nodes[9].name, "Score 4");
 	strcpy(nodes[10].name, "Score 5");
-
+	
+	for(int i = 0;i<11; i++)
+	{
+		//This could be done way better and more general with hashing taking in the node name as input.
+		nodes[i].nodeID=i;
+		//Chooses if the child is sub or action (this is not dynamic)
+		if(i>=4){
+			nodes[i].isAction=1;
+		}
+		else{
+			nodes[i].isAction=0;
+		}
+	}
 	
 	
 	nodes[0].numChildren = 3;
@@ -51,42 +65,7 @@ void this_init() {
 			currentChildIdx++;
 		}
 	}
-	
-	/*
-	nodes[0].children = {nodes+1, nodes+2, nodes+3}; 
-	nodes[1].children = {nodes+4, nodes+5};
-	nodes[2].children = {nodes+6, nodes+7, nodes+8, nodes+9, nodes+10};
-
-	nodes[1].parent = nodes;
-	nodes[2].parent = nodes;
-	nodes[3].parent = nodes;
-	nodes[4].parent = nodes+1;
-	nodes[5].parent = nodes+1;
-	nodes[6].parent = nodes+2;
-	nodes[7].parent = nodes+2;
-	nodes[8].parent = nodes+2;
-	nodes[9].parent = nodes+2;
-	nodes[10].parent = nodes+2;
-	*/
-	/*
-	for (int i = 0; i<11; i++) {
-		printf("Node %i\n\r", i);
-		printf( nodes[i].name);
-		for (int childIdx=0; childIdx<nodes[i].numChildren; childIdx++) {
-			printf("child: ");
-			printf(nodes[i].children[childIdx]->name);
-			printf("\n\r");
-
-		}
-		if (i != 0) {
-			printf("Parent");
-			printf(nodes[i].parent->name);
-			printf("\n\r");
-
-		}
-		
-	}
-	*/
+	navigateMenu(&joystick_pos);
 	currentMenu.currentMenuItem = nodes; //set main menu as current
 	currentMenu.childIndex = 0;
 	currentMenu.lastDir = NEUTRAL;
@@ -94,80 +73,6 @@ void this_init() {
 }
 
 
-
-
-/*
-
-MenuNode* mainMenuInit (void){
-	MenuNode* ptr = (MenuNode*) malloc(sizeof(MenuNode));
-	ptr->numChildren = 0;
-	strcpy(ptr->name, "Main menu");
-	ptr->parent = NULL;
-	
-	return ptr;
-}
-*/
-/*
-MenuNode * addChild(MenuNode* parent, char* child_name)
-{
-	MenuNode* childPtr = (MenuNode*) malloc(sizeof(MenuNode));
-	
-	parent->numChildren++;
-	strcpy(childPtr->name, child_name);
-	childPtr->parent = parent;
-	//printf("Added child: %s\n\r", childPtr->name);
-
-	if (parent->numChildren > MAXCHILDREN) {
-		printf("REached max: \n\r");
-		return NULL;
-	} 
-	parent->children[parent->numChildren-1]=childPtr;
-	parent->children[parent->numChildren-1]->numChildren = 0;
-	return childPtr;
-}
-*/
-/*
-MenuNode* menuInit(void)
-{
-	MenuNode* mainMenu = mainMenuInit();
-		
-	MenuNode * childPlayGame = addChild(mainMenu,"Play game");
-	addChild(childPlayGame,"GAME 1");
-	addChild(childPlayGame,"GAME 2");
-	
-	
-	MenuNode * childHighscore = addChild(mainMenu,"Highscore");
-	//childHighscore->numChildren = 5;
-	
-	for (int i = 0; i< 5; i++) {
-		addChild(childHighscore, "High: 1");
-	}
-	
-	//MenuNode* childSettings = addChild(mainMenu,"Settings");
-	
-	MenuNode* childMusic = addChild(mainMenu,"Music");
-	addChild(childMusic, "Rick");
-	
-	
-	//addChild(childSettings, "No sett");
-	
-	
-	printf("Number of children: %i\n\r",mainMenu->numChildren);
-
-	*/
-	/*
-	MenuNode* childSettings = addChild(mainMenu,"Settings");
-	addChild(childSettings, "No sett");
-	printf("Number of children: %i\n\r",childSettings->numChildren);
-	*/
-	/*
-	currentMenu.currentMenuItem = mainMenu;
-	currentMenu.childIndex = 0;
-	currentMenu.lastDir = NEUTRAL;
-	
-	return mainMenu;
-}
-*/
 void navigateMenu(joystick_position_t * joystick_position_p) {
 	DIRECTION_t dir = joystick_getDirection(joystick_position_p);
 	if (currentMenu.lastDir == NEUTRAL) {
@@ -194,7 +99,7 @@ void navigateMenu(joystick_position_t * joystick_position_p) {
 				
 				break;
 			case RIGHT:
-				if (currentMenu.currentMenuItem->children[currentMenu.childIndex]->numChildren != 0) {
+				if ((currentMenu.currentMenuItem->children[currentMenu.childIndex]->numChildren != 0) || (currentMenu.currentMenuItem->children[currentMenu.childIndex]->isAction)) {
 					currentMenu.currentMenuItem = currentMenu.currentMenuItem->children[currentMenu.childIndex];
 					currentMenu.childIndex = 0;
 				}

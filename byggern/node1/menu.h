@@ -14,8 +14,19 @@
 #include "joystick.h"
 #define MAXCHILDREN 6
 #define MAX_OLED_STRING 16
+typedef enum MENU_ID {
+	MAIN_MENU,
+	PLAY_GAME,
+	HIGH_SCORE,
+	MUSIC,
+	GAME_1,
+	GAME_2
+} MENU_ID_t ;
+
 struct MenuNode 
 {
+	MENU_ID_t nodeID;
+	uint8_t isAction;
 	char name[MAX_OLED_STRING];
 	struct MenuNode* parent;
 	struct MenuNode* children[MAXCHILDREN];
@@ -23,6 +34,7 @@ struct MenuNode
 };
 
 typedef struct MenuNode MenuNode;
+
 typedef struct{
 	MenuNode * currentMenuItem;
 	uint8_t childIndex;

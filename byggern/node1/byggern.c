@@ -32,16 +32,7 @@
 #include "pwm.h"
 #include "music.h"
 #include "CAN.h"
-volatile CAN_message_t received_message;
-volatile uint8_t flag = 0;
-ISR (INT0_vect) {
-	//cli();
-	flag= 1;
-	
-	
-	//sei();
-	
-}
+
 
 
 int main(void)
@@ -61,31 +52,25 @@ int main(void)
 	printf("Starting program\n\r");
 	printf("---------------------------------------\n\r");
 	_delay_ms(500);
-	//CAN_transmit_message(&message);
 	
 	CAN_controller_setMode(MODE_NORMAL);
-	//music_playRick();
 
-	//test_SRAM();
-	//pwm_testPlayNote();
-	//pwm_init();
-	//music_playLisaGikk();                 
+	//test_SRAM();            
 	while (1) {
 		//
 		//Put microcontroller to sleep until next interrupt. 
-
 		sleep_now();
 		
-		if (flag) {
-			printf("Message received");
-			flag=0;
-			CAN_receiveMessage(&received_message);
-			//printf("This is the data: %i", received_message.data);
-			uint8_t mask = 0b11; 
-			CAN_controller_bitModify(mask, CANINTF, 0b00);
-			
+		switch(currentMenu.currentMenuItem->nodeID){
+			case MAIN_MENU:
+				break;
+			case HIGH_SCORE:
+				break;
+			case MUSIC:
+				break;
+			case GAME_1:
+				game_play(1);
+				break;
 		}
-		CAN_sendInputData();
-		
 	}
 }

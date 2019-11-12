@@ -1,7 +1,9 @@
 #ifndef OLED_H_
 #define OLED_H_
+
 #include <avr/io.h>
 #define	ASCII_SPACE 32
+
 void oled_init(void);
 void oled_print_arrow();
 void oled_reset();

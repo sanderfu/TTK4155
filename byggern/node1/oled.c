@@ -63,7 +63,6 @@ void oled_init(void) {
 
 void oled_print_arrow()
 {
-
 	oled_write_d(0b00011000);
 	oled_write_d(0b00111100);
 	oled_write_d(0b01111110);
@@ -96,6 +95,7 @@ void oled_print(char* character){
 		}
 		character++;
 	}
+	
 	
 }
 

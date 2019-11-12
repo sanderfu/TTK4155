@@ -6,6 +6,7 @@
 #include "oled.h"
 #include "timer.h"
 #include "sleep.h"
+#include "game.h"
 
 	void setupInit(void){
 	cli();
@@ -23,5 +24,6 @@
 	printf("Finished this");
 	CAN_controller_init();
 	//pwm_init(); uncommenting this breaks can on node 2.
+	game_init();
 	sei();
 }

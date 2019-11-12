@@ -9,6 +9,7 @@
 #include "slider.h"
 #include "touchButton.h"
 #include "menu.h"
+#include "game.h"
 
 
 ISR (TIMER1_COMPB_vect) {
@@ -17,20 +18,17 @@ ISR (TIMER1_COMPB_vect) {
 	joystick_readPosition(&joystick_pos);
 	slider_readPosition(&slider_pos);
 	touchButton_readButtons(&buttons);
-	navigateMenu(&joystick_pos);
-	menu_printCurrentMenu();
-	sei();
-}
-/*
-ISR (TIMER0_COMP_vect) {
-	cli();
-	TCNT1 = 0x00;
-	navigateMenu(&joystick_pos);
-	menu_printCurrentMenu();
+	if(gameActive==0){
+		printf("Game not active");
+		navigateMenu(&joystick_pos);
+		menu_printCurrentMenu();
+	}
+	else{
+		game_updateOled();
+	}
 	sei();
 }
 
-*/
 void timer_init() {
 
 	
@@ -49,19 +47,4 @@ void timer_init() {
 	
 	//Output compare register containing value compared to counter
 	OCR1B = TIMER1_RESET;
-	
-	
-	////////////////////////TIMER 0////////////////////////////////////
-	/*
-	TIMSK |= (1 << OCIE0);
-	TCNT0 = 0x0; 
-	
-	TCCR0 = (1 << COM01 | 1 << COM00 | 1 << CS02 | 1 << CS00);
-	
-	OCR0 = TIMER0_RESET;
-	*/
-	
-	//Enable global interrupts
-
-	//printf("Timer initialized");
 }
