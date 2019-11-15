@@ -33,7 +33,7 @@ void menu_init() {
 		//This could be done way better and more general with hashing taking in the node name as input.
 		nodes[i].nodeID=i;
 		//Chooses if the child is sub or action (this is not dynamic)
-		if(i>=4){
+		if(i>=3){
 			nodes[i].isAction=1;
 		}
 		else{

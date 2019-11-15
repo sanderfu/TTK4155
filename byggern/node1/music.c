@@ -13,6 +13,7 @@
 #include "music.h"
 #include "pwm.h"
 #include "notes.h"
+#include "oled.h"
 /*
 
 const uint32_t PROGMEM lisaMelody[33] = {
@@ -72,30 +73,30 @@ const uint32_t PROGMEM song1_chorus_melody[79] =
 	 NOTE_C5, NOTE_AS4, NOTE_GS4, 0, 
 	 NOTE_GS4, NOTE_DS5, NOTE_CS5, 0
 };
-/*
-const char* lyrics_chorus[79] =
+
+volatile const char* lyrics_chorus[80] =
 { "Never ", "", "gonna ", "",
-  "", "give ", "", "you ", "up\r\n",
+  "", "give ", "", "you ", "up.",
   "Never ", "", "gonna ", "",
    "", "let ",  "",  "you ", "",
    
-   "down", "\r\n", "", "Never ", "", 
+   "down.", "", "", "Never ", "", 
   "gonna ", "", "", "", "run ", "", "", 
   "around ", "", "", 
-   "", "", "and ", "", "desert ",  "","", "you", "\n\r",  
+   "", "", "and ", "", "desert ",  "","", "you.", "",  
   
   "Never ", "", "gonna ", "",
-   "make ", "", "you ", "cry", "\n\r",
+   "make ", "", "you ", "cry.", "",
    "Never ", "", "gonna ", "",
-    "", "",  "say ",  "goodbye ", "", 
+    "", "",  "say ",  "goodbye.", "", 
 	
-	"", "\r\n", "Never ", "", 
+	"", "", "Never ", "", 
 	"gonna ", "", "", "tell ", "", "",
 	"a ", "lie ", "","",
-   "and ","", "hurt ",  "you", "\r\n", ""
+   "and ","", "hurt ",  "you.", "", ""
 };
-*/
-const uint8_t PROGMEM song1_chorus_rhythmn[79] =
+
+ const uint8_t PROGMEM song1_chorus_rhythmn[79] =
 { 10, 10, 10, 1, 
 	10,30,  1, 30,
 	 60, 10,  1,10, 
@@ -142,7 +143,26 @@ void music_playLisaGikk() {
 void music_playRick() {
 	
 	//printf("You got rickrolled\n\n\r");
+	cli();
+	oled_home();
+	oled_reset();
+	uint8_t line = 0;
 	for (int i = 0; i< sizeof(song1_chorus_melody)/sizeof(uint32_t); i++) {
+		if (line== 0) {
+			oled_reset();
+		}
+		//if not equal to ""
+		if ((strcmp(lyrics_chorus[i], ""))) {
+			oled_gotoLine(line);
+			line++;
+			oled_print(lyrics_chorus[i]);
+		}
+		if (lyrics_chorus[i][strlen(lyrics_chorus[i])-1] == '.') {
+			
+			line = 0;
+		}
+		
+		
 		//printf(lyrics_chorus[i]);
 		pwm_setFreq(pgm_read_word(&(song1_chorus_melody[i])));
 		uint32_t duration = 20*pgm_read_byte(&(song1_chorus_rhythmn[i]));
@@ -151,6 +171,9 @@ void music_playRick() {
 		}
 	}
 	pwm_setFreq(0);
+	menu_init();
+
+	sei();
 	
 
 }

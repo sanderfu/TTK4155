@@ -19,7 +19,6 @@ ISR (TIMER1_COMPB_vect) {
 	slider_readPosition(&slider_pos);
 	touchButton_readButtons(&buttons);
 	if(gameActive==0){
-		printf("Game not active");
 		navigateMenu(&joystick_pos);
 		menu_printCurrentMenu();
 	}

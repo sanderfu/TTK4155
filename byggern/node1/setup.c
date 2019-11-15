@@ -20,7 +20,7 @@
 	sleep_init();
 	menu_init();
 	CAN_controller_init();
-	//pwm_init(); uncommenting this breaks can on node 2.
+	pwm_init();
 	game_init();
 	sei();
 }

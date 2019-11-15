@@ -18,13 +18,16 @@ typedef enum {
 } prescaling;
 
 void pwm_init() {
+	
     //set output pin
-    DDRB = (1 << PB0); 
+
+    DDRB |= (1 << PB0); 
 
 
     //set ocr0 register as something
     OCR0 = 0xFF;
     
+	
     //set foc0 in tcr0
     TCCR0 = (1 << FOC0);
 

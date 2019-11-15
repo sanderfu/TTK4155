@@ -56,7 +56,7 @@ int main(void)
 	_delay_ms(500);
 	
 	CAN_controller_setMode(MODE_NORMAL);
-
+	_delay_ms(500);
 	//test_SRAM();            
 	while (1) {
 		
@@ -69,6 +69,7 @@ int main(void)
 			case HIGH_SCORE:
 				break;
 			case MUSIC:
+				music_playRick();
 				break;
 			case GAME_1:
 				game_play(1);
