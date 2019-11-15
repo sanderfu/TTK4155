@@ -149,7 +149,7 @@ void CAN_receiveMessage() {
 			game_init();
 			break;
 		case 3:
-			gameActive = 0;
+			game_stop();
 			break;
 	}
 	

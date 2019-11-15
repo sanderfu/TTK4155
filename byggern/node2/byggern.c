@@ -62,21 +62,16 @@ int main(void)
 {
 	
 	setupInit();
-	printf("---------------------------------------\n\n\n\n\n\n\r");
-
-
-	//test_SRAM();
-	/*
-	volatile CAN_message_t message;
-	message.ID = 0b10101010111;
-	message.data_length = 3;
-	message.data[0] = 13;
-	message.data[1] = 22;
-	message.data[2] = 33;
-	*/
+	printf("------------------------6---------------\n\n\n\n\n\n\r");
+/*
+	DDRE  |= (1 << PE5);
+	PORTE &= ~(1 << PE5);
+	
 	_delay_ms(2000);
+	PORTE |= (1 << PE5);
+		_delay_ms(2000);
+*/
 	//pwm_setPulseWidth(2);
-    CAN_controller_setMode(MODE_NORMAL);
 	while (1) {
 		_delay_ms(5);
 		//Put microcontroller to sleep until next interrupt. 

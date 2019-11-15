@@ -52,17 +52,17 @@ void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data) {
 }
 void CAN_controller_reset() {
 	SPI_setChipSelect(PB7, 0);
-	printf("CAN reset\n\r");
+	//printf("CAN reset\n\r");
 	SPI_masterWrite(MCP_RESET);
 	SPI_setChipSelect(PB7, 1);
 }
 void CAN_controller_init() {
-	printf("Can controller init \n\r");
+	//printf("Can controller init \n\r");
 	SPI_masterInit();
-	printf("SPI master init done \n\r");
+	//printf("SPI master init done \n\r");
 
-	CAN_controller_setMode(MODE_LOOPBACK);
-	printf("Modes set \n\r");
+	CAN_controller_setMode(MODE_NORMAL);
+//	printf("Modes set \n\r");
 
 	//set interrupt on 2560
 	
@@ -76,11 +76,11 @@ void CAN_controller_init() {
 	
 	
 	_delay_ms(200);
-	printf("after write to canctrl\n\r");
+//	printf("after write to canctrl\n\r");
 	
 	//Check CANSTAT register
 	uint8_t status = CAN_controller_read(MCP_CANSTAT);
-	printf("Data: %i\n\r", status);
+//	printf("Data: %i\n\r", status);
 }
 
 void CAN_controller_RTS(uint8_t buffer) {
@@ -111,7 +111,7 @@ void CAN_controller_setMode(uint8_t mode) {
 	uint8_t mode_bits = (status & MODE_MASK);
 	
 	if (mode_bits != MODE_CONFIG) {
-		printf("Not in config mode, \t %i\n\r", mode_bits);
+		//printf("Not in config mode, \t %i\n\r", mode_bits);
 		return;
 	}
 	
@@ -125,9 +125,9 @@ void CAN_controller_setMode(uint8_t mode) {
 	status = CAN_controller_read(MCP_CANSTAT);
 	mode_bits = (status & MODE_MASK);
 	if (mode_bits != mode) {
-		printf("Not in correct mode: Mode: %i\n\r", mode_bits);
+		//printf("Not in correct mode: Mode: %i\n\r", mode_bits);
 
 	}
-	printf("Mode set: %i\n\r", status & MODE_MASK);
+	//printf("Mode set: %i\n\r", status & MODE_MASK);
 }
 

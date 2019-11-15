@@ -32,10 +32,10 @@ void pwm_init() {
 	
 	//Timer incremented until counter value matches value in OCR1A
 	TCCR1A |= (1 << WGM11 & ~(1 <<WGM10));
-	TCCR1B |= (1 << WGM13 | 1 << WGM12);
+	TCCR1B |= ((1 << WGM13) | (1 << WGM12));
 	
 	//Set compare output mode on channel A
-	TCCR1A |= (1 << COM1A1 & ~(COM1A0));
+	TCCR1A |= ((1 << COM1A1) & ~(1 << COM1A0));
 	
 	
 	

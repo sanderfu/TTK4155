@@ -10,12 +10,10 @@
 #define F_CPU 16000000
 #include <util/delay.h>
 #include <avr/io.h>
-
 void encoder_init() {
 	DDRH |= (1 <<PH5);
 	DDRH |= (1 <<PH3);
 	DDRH |= (1 <<PH6);
-
    
 	//!Rst pin set high to use the encoder to know how much motor has rotated.
 	PORTH &= ~(1 << PH5);
@@ -34,6 +32,12 @@ void encoder_init() {
 	encoder_maxValue = -15000;
 
 }
+void encoder_convertValues() {
+	float a = (100.0-(-100.0))/encoder_maxValue;
+	float b = -100;
+	converted_encoderValue = a*encoder_value + b;
+	//printf("Converted encoder_values: %d\n\r", converted_encoderValue);
+}
 void encoder_readValues() {
 	
 	//set !OE value low
@@ -43,14 +47,14 @@ void encoder_readValues() {
 	PORTH &= ~(1 << PH3);
 	_delay_us(20);
 	
-	//Read msb !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//Read msb !
 	uint8_t high_val = PINK & 0xff;
 
 	
 	//set select low to get high byte, then wait 20 microseconds
 	PORTH |= (1 << PH3);
 	_delay_us(20);
-	//Read lsb !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//Read lsb !
 	uint8_t low_val =  PINK & 0xff;
 
 	
@@ -75,18 +79,25 @@ void encoder_readValues() {
 		encoder_value = (-1* (~rec_data +1));
 	}
 	if (encoder_value>0) {
-		encoder_value = 0;
+		//Encoder_reset
+		PORTH |= (1 << PH6);
+		_delay_us(20);
+
+		PORTH &= ~(1 << PH6);
+		_delay_us(20);
+
+		PORTH |= (1 << PH6);
+		_delay_us(20);
 		
-	} else if (encoder_value <encoder_maxValue) {
+	} /*
+	else if (encoder_value < encoder_maxValue) {
 		encoder_value = encoder_maxValue;
+		offset += encoder_value-encoder_maxValue;
+		encoder_maxValue += offset;
 	}
+	*/
+	
 	encoder_convertValues();
 	//printf("Encoder_values: %d\n\r", encoder_value);
 }
 
-void encoder_convertValues() {
-	float a = (100.0-(-100.0))/encoder_maxValue;
-	float b = -100;
-	converted_encoderValue = a*encoder_value + b;
-	//printf("Converted encoder_values: %d\n\r", converted_encoderValue);
-}

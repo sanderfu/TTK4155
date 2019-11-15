@@ -32,6 +32,7 @@ uint8_t gameActive;
 volatile int numOf5ms;
 void game_init();
 void game_play();
+void game_stop();
 void game_sendGameData();
 
 #endif /* GAME_H_ */

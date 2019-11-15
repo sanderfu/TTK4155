@@ -40,3 +40,9 @@ void game_play() {
 
 }
 
+void game_stop() {
+		gameData.playtime = numOf5ms*TIMER3_SECONDS;
+		gameData.score = INITSCORE;
+		gameActive = 0;
+}
+

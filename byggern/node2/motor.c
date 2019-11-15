@@ -30,7 +30,7 @@ void motor_init() {
 	summed_error = 0;
 	prev_error = 0;
 	_delay_ms(500);
-	printf("Start moving");
+	//printf("Start moving");
 	motor_moveUntilEdge(0);
 	
 }
@@ -110,17 +110,17 @@ void motor_control() {
 
 void motor_moveUntilEdge(uint8_t dir) {
 	motor_setDirection(dir);
-	printf("In start of calibration");
+	//printf("In start of calibration");
 	_delay_ms(500);
 	uint8_t speed = 0;
 	motor_setSpeed(75);	
 	motor_enable();
 
-	printf("After");
+	//printf("After");
 	int32_t prev_encoder = 10;
 	int32_t current_encoder= 0;
 	_delay_ms(100);
-	printf("in function");
+	//printf("in function");
 	while (current_encoder-prev_encoder >0 || prev_encoder-current_encoder >0) {
 		prev_encoder = current_encoder;
 		encoder_readValues();
@@ -128,7 +128,7 @@ void motor_moveUntilEdge(uint8_t dir) {
 		_delay_ms(1000);
 	}
 	
-	printf("finish loop");
+	//printf("finish loop");
 
 	encoder_init();
 	
@@ -139,14 +139,14 @@ void motor_moveUntilEdge(uint8_t dir) {
 		prev_encoder = current_encoder;
 		encoder_readValues();
 		current_encoder = encoder_value;
-		printf("%i", encoder_value);
+	//	printf("%i", encoder_value);
 		_delay_ms(1000);
 	}
 	
 	encoder_readValues();
 	_delay_ms(50);
 	encoder_maxValue = encoder_value;
-	printf("encoder_max_Value:%i\n\r ", encoder_maxValue);
+	//printf("encoder_max_Value:%i\n\r ", encoder_maxValue);
 	//motor_disable();
 	//_delay_ms(50000);
 
