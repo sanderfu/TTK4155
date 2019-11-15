@@ -9,6 +9,8 @@
 #include "menu.h"
 #include "CAN.h"
 #include "touchButton.h"
+#include "music.h"
+#include "notes.h"
 #define F_CPU 4915200
 #include <avr/delay.h>
 #include <avr/interrupt.h>
@@ -33,28 +35,40 @@ void game_countdown() {
 	oled_print(currentMenu.currentMenuItem->name);
 	oled_gotoLine(3);
 	oled_print(num);
-	_delay_ms(1000);
+	music_playNote(NOTE_C4);
+	_delay_ms(500);
+	music_playNote(0);
+	_delay_ms(500);
+	
 	itoa(2,num,10);
 	oled_reset();
 	oled_home();
 	oled_print(currentMenu.currentMenuItem->name);
 	oled_gotoLine(3);
 	oled_print(num);
-	_delay_ms(1000);
-
+	music_playNote(NOTE_C4);
+	_delay_ms(500);
+	music_playNote(0);
+	_delay_ms(500);
 	itoa(1,num,10);
 	oled_reset();
 	oled_home();
 	oled_print(currentMenu.currentMenuItem->name);
 	oled_gotoLine(3);
 	oled_print(num);
-	_delay_ms(1000);
+	music_playNote(NOTE_C4);
+	_delay_ms(500);
+	music_playNote(0);
+	_delay_ms(500);
 	oled_reset();
 	oled_home();
 	oled_print(currentMenu.currentMenuItem->name);
 	oled_gotoLine(3);
 	oled_print("Go");
-	_delay_ms(1000);
+	music_playNote(NOTE_C6);
+	_delay_ms(500);
+	music_playNote(0);
+	_delay_ms(500);
 }
 void game_initialCANMessage() {
 	CAN_message_t initMessage;
@@ -145,7 +159,7 @@ void game_finished(uint8_t gameID) {
 	oled_print("Game over");
 	oled_gotoLine(4);
 	oled_print("Maybe HS?");
-	_delay_ms(3000);
+	music_gameOver();
 	gameActive=0;
 	
 	menu_init();

@@ -177,3 +177,20 @@ void music_playRick() {
 	
 
 }
+
+void music_gameOver() {
+	pwm_setFreq(NOTE_C5);
+	_delay_ms(500);
+	pwm_setFreq(NOTE_G4);
+	_delay_ms(500);
+	pwm_setFreq(NOTE_DS4);
+	_delay_ms(500);
+	pwm_setFreq(NOTE_C4);
+	_delay_ms(500);
+	pwm_setFreq(0);
+	
+}
+
+void music_playNote(uint16_t note) {
+	pwm_setFreq(note);
+}
