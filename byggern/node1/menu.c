@@ -10,7 +10,7 @@
 
 
 
-MenuNode nodes[6];
+MenuNode nodes[8];
 
 void menu_init() {
 	
@@ -24,9 +24,11 @@ void menu_init() {
 	//Setting the names of the actions
 	strcpy(nodes[4].name, "Game 1");
 	strcpy(nodes[5].name, "Game 2");
+	strcpy(nodes[6].name, "Game 1 HS");
+	strcpy(nodes[7].name, "Game 2 HS");
 	
-	//Set games to be actions
-	for(int i = 0;i<11; i++)
+	//Set games and HSs to be actions
+	for(int i = 0;i<8; i++)
 	{
 		//This could be done way better and more general with hashing taking in the node name as input.
 		nodes[i].nodeID=i;
@@ -39,20 +41,21 @@ void menu_init() {
 		}
 	}
 	
-	nodes[2].isAction=1;
-	
 	
 	nodes[0].numChildren = 3;
 	nodes[1].numChildren = 2;
-	nodes[2].numChildren = 0;
+	nodes[2].numChildren = 2;
 	nodes[3].numChildren = 0;
 	nodes[4].numChildren = 0;
 	nodes[5].numChildren = 0;
+	nodes[6].numChildren = 0;
+	nodes[7].numChildren = 0;
+	
 	
 	uint8_t currentChildIdx = 1;
 	
 	nodes[0].parent = NULL;
-	for (int i = 0; i< 11; i++) {
+	for (int i = 0; i< 8; i++) {
 		for (int childIdx = 0; childIdx< nodes[i].numChildren; childIdx++) {
 			nodes[i].children[childIdx] = nodes+currentChildIdx;
 			(nodes+currentChildIdx)->parent = nodes+i;

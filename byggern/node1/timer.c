@@ -24,7 +24,7 @@ ISR (TIMER1_COMPB_vect) {
 		menu_printCurrentMenu();
 	}
 	else{
-		game_updateOled();
+		//game_updateOled();
 	}
 	sei();
 }

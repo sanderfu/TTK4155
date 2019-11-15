@@ -21,6 +21,7 @@ void game_init()
 	gameActive=0;
 	for (int i = 0; i<5; i++) {
 			highScores[i] = 0;
+			highScores2[i] = 0;
 	}
 }
 
@@ -99,46 +100,82 @@ void game_recieveGameData()
 	
 }
 
-void game_updateOled()
+void game_updateOled(uint8_t gameID)
 {
 	//Print the game name
 	oled_reset();
 	oled_home();
 	oled_print(currentMenu.currentMenuItem->name);
-	oled_gotoLine(3);
-	oled_print("Score: ");
 	char score_string[2];
-	itoa(gameData.score,score_string,10);
-	oled_print(score_string);
-	oled_gotoLine(5);
-	oled_print("Time: ");
 	char time_string[2];
-	itoa(gameData.playtime,time_string,10);
-	printf(time_string);
-	oled_print(time_string);
+	
+	oled_gotoLine(3);
+	switch(gameID) {
+		case 1:
+			oled_print("Score: ");
+			itoa(gameData.score,score_string,10);
+			oled_print(score_string);
+			oled_gotoLine(5);
+			oled_print("Time: ");
+			itoa(gameData.playtime,time_string,10);
+			oled_print(time_string);
+			break;
+		case 2:
+			oled_print("Air time: ");
+			itoa(gameData.playtime,time_string,10);
+			oled_print(time_string);
+			break;
+
+	}
+	
 }
-void game_finished() {
+
+void game_sendStop() {
+	CAN_message_t mess;
+	mess.ID = 0x3;
+	mess.data_length=0;
+	CAN_transmit_message(&mess);
+}
+void game_finished(uint8_t gameID) {
 	cli();
+	game_sendStop();
 	oled_reset();
 	oled_home();
 	oled_gotoLine(3);
-	oled_print("time up");
+	oled_print("Game over");
 	oled_gotoLine(4);
 	oled_print("Maybe HS?");
 	_delay_ms(3000);
 	gameActive=0;
 	
 	menu_init();
-	
-	for (int i = 0; i<5; i++) {
-		if (gameData.score > highScores[i]) {
-			for (int a = 4; a>i; a--) {
-				highScores[a] = highScores[a-1];
+	switch (gameID) {
+		case 1:
+			for (int i = 0; i<5; i++) {
+				if (gameData.score > highScores[i]) {
+					for (int a = 4; a>i; a--) {
+						highScores[a] = highScores[a-1];
+					}
+					highScores[i] = gameData.score;
+					break;
+				}
 			}
-			highScores[i] = gameData.score;
 			break;
-		}
+		case 2:
+			for (int i = 0; i<5; i++) {
+				if (gameData.playtime > highScores2[i]) {
+					for (int a = 4; a>i; a--) {
+						highScores2[a] = highScores2[a-1];
+					}
+					highScores2[i] = gameData.playtime;
+					break;
+				}
+			}
+			break;
+		
 	}
+	
+	
 	sei();
 }
 void game_play(uint8_t gameID)
@@ -153,14 +190,24 @@ void game_play(uint8_t gameID)
 	}
 	game_sendUserInput();
 	game_recieveGameData();
-	
-	if (gameData.playtime==10) {
-		game_finished();
+	game_updateOled(gameID);
+	switch (gameID) {
+		case 1:
+			if (gameData.playtime==10) {
+				game_finished(gameID);
+			}
+			break;
+		case 2:
+			if (gameData.score <10) {
+				game_finished(gameID);
+			}
+			break;
 	}
+	
 	
 }
 
-void game_displayHighscores() {
+void game_displayHighscores(uint8_t gameID) {
 	oled_reset();
 	oled_home();
 	oled_print(currentMenu.currentMenuItem->name);
@@ -173,7 +220,14 @@ void game_displayHighscores() {
 		itoa(i+1,num,10);
 		oled_print(num);
 		oled_print(": ");
-		itoa(highScores[i],num,10);
+		switch (gameID) {
+			case 1:
+				itoa(highScores[i],num,10);
+				break;
+			case 2:
+				itoa(highScores2[i],num,10);
+				break;
+		}
 		oled_print(num);
 	}
 }

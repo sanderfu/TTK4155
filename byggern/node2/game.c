@@ -9,9 +9,9 @@
 #include "IR.h"
 
 void game_init() {
-	printf("game_init\n\r");
 	//Reset play_time
 	numOf5ms = 0;
+	gameActive = 1;
 	//goals = 0;
 	//Initialize gameData
 	gameData.playtime = numOf5ms*TIMER3_SECONDS;
@@ -29,15 +29,14 @@ void game_sendGameData() {
 }
 
 void game_play() {
+	IR_detectGoal();
 	gameData.playtime = numOf5ms*TIMER3_SECONDS;
 	float timeFloat = gameData.playtime;
 	if (!(numOf5ms*TIMER3_SECONDS > timeFloat)) {
-		printf("num of 5 ms: %i\n\r", numOf5ms);
 		cli();
 		game_sendGameData();
 		sei();
 	}
-	IR_detectGoal();
 
 }
 

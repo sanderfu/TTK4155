@@ -20,7 +20,9 @@ typedef enum MENU_ID {
 	HIGH_SCORE,
 	MUSIC,
 	GAME_1,
-	GAME_2
+	GAME_2,
+	HS1,
+	HS2
 } MENU_ID_t ;
 
 struct MenuNode 

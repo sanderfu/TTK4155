@@ -88,17 +88,20 @@ int main(void)
 			//printf("Message received");
 			CANFlag=0;
 			CAN_receiveMessage();
-			//printf("slider left%i", slider_pos.left_pos);
-			if (slider_pos.left_pos>0) {
-				//printf("reg on2");
-				regulatorOn = 1;
-			} else {
-				motor_setSpeed(0);
-				regulatorOn = 0;
+			
+			if (gameActive) {
+				//printf("slider left%i", slider_pos.left_pos);
+				if (slider_pos.left_pos>0) {
+					//printf("reg on2");
+					regulatorOn = 1;
+					} else {
+					motor_setSpeed(0);
+					regulatorOn = 0;
+				}
+				
+				joystick_setServo();
 			}
-			//joystick_readPositionOverCAN();
-			//joystick_printPosition();
-			joystick_setServo();
+			
 			uint8_t mask = 0b11; 
 
 			CAN_controller_bitModify(mask, CANINTF, 0b00);
@@ -123,7 +126,9 @@ int main(void)
 				motor_control();
 			}
 			//printf("ADC-value: %i", ADC_read());
-			game_play();
+			if (gameActive) {
+				game_play();
+			}
 			
 			sei();
 		}

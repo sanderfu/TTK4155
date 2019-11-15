@@ -67,12 +67,22 @@ int main(void)
 			case MAIN_MENU:
 				break;
 			case HIGH_SCORE:
-				game_displayHighscores();
+				break;
 			case MUSIC:
 				break;
 			case GAME_1:
 				game_play(1);
 				break;
+			case GAME_2:
+				game_play(2);
+				break;
+			case HS1:
+				game_displayHighscores(1);
+				break;
+			case HS2:
+				game_displayHighscores(2);
+				break;
+			
 		}
 	}
 }

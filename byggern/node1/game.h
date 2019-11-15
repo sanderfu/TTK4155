@@ -22,8 +22,9 @@ typedef struct{
 gameData_t gameData; 
 uint8_t gameActive;
 uint8_t highScores[5];
+uint8_t highScores2[5];
 void game_init();
 void game_play(uint8_t gameID);
-void game_displayHighscores();
+void game_displayHighscores(uint8_t gameID);
 
 #endif /* GAME_H_ */
