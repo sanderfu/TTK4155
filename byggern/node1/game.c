@@ -8,7 +8,10 @@
 #include "game.h"
 #include "menu.h"
 #include "CAN.h"
-
+#include "touchButton.h"
+#define F_CPU 4915200
+#include <avr/delay.h>
+#include <avr/interrupt.h>
 #define TIMELIMIT 120
 #define INITSCORE 10
 void game_init()
@@ -16,12 +19,47 @@ void game_init()
 	gameActive=0;
 }
 
+void game_countdown() {
+	char num[1];
+	itoa(3,num,10);
+	oled_reset();
+	oled_home();
+	oled_print(currentMenu.currentMenuItem->name);
+	oled_gotoLine(3);
+	oled_print(num);
+	_delay_ms(1000);
+	itoa(2,num,10);
+	oled_reset();
+	oled_home();
+	oled_print(currentMenu.currentMenuItem->name);
+	oled_gotoLine(3);
+	oled_print(num);
+	_delay_ms(1000);
+
+	itoa(1,num,10);
+	oled_reset();
+	oled_home();
+	oled_print(currentMenu.currentMenuItem->name);
+	oled_gotoLine(3);
+	oled_print(num);
+	_delay_ms(1000);
+	oled_reset();
+	oled_home();
+	oled_print(currentMenu.currentMenuItem->name);
+	oled_gotoLine(3);
+	oled_print("Go");
+	_delay_ms(1000);
+}
+
 void game_newgame()
 {
+	cli();
+	game_countdown();
 	gameActive=1;
 	gameData.score=INITSCORE;
 	gameData.playtime=0;
 	gameData.timeLimit=TIMELIMIT;
+	sei();
 }
 
 void game_sendUserInput()
@@ -57,9 +95,16 @@ void game_updateOled()
 	oled_home();
 	oled_print(currentMenu.currentMenuItem->name);
 	oled_gotoLine(3);
+	oled_print("Score: ");
 	char score_string[2];
 	itoa(gameData.score,score_string,10);
-	oled_print();
+	oled_print(score_string);
+	oled_gotoLine(5);
+	oled_print("Time: ");
+	char time_string[2];
+	itoa(gameData.playtime,time_string,10);
+
+	oled_print(time_string);
 }
 
 void game_play(uint8_t gameID)
@@ -67,6 +112,10 @@ void game_play(uint8_t gameID)
 	if(gameActive==0)
 	{
 		game_newgame();	
+	}
+	if (buttons.right_button) {
+		gameActive = 0;
+		this_init();
 	}
 	game_sendUserInput();
 	

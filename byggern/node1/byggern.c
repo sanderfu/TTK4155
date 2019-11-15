@@ -57,7 +57,7 @@ int main(void)
 
 	//test_SRAM();            
 	while (1) {
-		//
+		
 		//Put microcontroller to sleep until next interrupt. 
 		sleep_now();
 		
