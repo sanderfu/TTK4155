@@ -5,13 +5,14 @@
  *  Author: torsteoe
  */ 
 #include "menu.h"
+#include "game.h"
 #include <avr/interrupt.h>
 
 
 
-MenuNode nodes[11];
+MenuNode nodes[6];
 
-void this_init() {
+void menu_init() {
 	
 	//printf("this_init initiating");
 	//Setting the name of the main menu
@@ -23,12 +24,8 @@ void this_init() {
 	//Setting the names of the actions
 	strcpy(nodes[4].name, "Game 1");
 	strcpy(nodes[5].name, "Game 2");
-	strcpy(nodes[6].name, "Score 1");
-	strcpy(nodes[7].name, "Score 2");
-	strcpy(nodes[8].name, "Score 3");
-	strcpy(nodes[9].name, "Score 4");
-	strcpy(nodes[10].name, "Score 5");
 	
+	//Set games to be actions
 	for(int i = 0;i<11; i++)
 	{
 		//This could be done way better and more general with hashing taking in the node name as input.
@@ -42,18 +39,15 @@ void this_init() {
 		}
 	}
 	
+	nodes[2].isAction=1;
+	
 	
 	nodes[0].numChildren = 3;
 	nodes[1].numChildren = 2;
-	nodes[2].numChildren = 5;
+	nodes[2].numChildren = 0;
 	nodes[3].numChildren = 0;
 	nodes[4].numChildren = 0;
 	nodes[5].numChildren = 0;
-	nodes[6].numChildren = 0;
-	nodes[7].numChildren = 0;
-	nodes[8].numChildren = 0;
-	nodes[9].numChildren = 0;
-	nodes[10].numChildren = 0;
 	
 	uint8_t currentChildIdx = 1;
 	

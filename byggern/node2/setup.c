@@ -10,13 +10,13 @@
 void setupInit(void){
 	cli();
 	USART_init(MYUBRR);
-	printf("finished uart setup2)");
+	//printf("finished uart setup2)");
 	CAN_controller_init();
-	printf("finished can setup");
+	//printf("finished can setup");
 	pwm_init();
-	printf("finished pwm");
+	//printf("finished pwm");
 	ADC_init();
-	printf("Finished setup");
+	//printf("Finished setup");
 	timer_init();
 	sleep_init();
 	TWI_Master_Initialise();

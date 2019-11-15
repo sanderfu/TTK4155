@@ -13,7 +13,7 @@
 #include "slider.h"
 #include "touchButton.h"
 #include "solenoid.h"
-
+#include "game.h"
 #define F_CPU 16000000
 
 #include <util/delay.h>
@@ -31,7 +31,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 	
 	buffer_number++;
 	buffer_number = buffer_number%3;
-	
+	//buffer_number =0;
 	
 	/*
 	
@@ -64,9 +64,6 @@ void CAN_transmit_message(CAN_message_t *message) {
 			case 0:
 				CAN_controller_bitModify(0b11100000, TXB0SIDL, (uint8_t) ((message->ID & 0b111) << 5));
 				CAN_controller_write(TXB0SIDH, (uint8_t) ( message->ID >> 3) );
-				
-				printf("Sending whole id: %i", message->ID );
-
 
 				break;
 			case 1:
@@ -85,7 +82,6 @@ void CAN_transmit_message(CAN_message_t *message) {
 	//Load length in register TXBnDLC
 	switch(buffer_number) {
 			case 0:
-				printf("\n\rtransmitting data length: %i\n\r", message->data_length);
 				CAN_controller_bitModify(0b1111, TXB0DLC, message->data_length);
 				break;
 			case 1:
@@ -102,7 +98,6 @@ void CAN_transmit_message(CAN_message_t *message) {
 	for (uint8_t i = 0; i != message->data_length; i++) {
 		switch(buffer_number) {
 			case 0:
-				printf("transmitting data: %i\t", message->data[i]);
 				CAN_controller_write(TXB0D0 + i, message->data[i]);
 				break;
 			case 1:
@@ -157,22 +152,19 @@ void CAN_receiveMessage() {
 				break;
 				*/
 	}
-	CAN_readPosition(received_message);
-	/*
+	
+
+	
 	switch(received_message.ID) {
 		case 1:
-			joystick_readPositionOverCAN(received_message);
+			CAN_readPosition(received_message);
 			break;
 		case 2:
-			slider_readPositionOverCAN(received_message);
-			break;
-		case 3:
-			touchButton_readButtonsOverCAN(received_message);
-			break;
+			game_init();
 	}
 	
 	
-	*/
+	
 	
 }
 

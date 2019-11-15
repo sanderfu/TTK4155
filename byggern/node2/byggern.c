@@ -32,13 +32,14 @@
 #include "slider.h"
 #include "touchbutton.h"
 #include "solenoid.h"
+#include "game.h"
 uint8_t timerFlag = 0;
 uint8_t regulatorOn = 0;
 ISR (TIMER3_COMPB_vect) {
 	
 	
 	timerFlag = 1;
-	
+	numOf5ms++;
 	
 }
 
@@ -59,8 +60,9 @@ ISR (INT4_vect) {
 int main(void)
 //p.23 for can read instructions
 {
+	
 	setupInit();
-	printf("\n\r---------------------------------------\n\n\n\n\n\n\r");
+	printf("---------------------------------------\n\n\n\n\n\n\r");
 
 
 	//test_SRAM();
@@ -111,17 +113,17 @@ int main(void)
 			//printf("in timer");
 			//printf("shooting VALUE: %i\n\r", shooting);
 			if (buttons.left_button && !(shooting)) {
-				printf("shooting");
+				//printf("shooting");
 				solenoid_setPulse();
 			}
 			TCNT3 = 0x00;
 			encoder_readValues();
-			printf("Converted: %i\n\r", converted_encoderValue);
+			//printf("Converted: %i\n\r", converted_encoderValue);
 			if (regulatorOn) {
 				motor_control();
 			}
 			//printf("ADC-value: %i", ADC_read());
-			
+			game_play();
 			
 			sei();
 		}

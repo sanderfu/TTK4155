@@ -48,6 +48,6 @@ MenuNode* addChild(MenuNode* parent, char* child_name);
 MenuNode* menuInit(void);
 void navigateMenu(joystick_position_t * joystick_position_p);
 void menu_printCurrentMenu();
-void this_init();
+void menu_init();
 
 #endif /* !MENU_HEADER */

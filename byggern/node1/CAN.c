@@ -18,9 +18,7 @@
 #include <util/delay.h>
 #include <stdio.h>
 
-ISR (INT0_vect) {
-	flag= 1;
-}
+
 
 void CAN_init() {
 	CAN_controller_init();

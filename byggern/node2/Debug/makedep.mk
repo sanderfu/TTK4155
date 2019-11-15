@@ -12,6 +12,8 @@ ADC.c
 
 encoder.c
 
+game.c
+
 IR.c
 
 joystick.c

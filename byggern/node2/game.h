@@ -1,16 +1,24 @@
 /*
  * game.h
  *
- * Created: 12.11.2019 16:35:33
- *  Author: sanderfu
+ * Created: 15.11.2019 09:20:37
+ *  Author: torsteoe
  */ 
 
 
 #ifndef GAME_H_
 #define GAME_H_
+
+#define  INITSCORE 10
+#define TIMELIMIT 99
+#include "timer.h"
+
+#define F_CPU 16000000
+
 #include <stdlib.h>
 #include <avr/io.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef struct{
 	uint8_t score;
@@ -19,11 +27,11 @@ typedef struct{
 } gameData_t;
 
 //Create global game data
-gameData_t gameData; 
+gameData_t gameData;
 uint8_t gameActive;
-uint8_t highScores[5];
+volatile int numOf5ms;
 void game_init();
-void game_play(uint8_t gameID);
-void game_displayHighscores();
+void game_play();
+void game_sendGameData();
 
 #endif /* GAME_H_ */

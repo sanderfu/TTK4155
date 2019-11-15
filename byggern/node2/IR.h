@@ -10,8 +10,7 @@
 #define IR_H_
 #include <stdlib.h>
 #include <avr/io.h>
-uint8_t goals = 0;
-
+void IR_detectGoal();
 
 
 

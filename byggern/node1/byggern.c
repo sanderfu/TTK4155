@@ -33,7 +33,9 @@
 #include "music.h"
 #include "CAN.h"
 
-
+ISR (INT0_vect) {
+	flag= 1;
+}
 
 int main(void)
 //p.23 for can read instructions
@@ -65,7 +67,7 @@ int main(void)
 			case MAIN_MENU:
 				break;
 			case HIGH_SCORE:
-				break;
+				game_displayHighscores();
 			case MUSIC:
 				break;
 			case GAME_1:

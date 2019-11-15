@@ -1,0 +1,43 @@
+/*
+ * game.c
+ *
+ * Created: 15.11.2019 09:20:26
+ *  Author: torsteoe
+ */ 
+#include "game.h"
+#include "CAN.h"
+#include "IR.h"
+
+void game_init() {
+	printf("game_init\n\r");
+	//Reset play_time
+	numOf5ms = 0;
+	//goals = 0;
+	//Initialize gameData
+	gameData.playtime = numOf5ms*TIMER3_SECONDS;
+	gameData.score = INITSCORE;
+	gameData.timeLimit = TIMELIMIT;
+	
+}
+void game_sendGameData() {
+	CAN_message_t score;
+	score.ID = 0x01;
+	score.data_length = 2;
+	score.data[0] = gameData.score;
+	score.data[1] = gameData.playtime;
+	CAN_transmit_message(&score);
+}
+
+void game_play() {
+	gameData.playtime = numOf5ms*TIMER3_SECONDS;
+	float timeFloat = gameData.playtime;
+	if (!(numOf5ms*TIMER3_SECONDS > timeFloat)) {
+		printf("num of 5 ms: %i\n\r", numOf5ms);
+		cli();
+		game_sendGameData();
+		sei();
+	}
+	IR_detectGoal();
+
+}
+

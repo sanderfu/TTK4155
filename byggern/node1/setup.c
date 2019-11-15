@@ -16,12 +16,9 @@
 	joystickInit();
 	touchButton_init();
 	oled_init();
-	printf("After oledinit\n\r");
 	timer_init();
 	sleep_init();
-	//menuInit();
-	this_init();
-	printf("Finished this");
+	menu_init();
 	CAN_controller_init();
 	//pwm_init(); uncommenting this breaks can on node 2.
 	game_init();
