@@ -30,26 +30,27 @@ uint8_t CAN_controller_read(uint8_t addr);
  */
 void CAN_controller_write(uint8_t addr, uint8_t data);
 
-//Request to send in chosen buffer
 /**
- * @brief Set joystick, buttons and slider values from CAN message.
+ * @brief Request to send to chosen buffer
  *
- * @param[in] message with data representing joystick, buttons and slider values 
+ * @param[in] buffer one of three possible transmit buffers: 0, 1, 2
  */
 void CAN_controller_RTS(uint8_t buffer);
 
 /**
- * @brief Set joystick, buttons and slider values from CAN message.
+ * @brief Set CAN transceiver in wanted mode.
  *
- * @param[in] message with data representing joystick, buttons and slider values 
+ * @param[in] mode CAN transceiver mode
  */
 void CAN_controller_setMode(uint8_t mode);
 
-//Modify certain bits in Can Transceiver register
+
 /**
- * @brief Set joystick, buttons and slider values from CAN message.
+ * @brief Modify certain bits in Can Transceiver register
  *
- * @param[in] message with data representing joystick, buttons and slider values 
+ * @param[in] mask, bitmask to modify
+ * @param[in] addr, register to modify
+ * @param[in] data, data to set
  */
 void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data);
 #endif /* CAN_controller_H_ */

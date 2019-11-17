@@ -52,7 +52,6 @@ C_SRCS +=  \
 ../solenoid.c \
 ../SPI.c \
 ../timer.c \
-../touchbutton.c \
 ../TWI_Master.c \
 ../uart.c
 
@@ -79,7 +78,6 @@ sleep.o \
 solenoid.o \
 SPI.o \
 timer.o \
-touchbutton.o \
 TWI_Master.o \
 uart.o
 
@@ -99,7 +97,6 @@ sleep.o \
 solenoid.o \
 SPI.o \
 timer.o \
-touchbutton.o \
 TWI_Master.o \
 uart.o
 
@@ -119,7 +116,6 @@ sleep.d \
 solenoid.d \
 SPI.d \
 timer.d \
-touchbutton.d \
 TWI_Master.d \
 uart.d
 
@@ -139,7 +135,6 @@ sleep.d \
 solenoid.d \
 SPI.d \
 timer.d \
-touchbutton.d \
 TWI_Master.d \
 uart.d
 
@@ -256,13 +251,6 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./timer.o: .././timer.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./touchbutton.o: .././touchbutton.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

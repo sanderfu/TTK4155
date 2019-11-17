@@ -13,21 +13,21 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00002224  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000360  00000000  00000000  00002264  2**0
+  5 .debug_aranges 00000358  00000000  00000000  00002264  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00003721  00000000  00000000  000025c4  2**0
+  6 .debug_info   0000370c  00000000  00000000  000025bc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001d88  00000000  00000000  00005ce5  2**0
+  7 .debug_abbrev 00001d72  00000000  00000000  00005cc8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001c54  00000000  00000000  00007a6d  2**0
+  8 .debug_line   00001c44  00000000  00000000  00007a3a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000006f8  00000000  00000000  000096c4  2**2
+  9 .debug_frame  000006e8  00000000  00000000  00009680  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000d65  00000000  00000000  00009dbc  2**0
+ 10 .debug_str    00000d4e  00000000  00000000  00009d68  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00001534  00000000  00000000  0000ab21  2**0
+ 11 .debug_loc    00001534  00000000  00000000  0000aab6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000250  00000000  00000000  0000c055  2**0
+ 12 .debug_ranges 00000248  00000000  00000000  0000bfea  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -543,16 +543,16 @@ void CAN_transmit_message(CAN_message_t *message) {
 	
 	buffer_number++;
 	buffer_number = buffer_number%3;
-     318:	80 91 4f 02 	lds	r24, 0x024F	; 0x80024f <buffer_number.2298>
-     31c:	90 91 50 02 	lds	r25, 0x0250	; 0x800250 <buffer_number.2298+0x1>
+     318:	80 91 4f 02 	lds	r24, 0x024F	; 0x80024f <buffer_number.2297>
+     31c:	90 91 50 02 	lds	r25, 0x0250	; 0x800250 <buffer_number.2297+0x1>
      320:	01 96       	adiw	r24, 0x01	; 1
      322:	63 e0       	ldi	r22, 0x03	; 3
      324:	70 e0       	ldi	r23, 0x00	; 0
      326:	0e 94 a9 0b 	call	0x1752	; 0x1752 <__divmodhi4>
      32a:	28 2f       	mov	r18, r24
      32c:	39 2f       	mov	r19, r25
-     32e:	80 93 4f 02 	sts	0x024F, r24	; 0x80024f <buffer_number.2298>
-     332:	90 93 50 02 	sts	0x0250, r25	; 0x800250 <buffer_number.2298+0x1>
+     32e:	80 93 4f 02 	sts	0x024F, r24	; 0x80024f <buffer_number.2297>
+     332:	90 93 50 02 	sts	0x0250, r25	; 0x800250 <buffer_number.2297+0x1>
 	
 
 	
@@ -651,8 +651,8 @@ void CAN_transmit_message(CAN_message_t *message) {
 		
 	//Filling message with data length
 	switch(buffer_number) {
-     3c8:	80 91 4f 02 	lds	r24, 0x024F	; 0x80024f <buffer_number.2298>
-     3cc:	90 91 50 02 	lds	r25, 0x0250	; 0x800250 <buffer_number.2298+0x1>
+     3c8:	80 91 4f 02 	lds	r24, 0x024F	; 0x80024f <buffer_number.2297>
+     3cc:	90 91 50 02 	lds	r25, 0x0250	; 0x800250 <buffer_number.2297+0x1>
      3d0:	81 30       	cpi	r24, 0x01	; 1
      3d2:	91 05       	cpc	r25, r1
      3d4:	59 f0       	breq	.+22     	; 0x3ec <CAN_transmit_message+0xe8>
@@ -698,8 +698,8 @@ void CAN_transmit_message(CAN_message_t *message) {
      408:	49 f1       	breq	.+82     	; 0x45c <__LOCK_REGION_LENGTH__+0x5c>
      40a:	c0 e0       	ldi	r28, 0x00	; 0
 		switch(buffer_number) {
-     40c:	80 91 4f 02 	lds	r24, 0x024F	; 0x80024f <buffer_number.2298>
-     410:	90 91 50 02 	lds	r25, 0x0250	; 0x800250 <buffer_number.2298+0x1>
+     40c:	80 91 4f 02 	lds	r24, 0x024F	; 0x80024f <buffer_number.2297>
+     410:	90 91 50 02 	lds	r25, 0x0250	; 0x800250 <buffer_number.2297+0x1>
      414:	81 30       	cpi	r24, 0x01	; 1
      416:	91 05       	cpc	r25, r1
      418:	69 f0       	breq	.+26     	; 0x434 <__LOCK_REGION_LENGTH__+0x34>
@@ -756,7 +756,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 	//request_to_send
 	CAN_controller_RTS(buffer_number);
      45a:	d8 cf       	rjmp	.-80     	; 0x40c <__LOCK_REGION_LENGTH__+0xc>
-     45c:	80 91 4f 02 	lds	r24, 0x024F	; 0x80024f <buffer_number.2298>
+     45c:	80 91 4f 02 	lds	r24, 0x024F	; 0x80024f <buffer_number.2297>
      460:	45 d1       	rcall	.+650    	; 0x6ec <CAN_controller_RTS>
 
 	//Currently no error handling
@@ -2020,7 +2020,7 @@ void IR_detectGoal() {
      b0a:	08 95       	ret
 
 00000b0c <joystick_setServo>:
-}
+
 
 void joystick_setServo() {
 	

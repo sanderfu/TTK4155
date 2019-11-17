@@ -231,9 +231,6 @@
     <Compile Include="timer.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="touchbutton.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="touchbutton.h">
       <SubType>compile</SubType>
     </Compile>
