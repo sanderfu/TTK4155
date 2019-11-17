@@ -1,0 +1,77 @@
+\hypertarget{uart_8h}{}\doxysection{uart.\+h File Reference}
+\label{uart_8h}\index{uart.h@{uart.h}}
+
+
+U\+S\+A\+RT interface.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{uart_8h_abb6a89f654177f030ce4b5297b56bd2b}{U\+S\+A\+R\+T\+\_\+init}} (unsigned int ubrr)
+\begin{DoxyCompactList}\small\item\em Initialize the usart interface. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{uart_8h_adfda2a6be9e0146a016007b5dd9187fb}{U\+S\+A\+R\+T\+\_\+transmit\+Char}} (unsigned char data)
+\begin{DoxyCompactList}\small\item\em Transmit a char over usart. \end{DoxyCompactList}\item 
+unsigned char \mbox{\hyperlink{uart_8h_a8e0addb4c5d14303d537c472957580f8}{U\+S\+A\+R\+T\+\_\+receive\+Char}} (void)
+\begin{DoxyCompactList}\small\item\em Receive char from usart. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{uart_8h_a59a6ccf27285f06ec36a9ad6b1a357b6}\label{uart_8h_a59a6ccf27285f06ec36a9ad6b1a357b6}} 
+F\+I\+LE $\ast$ {\bfseries uart}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+U\+S\+A\+RT interface. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{uart_8h_abb6a89f654177f030ce4b5297b56bd2b}\label{uart_8h_abb6a89f654177f030ce4b5297b56bd2b}} 
+\index{uart.h@{uart.h}!USART\_init@{USART\_init}}
+\index{USART\_init@{USART\_init}!uart.h@{uart.h}}
+\doxysubsubsection{\texorpdfstring{USART\_init()}{USART\_init()}}
+{\footnotesize\ttfamily void U\+S\+A\+R\+T\+\_\+init (\begin{DoxyParamCaption}\item[{unsigned int}]{ubrr }\end{DoxyParamCaption})}
+
+
+
+Initialize the usart interface. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em ubrr} & Communication speed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{uart_8h_a8e0addb4c5d14303d537c472957580f8}\label{uart_8h_a8e0addb4c5d14303d537c472957580f8}} 
+\index{uart.h@{uart.h}!USART\_receiveChar@{USART\_receiveChar}}
+\index{USART\_receiveChar@{USART\_receiveChar}!uart.h@{uart.h}}
+\doxysubsubsection{\texorpdfstring{USART\_receiveChar()}{USART\_receiveChar()}}
+{\footnotesize\ttfamily unsigned char U\+S\+A\+R\+T\+\_\+receive\+Char (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Receive char from usart. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em char} & Character read over usart \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{uart_8h_adfda2a6be9e0146a016007b5dd9187fb}\label{uart_8h_adfda2a6be9e0146a016007b5dd9187fb}} 
+\index{uart.h@{uart.h}!USART\_transmitChar@{USART\_transmitChar}}
+\index{USART\_transmitChar@{USART\_transmitChar}!uart.h@{uart.h}}
+\doxysubsubsection{\texorpdfstring{USART\_transmitChar()}{USART\_transmitChar()}}
+{\footnotesize\ttfamily void U\+S\+A\+R\+T\+\_\+transmit\+Char (\begin{DoxyParamCaption}\item[{unsigned char}]{data }\end{DoxyParamCaption})}
+
+
+
+Transmit a char over usart. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em data} & Char to send over usart \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,88 @@
+\hypertarget{game_8h}{}\doxysection{game.\+h File Reference}
+\label{game_8h}\index{game.h@{game.h}}
+
+
+Game Interface.  
+
+
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structgame_data__t}{game\+Data\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{game_8h_a5f5ccbe5abfdef24c8378dc3cf32ffb3}{game\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Initialize Game Interface. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a3fb67f8f4254c9b3a37fd99229290168}{game\+\_\+play}} (uint8\+\_\+t game\+ID)
+\begin{DoxyCompactList}\small\item\em Play game, starts connection between Node 1 and 2. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{game_8h_a1bb9c1ea48663e8f083583d3209911a7}{game\+\_\+display\+Highscores}} (uint8\+\_\+t game\+ID)
+\begin{DoxyCompactList}\small\item\em Show highscores for a given game mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{game_8h_af37dedabe23a17a4305876d4c8004148}\label{game_8h_af37dedabe23a17a4305876d4c8004148}} 
+\mbox{\hyperlink{structgame_data__t}{game\+Data\+\_\+t}} {\bfseries game\+Data}
+\item 
+\mbox{\Hypertarget{game_8h_a9517746c3e8e6b767e3256e1fbf8e484}\label{game_8h_a9517746c3e8e6b767e3256e1fbf8e484}} 
+uint8\+\_\+t {\bfseries game\+Active}
+\item 
+\mbox{\Hypertarget{game_8h_a71be63cd94c304471dbafb97dc9a480a}\label{game_8h_a71be63cd94c304471dbafb97dc9a480a}} 
+uint8\+\_\+t {\bfseries high\+Scores} \mbox{[}5\mbox{]}
+\item 
+\mbox{\Hypertarget{game_8h_afae789d7037cbfacea421e07995e443e}\label{game_8h_afae789d7037cbfacea421e07995e443e}} 
+uint8\+\_\+t {\bfseries high\+Scores2} \mbox{[}5\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Game Interface. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{game_8h_a1bb9c1ea48663e8f083583d3209911a7}\label{game_8h_a1bb9c1ea48663e8f083583d3209911a7}} 
+\index{game.h@{game.h}!game\_displayHighscores@{game\_displayHighscores}}
+\index{game\_displayHighscores@{game\_displayHighscores}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{game\_displayHighscores()}{game\_displayHighscores()}}
+{\footnotesize\ttfamily void game\+\_\+display\+Highscores (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{game\+ID }\end{DoxyParamCaption})}
+
+
+
+Show highscores for a given game mode. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em game\+ID} & The ID of the requested game mode. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{game_8h_a5f5ccbe5abfdef24c8378dc3cf32ffb3}\label{game_8h_a5f5ccbe5abfdef24c8378dc3cf32ffb3}} 
+\index{game.h@{game.h}!game\_init@{game\_init}}
+\index{game\_init@{game\_init}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{game\_init()}{game\_init()}}
+{\footnotesize\ttfamily void game\+\_\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initialize Game Interface. 
+
+\mbox{\Hypertarget{game_8h_a3fb67f8f4254c9b3a37fd99229290168}\label{game_8h_a3fb67f8f4254c9b3a37fd99229290168}} 
+\index{game.h@{game.h}!game\_play@{game\_play}}
+\index{game\_play@{game\_play}!game.h@{game.h}}
+\doxysubsubsection{\texorpdfstring{game\_play()}{game\_play()}}
+{\footnotesize\ttfamily void game\+\_\+play (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{game\+ID }\end{DoxyParamCaption})}
+
+
+
+Play game, starts connection between Node 1 and 2. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em game\+ID} & The ID of the requested game mode. \\
+\hline
+\end{DoxyParams}
