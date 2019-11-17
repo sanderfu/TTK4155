@@ -19,7 +19,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 00001d72  00000000  00000000  00005cc8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001c44  00000000  00000000  00007a3a  2**0
+  8 .debug_line   00001c45  00000000  00000000  00007a3a  2**0
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000006e8  00000000  00000000  00009680  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -1780,7 +1780,7 @@ void game_init() {
      9bc:	8a e0       	ldi	r24, 0x0A	; 10
      9be:	88 83       	st	Y, r24
 	gameData.timeLimit = TIMELIMIT;
-     9c0:	83 e6       	ldi	r24, 0x63	; 99
+     9c0:	8e e1       	ldi	r24, 0x1E	; 30
      9c2:	89 83       	std	Y+1, r24	; 0x01
 	
 }

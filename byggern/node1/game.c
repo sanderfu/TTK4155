@@ -15,7 +15,7 @@
 #include "notes.h"
 #include "oled.h"
 #include <stdio.h>
-#define TIMELIMIT 99
+#define TIMELIMIT 30
 #define INITSCORE 10
 
 
@@ -213,12 +213,12 @@ void game_play(uint8_t gameID)
 	game_updateOled(gameID);
 	switch (gameID) {
 		case 1:
-			if (gameData.playtime==10) {
+			if (gameData.playtime==TIMELIMIT) {
 				game_finished(gameID);
 			}
 			break;
 		case 2:
-			if (gameData.score <10) {
+			if (gameData.score < INITSCORE) {
 				game_finished(gameID);
 			}
 			break;

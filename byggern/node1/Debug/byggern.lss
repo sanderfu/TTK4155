@@ -1450,7 +1450,7 @@ void game_sendUserInput()
      cb0:	8a e0       	ldi	r24, 0x0A	; 10
      cb2:	80 83       	st	Z, r24
      cb4:	12 82       	std	Z+2, r1	; 0x02
-     cb6:	83 e6       	ldi	r24, 0x63	; 99
+     cb6:	8e e1       	ldi	r24, 0x1E	; 30
      cb8:	81 83       	std	Z+1, r24	; 0x01
      cba:	0e 94 34 06 	call	0xc68	; 0xc68 <game_initialCANMessage>
      cbe:	78 94       	sei
@@ -1909,9 +1909,9 @@ void game_sendUserInput()
      f1a:	49 f0       	breq	.+18     	; 0xf2e <game_play+0x5e>
      f1c:	0f c0       	rjmp	.+30     	; 0xf3c <game_play+0x6c>
 		case 1:
-			if (gameData.playtime==10) {
+			if (gameData.playtime==TIMELIMIT) {
      f1e:	80 91 f0 02 	lds	r24, 0x02F0	; 0x8002f0 <gameData+0x2>
-     f22:	8a 30       	cpi	r24, 0x0A	; 10
+     f22:	8e 31       	cpi	r24, 0x1E	; 30
      f24:	59 f4       	brne	.+22     	; 0xf3c <game_play+0x6c>
 				game_finished(gameID);
      f26:	81 e0       	ldi	r24, 0x01	; 1
@@ -1920,7 +1920,7 @@ void game_sendUserInput()
 			}
 			break;
 		case 2:
-			if (gameData.score <10) {
+			if (gameData.score < INITSCORE) {
      f2e:	80 91 ee 02 	lds	r24, 0x02EE	; 0x8002ee <gameData>
      f32:	8a 30       	cpi	r24, 0x0A	; 10
      f34:	18 f4       	brcc	.+6      	; 0xf3c <game_play+0x6c>

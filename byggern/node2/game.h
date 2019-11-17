@@ -8,7 +8,7 @@
 #define GAME_H_
 
 #define  INITSCORE 10
-#define TIMELIMIT 99
+#define TIMELIMIT 30
 #include "timer.h"
 
 #define F_CPU 16000000
