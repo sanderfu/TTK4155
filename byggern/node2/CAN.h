@@ -21,4 +21,5 @@ void CAN_transmit_message(CAN_message_t * message);
 void CAN_receiveMessage();
 void CAN_init();
 void CAN_readPosition(CAN_message_t mess);
+void CAN_clearInterrupt();
 #endif /* CAN_H_ */

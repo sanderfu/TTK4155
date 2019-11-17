@@ -7,7 +7,8 @@
 #include "game.h"
 #include "CAN.h"
 #include "IR.h"
-
+#include "solenoid.h"
+#include "touchbutton.h"
 void game_init() {
 	//Reset play_time
 	numOf5ms = 0;
@@ -29,6 +30,9 @@ void game_sendGameData() {
 }
 
 void game_play() {
+	if (buttons.left_button && !(shooting)) {
+		solenoid_setPulse();
+	}
 	IR_detectGoal();
 	gameData.playtime = numOf5ms*TIMER3_SECONDS;
 	float timeFloat = gameData.playtime;

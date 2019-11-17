@@ -21,14 +21,15 @@ void sleep_init() {
 void sleep_now() {
 	
 	//disable analog reading
-	ACSR |= (1 << ACD | 1 << ACIE);
+	//ACSR |= (1 << ACD | 1 << ACIE);
 	
-	ADCSRA &= ~(1 << ADEN);
+	//ADCSRA &= ~(1 << ADEN);
 
 	// Put the device to sleep:
 	sleep_mode();
 	
-	ADCSRA |= (1 << ADEN);
+	
+	//ADCSRA |= (1 << ADEN);
 
 	// Upon waking up, sketch continues from this point.
 	

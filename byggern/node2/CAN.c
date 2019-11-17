@@ -21,10 +21,17 @@
 void CAN_init() {
 	CAN_controller_init();
 	
-	
-	
-	
 }
+
+
+
+void CAN_clearInterrupt()
+{
+	uint8_t mask = 0b11;
+	CAN_controller_bitModify(mask, CANINTF, 0b00);
+}
+
+
 void CAN_transmit_message(CAN_message_t *message) {
 	printf("Transmitting message");
 	static int buffer_number = 0;
