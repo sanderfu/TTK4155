@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.16"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>byggern: Byggern - TTK4155 - Group ??</title>
+<title>byggern: Node 1 Documentation - TTK4155 - Group 46</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,13 +62,34 @@ $(function() {
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Byggern - TTK4155 - Group ?? </div>  </div>
+<div class="title">Node 1 Documentation - TTK4155 - Group 46 </div>  </div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="intro_sec"></a>
 Introduction</h1>
-<p>This page contains the documentation for our elevator project. </p>
-</div></div><!-- PageDoc -->
+<p>This page contains the documentation for node 1 of the term project in TTK4155</p>
+<h1><a class="anchor" id="summary"></a>
+Implementation summary</h1>
+<h2><a class="anchor" id="drivers"></a>
+Drivers</h2>
+<p>The interfacing functions have been implemented according to the official data sheet of the ATmega162 and the relevant additional IC's used, but details regarding the use of these data sheets are not documented in this node documentation. We therefore recommend having the relevant data sheets of the IC's open when studying this documentation to get a complete understanding of the choices that has been taken along the way regarding operation modes, timer settings etc. It is not considered essential if the main purpose is to get a general overview of the node functionality.</p>
+<h2><a class="anchor" id="game"></a>
+Game Logic</h2>
+<p>The node introduces two game modes. In Game 1, the player starts with 10 points and have to keep as many points as possible within a given time frame. One point is lost every time the ball passes the "goal line". In Game 2, points are given for every second the player keeps the ball away from the goal.</p>
+<h1><a class="anchor" id="pcb"></a>
+PCB</h1>
+<p>During the project term, a PCB has been designed to remove the need for breadboard usage for the node itself. The PCB Schematic was designed based on the breadboard layout, designed in KiCAD and produced by JLCPCB in Shenzhen, China. A separate repository for the PCB designed this term can be found at <a href="https://github.com/sanderfu/ttk4155-pcb">https://github.com/sanderfu/ttk4155-pcb</a> </p>
+<h2><a class="anchor" id="schematic"></a>
+Schematic</h2>
+<p> <style>div.image img[src="schematic.png"]{width:1000px;}</style>  </p><div class="image">
+<img src="schematic.png" alt=""/>
+</div>
+ <h2><a class="anchor" id="pcb_render"></a>
+PCB Render</h2>
+<p> <style>div.image img[src="pcb_render.png"]{width:1000px;}</style>  </p><div class="image">
+<img src="pcb_render.png" alt=""/>
+</div>
+ </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

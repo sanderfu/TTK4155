@@ -1,10 +1,33 @@
 
 
 /**
- * @mainpage Byggern - TTK4155 - Group ??
+ * @mainpage Node 1 Documentation - TTK4155 - Group 46
  * @section intro_sec Introduction
- * This page contains the documentation for our project in TTK4155.
+ * This page contains the documentation for node 1 of the term project in TTK4155
  * 
+ * @section summary Implementation summary
+ *
+ * @subsection drivers Drivers
+ * The interfacing functions have been implemented according to the official data sheet of the ATmega162 
+ * and the relevant additional IC's used, but details regarding the use of these data sheets are not documented in this node documentation.
+ * We therefore recommend having the relevant data sheets of the IC's open when studying this documentation to get a complete
+ * understanding of the choices that has been taken along the way regarding operation modes, timer settings etc. It is not considered essential
+ * if the main purpose is to get a general overview of the node functionality.
+ *
+ * @subsection game Game Logic
+ * The node introduces two game modes. In Game 1, the player starts with 10 points and have to keep as many points as possible within a given time frame. 
+ * One point is lost every time the ball passes the "goal line". In Game 2, points are given for every second the player keeps the ball away from the goal.
+ *
+ * @section pcb PCB
+ * During the project term, a PCB has been designed to remove the need for breadboard usage for the node itself. 
+ * The PCB Schematic was designed based on the breadboard layout, designed in KiCAD and produced by JLCPCB in Shenzhen, China. 
+ * A separate repository for the PCB designed this term can be found at <a href="https://github.com/sanderfu/ttk4155-pcb">https://github.com/sanderfu/ttk4155-pcb</a> 
+ * @subsection schematic Schematic
+ * \htmlonly <style>div.image img[src="schematic.png"]{width:1000px;}</style> \endhtmlonly
+ * @image html schematic.png
+ * @subsection pcb_render PCB Render
+ * \htmlonly <style>div.image img[src="pcb_render.png"]{width:1000px;}</style> \endhtmlonly
+ * @image html pcb_render.png
 */
 
 
