@@ -13,16 +13,16 @@
 //Initiate and set in normal mode
 void CAN_controller_init();
 
-//Read from Can_transceiver
+//Read from CAN_transceiver
 uint8_t CAN_controller_read(uint8_t addr);
 
-//Write to Can transceiver
+//Write to CAN transceiver
 void CAN_controller_write(uint8_t addr, uint8_t data);
 
 //Request to send, function to be called after loading transmission buffer.
 void CAN_controller_RTS(uint8_t buffer);
 
-//change mode of Can_controller.
+//change mode of CAN_controller.
 void CAN_controller_setMode(uint8_t mode);
 
 //Modify chosen bits on transceiver register.

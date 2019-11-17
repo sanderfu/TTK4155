@@ -45,9 +45,10 @@ menu currentMenu;
 //uses joystick position to change current menu.
 void navigateMenu(joystick_position_t * joystick_position_p);
 
-//Print menu on oled.
+//Print menu on OLED.
 void menu_printCurrentMenu();
 
+//Initialize menu
 void menu_init();
 
 #endif /* !MENU_HEADER */

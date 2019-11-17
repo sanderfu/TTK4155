@@ -19,10 +19,14 @@ typedef struct {
 CAN_message_t received_message;
 uint8_t flag;
 
-
-void CAN_transmit_message(CAN_message_t * message);
-void CAN_receiveMessage(CAN_message_t * received_message);
+//Initialize CAN
 void CAN_init();
+
+//Transmit CAN message
+void CAN_transmit_message(CAN_message_t * message);
+
+//Receive CAN message
+void CAN_receiveMessage(CAN_message_t * received_message);
 
 //Send joystick, slider and button positions
 void CAN_sendInputData();

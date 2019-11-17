@@ -6,7 +6,11 @@ typedef struct {
 	uint8_t left_pos;
 	uint8_t right_pos;
 } slider_position_t;
-void slider_readPosition(slider_position_t * pos);
+
+//Read the slider position from the P1000 board
+void slider_readPosition();
+
+//Send the slider position over CAN
 void slider_sendPositionOverCAN();
 
 slider_position_t slider_pos;

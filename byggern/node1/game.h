@@ -25,11 +25,14 @@ gameData_t gameData;
 uint8_t gameActive;
 uint8_t highScores[5];
 uint8_t highScores2[5];
+
+//Initialize game values
 void game_init();
 
-//function to be called in main, runs games on node 2
+//Run game in given game mode
 void game_play(uint8_t gameID);
 
+//Display the higscore list for the given game mode
 void game_displayHighscores(uint8_t gameID);
 
 #endif /* GAME_H_ */
