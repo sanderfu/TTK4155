@@ -42,11 +42,12 @@ typedef struct{
 
 menu currentMenu;
 
-MenuNode* mainMenuInit(void);
-MenuNode* addChild(MenuNode* parent, char* child_name);
-MenuNode* menuInit(void);
+//uses joystick position to change current menu.
 void navigateMenu(joystick_position_t * joystick_position_p);
+
+//Print menu on oled.
 void menu_printCurrentMenu();
+
 void menu_init();
 
 #endif /* !MENU_HEADER */

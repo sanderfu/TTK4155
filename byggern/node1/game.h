@@ -26,7 +26,10 @@ uint8_t gameActive;
 uint8_t highScores[5];
 uint8_t highScores2[5];
 void game_init();
+
+//function to be called in main, runs games on node 2
 void game_play(uint8_t gameID);
+
 void game_displayHighscores(uint8_t gameID);
 
 #endif /* GAME_H_ */
