@@ -1,65 +1,30 @@
-/**
- * @file
- * @brief OLED interface
- */
-
 #ifndef OLED_H_
 #define OLED_H_
-///////////////////////////////////////////////
-// Includes
-///////////////////////////////////////////////
+
 #include <avr/io.h>
 
-/**
- * @brief Initialize the oled interface
- * 
- */
+//Initialize OLED
 void oled_init(void);
 
-/**
- * @brief Print left facing arrow on oled
- * 
- */
+//Print a left-facing arrow on the screen
 void oled_print_arrow();
 
-/**
- * @brief Clear the oled screen
- * 
- */
+//Clear the screen
 void oled_reset();
 
-/**
- * @brief Go to position (0,0) on the Ooled screen
- * 
- */
+//Go to position (0,0)
 void oled_home();
 
-/**
- * @brief Go to a specified page (line) of the oled screen
- * 
- * @param[in] page The page to go to
- */
+//Go to a specific page
 void oled_gotoLine(uint8_t page);
 
-/**
- * @brief Go to a specified column of the oled screen
- * 
- * @param[in] column The column to go to
- */
+//Go to a specific column
 void oled_gotoColumn(uint8_t column);
 
-/**
- * @brief Clear a specified page (line)
- * 
- * @param[in] page The page to clear
- */
+//Clear a specific line
 void oled_clearLine(uint8_t page);
 
-/**
- * @brief Print char array to oled screen
- * 
- * @param[in] character The char array to write to screen
- */
-void oled_print(char* character);
+//Print char array to oled screen.
+void oled_print(char*);
 
 #endif

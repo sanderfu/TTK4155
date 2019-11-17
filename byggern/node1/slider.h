@@ -1,41 +1,18 @@
-/**
- * @file
- * @brief Slider interface
- */
-
 #ifndef SLIDER_H_
 #define SLIDER_H_
-///////////////////////////////////////////////
-// Includes
-///////////////////////////////////////////////
-
 #include <avr/io.h>
-
-///////////////////////////////////////////////
-// Structures
-///////////////////////////////////////////////
 
 typedef struct {
 	uint8_t left_pos;
 	uint8_t right_pos;
 } slider_position_t;
 
-///////////////////////////////////////////////
-// Global variables
-///////////////////////////////////////////////
+//Read the slider position from the P1000 board
+void slider_readPosition();
 
-slider_position_t slider_pos;
-
-///////////////////////////////////////////////
-// Function declarations
-///////////////////////////////////////////////
-
-/**
- * @brief Read position of the slider
- * 
- */
-void slider_readPosition(slider_position_t * pos);
+//Send the slider position over CAN
 void slider_sendPositionOverCAN();
 
+slider_position_t slider_pos;
 
 #endif

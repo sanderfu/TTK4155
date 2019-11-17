@@ -23,8 +23,10 @@ typedef enum DIRECTION {
 } DIRECTION_t ;
 
 volatile joystick_position_t joystick_pos;
-void joystick_readPositionOverCAN(CAN_message_t mess);
-void joystick_printPosition();
+
+/**
+ * @brief Set servo motor voltage according to joystick position.
+ */
 void joystick_setServo();
 
 #endif /* JOYSTICK_H_ */

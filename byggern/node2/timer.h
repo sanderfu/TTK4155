@@ -18,6 +18,10 @@
 
 #define TIMER3_SECONDS 0.05
 #define TIMER3_RESET (F_CPU/PRESCALE)*TIMER3_SECONDS
+
+/**
+ * @brief Initialize timer
+ */
 void timer_init();
 
 #endif /* !TIMER_HEADER */

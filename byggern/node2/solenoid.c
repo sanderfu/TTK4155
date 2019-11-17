@@ -10,9 +10,12 @@
 #include <avr/io.h>
 #include "solenoid.h"
 void solenoid_init() {
+	
+	//Set port E5 as output.
 	DDRE  |= (1 << PE5);
 	PORTE |= (1 << PE5);
 
+	//initialize shooting variable
 	shooting = 0;
 }
 void solenoid_setPulse() {

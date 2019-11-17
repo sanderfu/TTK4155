@@ -23,7 +23,6 @@ void IR_detectGoal() {
 		
 		game_sendGameData();
 
-		//goals++;
 		while(adc_value<50) {
 			_delay_ms(2000);
 			adc_value = ADC_read();

@@ -34,6 +34,7 @@ void CAN_clearInterrupt()
 
 void CAN_transmit_message(CAN_message_t *message) {
 	printf("Transmitting message");
+	//changing between three buffers
 	static int buffer_number = 0;
 	
 	buffer_number++;
@@ -66,7 +67,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 
 	
 
-	//Load id in registers TXBnSIDH and TXBnSIDL
+	//Load ID in message
 	switch(buffer_number) {
 			case 0:
 				CAN_controller_bitModify(0b11100000, TXB0SIDL, (uint8_t) ((message->ID & 0b111) << 5));
@@ -86,7 +87,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 			
 	}
 		
-	//Load length in register TXBnDLC
+	//Filling message with data length
 	switch(buffer_number) {
 			case 0:
 				CAN_controller_bitModify(0b1111, TXB0DLC, message->data_length);
@@ -101,7 +102,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 			
 	}
 
-	//iterate in for loop length = message.length and load TXBnDm
+	//Filling message with data.
 	for (uint8_t i = 0; i != message->data_length; i++) {
 		switch(buffer_number) {
 			case 0:
@@ -124,7 +125,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 	//request_to_send
 	CAN_controller_RTS(buffer_number);
 
-	//ERROR HANDLING?	
+	//Currently no error handling
 }
 
 void CAN_receiveMessage() {

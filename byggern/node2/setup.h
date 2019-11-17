@@ -14,6 +14,9 @@
 #include <avr/interrupt.h>
 #define test_bit(reg, bit) (reg & (1<<bit))
 
+/**
+* @brief Initialize all modules that need initialization.
+*/
 void setupInit(void);
 
 #endif

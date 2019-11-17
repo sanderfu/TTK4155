@@ -1,25 +1,10 @@
-/**
- * @file
- * @brief Setup interface
- */
-
 #ifndef SETUP_H_
 #define SETUP_H_
 
-///////////////////////////////////////////////
-// Includes
-///////////////////////////////////////////////
 #include <stdlib.h>
 #include <avr/io.h>
 
-///////////////////////////////////////////////
-// Function declarations
-///////////////////////////////////////////////
-
-/**
- * @brief Run the Node Setup
- * 
- */
+//Call the initialization functions of all modules
 void setupInit(void);
 
 #endif

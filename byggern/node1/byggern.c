@@ -1,13 +1,9 @@
-
-
-/**
- * @mainpage Byggern - TTK4155 - Group ??
- * @section intro_sec Introduction
- * This page contains the documentation for our project in TTK4155.
- * 
-*/
-
-
+/*
+ * byggern.c
+ *
+ * Created: 30.08.2019 15:12:42
+ *  Author: torsteoe
+ */ 
 #include <avr/io.h>
 #include <stdio.h>
 #include <stdlib.h>

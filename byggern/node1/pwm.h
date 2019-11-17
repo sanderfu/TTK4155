@@ -1,36 +1,13 @@
-/**
- * @file
- * @brief PWM interface
- */
-
 #ifndef PWM_H_
 #define PWM_H_
-
-///////////////////////////////////////////////
-// Includes
-///////////////////////////////////////////////
 #include <avr/io.h> 
 
-///////////////////////////////////////////////
-// Function declarations
-///////////////////////////////////////////////
-
-/**
- * @brief Initialize the pwm interface
- * 
- */
+//Initialize PWM
 void pwm_init();
 
-/**
- * @brief Set the pwm frequency
- * 
- * @param[in] freq The wanted frequency
- */
+//Set PWM frequency
 void pwm_setFreq(uint32_t freq);
 
-/**
- * @brief Test function
- * 
- */
+//Test function to verify that PWM is functioning correctly
 void pwm_testPlayNote();
 #endif
