@@ -16,7 +16,6 @@
 #include "SPI.h"
 
 
-//Read from Can_transceiver
 uint8_t CAN_controller_read(uint8_t addr) {
 	SPI_setChipSelect(PB4, 0); 
 	
@@ -29,7 +28,6 @@ uint8_t CAN_controller_read(uint8_t addr) {
 	return data;
 }
 
-//Write to Can transceiver
 void CAN_controller_write(uint8_t addr, uint8_t data) {
 	SPI_setChipSelect(PB4, 0);
 	
@@ -41,7 +39,6 @@ void CAN_controller_write(uint8_t addr, uint8_t data) {
 	
 }
 
-//Modify chosen bits on transceiver register.
 void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data) {
 		SPI_setChipSelect(PB4, 0);
 		SPI_masterWrite(MCP_BITMOD);
@@ -60,8 +57,6 @@ void CAN_controller_reset() {
 	SPI_masterWrite(MCP_RESET);
 	SPI_setChipSelect(PB4, 1);
 }
-
-//Initiate transceiver, put in Normal mode.
 void CAN_controller_init() {
 
 	SPI_masterInit();
@@ -101,8 +96,7 @@ void CAN_controller_RTS(uint8_t buffer) {
 			SPI_masterWrite(MCP_RTS_TX2);
 			break;
 		default: 
-			break;
-			
+			break;			
 	}
 	SPI_setChipSelect(PB4, 1);
 }
@@ -110,26 +104,28 @@ void CAN_controller_RTS(uint8_t buffer) {
 void CAN_controller_setMode(uint8_t mode) {
 	
 	CAN_controller_reset();
-	uint8_t status = CAN_controller_read(MCP_CANSTAT);
+	volatile uint8_t status = CAN_controller_read(MCP_CANSTAT);
 	uint8_t mode_bits = (status & MODE_MASK);
 	
 	if (mode_bits != MODE_CONFIG) {
-		printf("Not in config mode, \t %i\n\r", mode_bits);
+		//printf("Not in config mode, \t %i\n\r", mode_bits);
 		return;
 	}
 	
-	
-	 //set in loopback mode p.60 MCP2515
+	//set mode
 	CAN_controller_bitModify(0b11101110, MCP_CANCTRL, mode | (0b1100));
+	
+	//enable interrupts
 	CAN_controller_bitModify(0b11111111, MCP_CANINTE, 0b1);
-	CAN_controller_bitModify(0b01100000, MCP_RXB0CTRL, 0b01100000); //receive any type of message, no filter p. 27
+	
+	//receive any type of message, no filter p. 27
+	CAN_controller_bitModify(0b01100000, MCP_RXB0CTRL, 0b01100000);
 
 	_delay_ms(200);
 	status = CAN_controller_read(MCP_CANSTAT);
 	mode_bits = (status & MODE_MASK);
 	if (mode_bits != mode) {
-			printf("Not in correct mode: Mode: %i\n\r", mode_bits);
-
+			//printf("Not in correct mode: Mode: %i\n\r", mode_bits);
 	}
 	//printf("Mode set: %i\n\r", status & MODE_MASK);
 }

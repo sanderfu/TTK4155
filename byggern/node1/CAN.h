@@ -19,9 +19,14 @@ typedef struct {
 volatile CAN_message_t received_message;
 volatile uint8_t flag;
 
+
 void CAN_transmit_message(CAN_message_t * message);
 void CAN_receiveMessage(volatile CAN_message_t * received_message);
 void CAN_init();
+
+//Send joystick, slider and button positions
 void CAN_sendInputData();
+
+//clear CAN receive interrupt
 void CAN_clearInterrupt();
 #endif /* CAN_H_ */
