@@ -16,9 +16,6 @@ typedef struct {
 } slider_position_t;
 volatile slider_position_t slider_pos;
 
-void slider_readPositionOverCAN(CAN_message_t mess);
-
-
 
 
 

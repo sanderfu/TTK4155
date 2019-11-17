@@ -28,11 +28,18 @@ typedef struct{
 
 //Create global game data
 gameData_t gameData;
+
 uint8_t gameActive;
 volatile int numOf5ms;
+
+
 void game_init();
 void game_play();
+
+//Disable game.
 void game_stop();
+
+//Send time and score over CAN.
 void game_sendGameData();
 
 #endif /* GAME_H_ */

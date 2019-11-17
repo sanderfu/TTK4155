@@ -49,7 +49,6 @@ C_SRCS +=  \
 ../pwm.c \
 ../setup.c \
 ../sleep.c \
-../slider.c \
 ../solenoid.c \
 ../SPI.c \
 ../timer.c \
@@ -77,7 +76,6 @@ motor.o \
 pwm.o \
 setup.o \
 sleep.o \
-slider.o \
 solenoid.o \
 SPI.o \
 timer.o \
@@ -98,7 +96,6 @@ motor.o \
 pwm.o \
 setup.o \
 sleep.o \
-slider.o \
 solenoid.o \
 SPI.o \
 timer.o \
@@ -119,7 +116,6 @@ motor.d \
 pwm.d \
 setup.d \
 sleep.d \
-slider.d \
 solenoid.d \
 SPI.d \
 timer.d \
@@ -140,7 +136,6 @@ motor.d \
 pwm.d \
 setup.d \
 sleep.d \
-slider.d \
 solenoid.d \
 SPI.d \
 timer.d \
@@ -240,13 +235,6 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./sleep.o: .././sleep.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./slider.o: .././slider.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

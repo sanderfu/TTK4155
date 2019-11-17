@@ -10,6 +10,8 @@
 #define IR_H_
 #include <stdlib.h>
 #include <avr/io.h>
+
+//Check for IR-light below a certain tolerance and update score
 void IR_detectGoal();
 
 

@@ -26,8 +26,6 @@ setup.c
 
 sleep.c
 
-slider.c
-
 solenoid.c
 
 SPI.c
