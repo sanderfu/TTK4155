@@ -10,12 +10,11 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-
 #include <util/delay.h>
 #include <avr/interrupt.h>
 #include "menu.h"
 #include "CAN.h"
+
 void test_SRAM(void)
 {
 	volatile char *ext_ram = (char *) 0x1800; // Start address for the SRAM

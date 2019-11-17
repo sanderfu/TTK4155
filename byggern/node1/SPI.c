@@ -7,7 +7,6 @@
 
 
 #include "SPI.h"
-#include <avr/io.h>
 
 void SPI_masterInit(void)
 {

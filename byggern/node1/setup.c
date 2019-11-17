@@ -8,6 +8,9 @@
 #include "sleep.h"
 #include "game.h"
 #include "CAN.h"
+#include "touchButton.h"
+#include "menu.h"
+#include "pwm.h"
 
 #define FOSC 4915200
 #define F_CPU 4915200
@@ -20,7 +23,7 @@
 	xmem_init();
 	USART_init(MYUBRR);
 	adcInit();
-	joystickInit();
+	joystick_init();
 	touchButton_init();
 	oled_init();
 	timer_init();

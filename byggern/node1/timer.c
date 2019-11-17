@@ -1,6 +1,6 @@
 #define PRESCALE 1024
-#define TIMER1_SECONDS 0.1
 #define F_CPU 4915200
+#define TIMER1_SECONDS 0.1
 #define TIMER1_RESET (F_CPU/PRESCALE)*TIMER1_SECONDS
 
 #define TIMER0_SECONDS 0.2
@@ -11,6 +11,7 @@
 #include "touchButton.h"
 #include "menu.h"
 #include "game.h"
+#include <avr/interrupt.h>
 
 
 ISR (TIMER1_COMPB_vect) {

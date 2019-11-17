@@ -11,7 +11,7 @@ uint8_t joystickOffsetX;
 uint8_t joystickOffsetY;
 
 
-void joystickInit() {
+void joystick_init() {
 	joystickOffsetX = readAdc(X_POS_CHANNEL);
 	joystickOffsetY = readAdc(Y_POS_CHANNEL);
 }
