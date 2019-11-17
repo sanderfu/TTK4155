@@ -21,6 +21,9 @@
 #include "game.h"
 #include "music.h"
 #include "sleep.h"
+#include "slider.h"
+#include "joystick.h"
+#include "touchButton.h"
 
 ISR (INT0_vect) {
 	flag= 1;
@@ -46,8 +49,21 @@ int main(void)
 	while (1) {
 		
 		//Put microcontroller to sleep until next interrupt. 
-		sleep_now();
 		
+		if (timerFlag)
+		{
+			cli();
+			TCNT1 = 0x00;
+			joystick_readPosition();
+			slider_readPosition(&slider_pos);
+			touchButton_readButtons();
+			if(gameActive==0){
+				navigateMenu(&joystick_pos);
+				menu_printCurrentMenu();
+			}
+			timerFlag=0;
+			sei();
+		}
 		switch(currentMenu.currentMenuItem->nodeID){
 			case MAIN_MENU:
 				break;
@@ -72,5 +88,6 @@ int main(void)
 				break;
 			
 		}
+		sleep_now();
 	}
 }
