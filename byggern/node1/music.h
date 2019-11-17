@@ -3,7 +3,6 @@
 
 
 void music_playRick();
-//void music_playLisaGikk();
 void music_gameOver();
 void music_playNote(uint16_t note);
 #endif

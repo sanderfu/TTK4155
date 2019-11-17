@@ -5,9 +5,7 @@
  *  Author: torsteoe
  */ 
 #include "menu.h"
-#include "game.h"
-#include <avr/interrupt.h>
-
+#include <stdio.h>
 
 
 MenuNode nodes[8];

@@ -7,10 +7,7 @@
 
 #ifndef MENU_H_
 #define MENU_H_
-#include <stdlib.h>
 #include <avr/io.h>
-#include <string.h>
-
 #include "joystick.h"
 #define MAXCHILDREN 6
 #define MAX_OLED_STRING 16

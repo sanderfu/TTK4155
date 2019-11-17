@@ -14,39 +14,6 @@
 #include "pwm.h"
 #include "notes.h"
 #include "oled.h"
-/*
-
-const uint32_t PROGMEM lisaMelody[33] = {
-	NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, 
-	NOTE_G5, 0, NOTE_G5, NOTE_A5, 
-	0, NOTE_A5, 0, NOTE_A5, 
-	0, NOTE_A5, NOTE_G5, NOTE_F5,
-	
-	0, NOTE_F5, 0,  NOTE_F5, 
-	0,  NOTE_F5, NOTE_E5, 0, 
-	NOTE_E5, NOTE_D5, 0, NOTE_D5,
-	0,  NOTE_D5, 0, NOTE_D5, 
-	
-	NOTE_C5
-
-};
-
-//Africa main them tempo
-const uint8_t PROGMEM lisaTempo[33] = {
-	100, 100, 100, 100,
-	200, 10, 200, 100, 
-	5,100, 5, 100, 
-	5, 100, 200, 100,
-	 
-	5, 100, 5, 100, 
-	5, 100, 200, 5, 
-	200, 100, 5, 100,
-	5, 100, 5, 100, 
-	
-	200
-
-};
-*/
 
 const uint32_t PROGMEM song1_chorus_melody[79] =
 { NOTE_AS4, NOTE_AS4, NOTE_GS4, 0, 
@@ -123,26 +90,7 @@ volatile const char* lyrics_chorus[80] =
 };
 
 
-/*
-void music_playLisaGikk() {
-	cli();
-	printf("playing Lisa Gikk til Skolen, not by Toto\n\n\r");
-	for (int i = 0; i< sizeof(lisaMelody)/sizeof(uint32_t); i++) {
-		printf("Playing frequency: %i", pgm_read_word(&(lisaMelody[i])));
-		pwm_setFreq(pgm_read_word(&(lisaMelody[i])));
-		uint32_t duration = 4*pgm_read_byte(&(lisaTempo[i]));
-		while (duration--) {
-			_delay_ms(1);
-		}
-	}
-	pwm_setFreq(0);
-	sei();
-
-}
-*/
 void music_playRick() {
-	
-	//printf("You got rickrolled\n\n\r");
 	cli();
 	oled_home();
 	oled_reset();

@@ -1,12 +1,19 @@
+#include "setup.h"
 #include "uart.h"
 #include "xmem.h"
 #include "adc.h"
 #include "joystick.h"
-#include "setup.h"
 #include "oled.h"
 #include "timer.h"
 #include "sleep.h"
 #include "game.h"
+#include "CAN.h"
+
+#define FOSC 4915200
+#define F_CPU 4915200
+#define BAUD 9600
+#define MYUBRR FOSC/16/BAUD-1
+
 
 	void setupInit(void){
 	cli();
@@ -19,7 +26,7 @@
 	timer_init();
 	sleep_init();
 	menu_init();
-	CAN_controller_init();
+	CAN_init();
 	pwm_init();
 	game_init();
 	sei();
