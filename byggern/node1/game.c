@@ -7,13 +7,14 @@
 
 #include "game.h"
 #define F_CPU 4915200
-#include <avr/delay.h>
+#include <util/delay.h>
 #include "menu.h"
 #include "CAN.h"
 #include "touchButton.h"
 #include "music.h"
 #include "notes.h"
 #include "oled.h"
+#include <stdio.h>
 #define TIMELIMIT 99
 #define INITSCORE 10
 

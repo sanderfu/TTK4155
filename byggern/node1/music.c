@@ -9,11 +9,12 @@
 #include <util/delay.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <string.h>
 #include "music.h"
 #include "pwm.h"
 #include "notes.h"
 #include "oled.h"
+#include "menu.h"
 
 const uint32_t PROGMEM song1_chorus_melody[79] =
 { NOTE_AS4, NOTE_AS4, NOTE_GS4, 0, 

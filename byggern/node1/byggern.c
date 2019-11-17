@@ -18,6 +18,9 @@
 #include "CAN_controller.h"
 #include "MCP2515.h"
 #include "CAN.h"
+#include "game.h"
+#include "music.h"
+#include "sleep.h"
 
 ISR (INT0_vect) {
 	flag= 1;
@@ -51,6 +54,8 @@ int main(void)
 		
 		switch(currentMenu.currentMenuItem->nodeID){
 			case MAIN_MENU:
+				break;
+			case PLAY_GAME:
 				break;
 			case HIGH_SCORE:
 				break;

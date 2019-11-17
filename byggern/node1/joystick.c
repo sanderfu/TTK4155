@@ -1,7 +1,7 @@
 #include "joystick.h"
 #include "adc.h"
 #include "CAN.h"
-
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #define X_POS_CHANNEL 0

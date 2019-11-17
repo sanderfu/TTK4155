@@ -4,7 +4,7 @@
  * Created: 20.09.2019 14:29:16
  *  Author: torsteoe
  */ 
-
+#define F_CPU 4915200
 #include "setup.h"
 #include "test.h"
 #include <avr/io.h>

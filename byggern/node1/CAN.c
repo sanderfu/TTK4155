@@ -12,6 +12,7 @@
 #include "slider.h"
 #include "joystick.h"
 #include "touchButton.h"
+#include <stdio.h>
 #define F_CPU 4915200
 #include <util/delay.h>
 

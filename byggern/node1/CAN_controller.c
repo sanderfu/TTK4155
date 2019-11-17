@@ -45,7 +45,7 @@ void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data) {
 		SPI_setChipSelect(PB4, 1);
 
 }
-CAN_controller_reset() {
+void CAN_controller_reset() {
 	SPI_setChipSelect(PB4, 0);
 	printf("Before spi write");
 	SPI_masterWrite(MCP_RESET);

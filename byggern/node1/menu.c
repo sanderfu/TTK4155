@@ -5,7 +5,9 @@
  *  Author: torsteoe
  */ 
 #include "menu.h"
+#include "oled.h"
 #include <stdio.h>
+#include <string.h>
 
 
 MenuNode nodes[8];
