@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 000003f8  00000000  00000000  00002cc4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00005765  00000000  00000000  000030bc  2**0
+  6 .debug_info   00005759  00000000  00000000  000030bc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001d25  00000000  00000000  00008821  2**0
+  7 .debug_abbrev 00001d25  00000000  00000000  00008815  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00002322  00000000  00000000  0000a546  2**0
+  8 .debug_line   00002322  00000000  00000000  0000a53a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000008dc  00000000  00000000  0000c868  2**2
+  9 .debug_frame  000008dc  00000000  00000000  0000c85c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000d03  00000000  00000000  0000d144  2**0
+ 10 .debug_str    00000d17  00000000  00000000  0000d138  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000242c  00000000  00000000  0000de47  2**0
+ 11 .debug_loc    0000242c  00000000  00000000  0000de4f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000398  00000000  00000000  00010273  2**0
+ 12 .debug_ranges 00000398  00000000  00000000  0001027b  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -472,9 +472,9 @@ int main(void)
 
 0000067c <CAN_clearInterrupt>:
 
+
 void CAN_clearInterrupt()
 {
-	//CLearing interrupt
 	uint8_t mask = 0b11;
 	CAN_controller_bitModify(mask, CANINTF, 0b00);
      67c:	40 e0       	ldi	r20, 0x00	; 0
@@ -490,9 +490,9 @@ void CAN_transmit_message(CAN_message_t *message) {
      68a:	1f 93       	push	r17
      68c:	cf 93       	push	r28
      68e:	8c 01       	movw	r16, r24
-	//printf("Transmitting message");
-	static int buffer_number = 0;
 	
+	//changing between three buffers
+	static int buffer_number = 0;
 	buffer_number++;
 	buffer_number = buffer_number%3;
      690:	80 91 20 03 	lds	r24, 0x0320	; 0x800320 <__data_end>
@@ -506,7 +506,7 @@ void CAN_transmit_message(CAN_message_t *message) {
      6a6:	80 93 20 03 	sts	0x0320, r24	; 0x800320 <__data_end>
      6aa:	90 93 21 03 	sts	0x0321, r25	; 0x800321 <__data_end+0x1>
 	
-	//Load id in registers TXBnSIDH and TXBnSIDL
+	//Load ID in message
 	switch(buffer_number) {
      6ae:	21 30       	cpi	r18, 0x01	; 1
      6b0:	31 05       	cpc	r19, r1
@@ -540,10 +540,6 @@ void CAN_transmit_message(CAN_message_t *message) {
      6e4:	67 95       	ror	r22
      6e6:	81 e3       	ldi	r24, 0x31	; 49
      6e8:	0e 94 7c 04 	call	0x8f8	; 0x8f8 <CAN_controller_write>
-				
-				//printf("Sending whole id: %i", message->ID );
-
-
 				break;
      6ec:	2d c0       	rjmp	.+90     	; 0x748 <CAN_transmit_message+0xc0>
 			case 1:
@@ -557,7 +553,7 @@ void CAN_transmit_message(CAN_message_t *message) {
      6fa:	62 e4       	ldi	r22, 0x42	; 66
      6fc:	80 ee       	ldi	r24, 0xE0	; 224
      6fe:	0e 94 94 04 	call	0x928	; 0x928 <CAN_controller_bitModify>
-				CAN_controller_write(TXB1SIDH, (uint8_t) ( message->ID >> 3) );
+				CAN_controller_write(TXB1SIDH, (uint8_t) ( message->ID >> 3) );				
      702:	f8 01       	movw	r30, r16
      704:	60 85       	ldd	r22, Z+8	; 0x08
      706:	71 85       	ldd	r23, Z+9	; 0x09
@@ -569,7 +565,6 @@ void CAN_transmit_message(CAN_message_t *message) {
      712:	67 95       	ror	r22
      714:	81 e4       	ldi	r24, 0x41	; 65
      716:	0e 94 7c 04 	call	0x8f8	; 0x8f8 <CAN_controller_write>
-				
 				break;
      71a:	16 c0       	rjmp	.+44     	; 0x748 <CAN_transmit_message+0xc0>
 			case 2:
@@ -595,11 +590,10 @@ void CAN_transmit_message(CAN_message_t *message) {
      740:	67 95       	ror	r22
      742:	81 e5       	ldi	r24, 0x51	; 81
      744:	0e 94 7c 04 	call	0x8f8	; 0x8f8 <CAN_controller_write>
-			
-			
+				break;
 	}
 		
-	//Load length in register TXBnDLC
+	//Filling message with data length
 	switch(buffer_number) {
      748:	80 91 20 03 	lds	r24, 0x0320	; 0x800320 <__data_end>
      74c:	90 91 21 03 	lds	r25, 0x0321	; 0x800321 <__data_end+0x1>
@@ -636,11 +630,11 @@ void CAN_transmit_message(CAN_message_t *message) {
      780:	65 e5       	ldi	r22, 0x55	; 85
      782:	8f e0       	ldi	r24, 0x0F	; 15
      784:	0e 94 94 04 	call	0x928	; 0x928 <CAN_controller_bitModify>
-			
-			
+				break;
+				
 	}
 
-	//iterate in for loop length = message.length and load TXBnDm
+	//Filling message with data.
 	for (uint8_t i = 0; i != message->data_length; i++) {
      788:	f8 01       	movw	r30, r16
      78a:	82 85       	ldd	r24, Z+10	; 0x0a
@@ -690,11 +684,11 @@ void CAN_transmit_message(CAN_message_t *message) {
      7d6:	86 e5       	ldi	r24, 0x56	; 86
      7d8:	8c 0f       	add	r24, r28
      7da:	0e 94 7c 04 	call	0x8f8	; 0x8f8 <CAN_controller_write>
-			
-			
+				break;
+				
 	}
 
-	//iterate in for loop length = message.length and load TXBnDm
+	//Filling message with data.
 	for (uint8_t i = 0; i != message->data_length; i++) {
      7de:	cf 5f       	subi	r28, 0xFF	; 255
      7e0:	f8 01       	movw	r30, r16
@@ -710,7 +704,7 @@ void CAN_transmit_message(CAN_message_t *message) {
      7e8:	80 91 20 03 	lds	r24, 0x0320	; 0x800320 <__data_end>
      7ec:	0e 94 be 04 	call	0x97c	; 0x97c <CAN_controller_RTS>
 	
-	//ERROR HANDLING?	
+	//Currently no error handling	
 }
      7f0:	cf 91       	pop	r28
      7f2:	1f 91       	pop	r17
@@ -728,10 +722,7 @@ void CAN_receiveMessage(volatile CAN_message_t * received_message) {
      802:	7c 01       	movw	r14, r24
 	
 	
-	uint8_t buffer = 0;
-	switch (buffer) {
-		case 0:
-				received_message->ID = ((CAN_controller_read(MCP_RXB0SIDL) & 0b11100000) >> 5) + (CAN_controller_read(MCP_RXB0SIDH) << 3); 
+	received_message->ID = ((CAN_controller_read(MCP_RXB0SIDL) & 0b11100000) >> 5) + (CAN_controller_read(MCP_RXB0SIDH) << 3); 
      804:	82 e6       	ldi	r24, 0x62	; 98
      806:	0e 94 66 04 	call	0x8cc	; 0x8cc <CAN_controller_read>
      80a:	c8 2f       	mov	r28, r24
@@ -749,21 +740,18 @@ void CAN_receiveMessage(volatile CAN_message_t * received_message) {
      824:	f7 01       	movw	r30, r14
      826:	91 87       	std	Z+9, r25	; 0x09
      828:	80 87       	std	Z+8, r24	; 0x08
-				
-				//printf("Whole id: %i\n\r", received_message->ID);
-				received_message->data_length = (CAN_controller_read(MCP_RXB0DLC) & 0b00001111);
+	received_message->data_length = (CAN_controller_read(MCP_RXB0DLC) & 0b00001111);
      82a:	85 e6       	ldi	r24, 0x65	; 101
      82c:	0e 94 66 04 	call	0x8cc	; 0x8cc <CAN_controller_read>
      830:	8f 70       	andi	r24, 0x0F	; 15
      832:	f7 01       	movw	r30, r14
      834:	82 87       	std	Z+10, r24	; 0x0a
-				//printf("data length read: %i\n\r",(CAN_controller_read(MCP_RXB0DLC) & 0b00001111));
-				for (uint8_t i = 0; i != received_message->data_length; i++) {
+	for (uint8_t i = 0; i != received_message->data_length; i++) {
      836:	82 85       	ldd	r24, Z+10	; 0x0a
      838:	88 23       	and	r24, r24
      83a:	81 f0       	breq	.+32     	; 0x85c <CAN_receiveMessage+0x64>
      83c:	c0 e0       	ldi	r28, 0x00	; 0
-					received_message->data[i] = CAN_controller_read(MCP_RXB0D0 + i);
+		received_message->data[i] = CAN_controller_read(MCP_RXB0D0 + i);
      83e:	0c 2f       	mov	r16, r28
      840:	10 e0       	ldi	r17, 0x00	; 0
      842:	86 e6       	ldi	r24, 0x66	; 102
@@ -773,20 +761,19 @@ void CAN_receiveMessage(volatile CAN_message_t * received_message) {
      84c:	e0 0f       	add	r30, r16
      84e:	f1 1f       	adc	r31, r17
      850:	80 83       	st	Z, r24
-				received_message->ID = ((CAN_controller_read(MCP_RXB0SIDL) & 0b11100000) >> 5) + (CAN_controller_read(MCP_RXB0SIDH) << 3); 
-				
-				//printf("Whole id: %i\n\r", received_message->ID);
-				received_message->data_length = (CAN_controller_read(MCP_RXB0DLC) & 0b00001111);
-				//printf("data length read: %i\n\r",(CAN_controller_read(MCP_RXB0DLC) & 0b00001111));
-				for (uint8_t i = 0; i != received_message->data_length; i++) {
+void CAN_receiveMessage(volatile CAN_message_t * received_message) {
+	
+	
+	received_message->ID = ((CAN_controller_read(MCP_RXB0SIDL) & 0b11100000) >> 5) + (CAN_controller_read(MCP_RXB0SIDH) << 3); 
+	received_message->data_length = (CAN_controller_read(MCP_RXB0DLC) & 0b00001111);
+	for (uint8_t i = 0; i != received_message->data_length; i++) {
      852:	cf 5f       	subi	r28, 0xFF	; 255
      854:	f7 01       	movw	r30, r14
      856:	82 85       	ldd	r24, Z+10	; 0x0a
      858:	8c 13       	cpse	r24, r28
      85a:	f1 cf       	rjmp	.-30     	; 0x83e <CAN_receiveMessage+0x46>
+		received_message->data[i] = CAN_controller_read(MCP_RXB0D0 + i);
 	}
-	
-	
 	
 	
 }
@@ -5439,8 +5426,8 @@ void xmem_init(void) {
     25f4:	30 91 03 01 	lds	r19, 0x0103	; 0x800103 <__malloc_heap_start+0x1>
     25f8:	30 93 5c 04 	sts	0x045C, r19	; 0x80045c <__brkval+0x1>
     25fc:	20 93 5b 04 	sts	0x045B, r18	; 0x80045b <__brkval>
-    2600:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
-    2604:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
+    2600:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <__data_start>
+    2604:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <__data_start+0x1>
     2608:	21 15       	cp	r18, r1
     260a:	31 05       	cpc	r19, r1
     260c:	41 f4       	brne	.+16     	; 0x261e <malloc+0xea>
