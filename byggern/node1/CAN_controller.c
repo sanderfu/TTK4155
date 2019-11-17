@@ -15,16 +15,21 @@
 #include "MCP2515.h"
 #include "SPI.h"
 
+
+//Read from Can_transceiver
 uint8_t CAN_controller_read(uint8_t addr) {
 	SPI_setChipSelect(PB4, 0); 
+	
 	SPI_masterWrite(MCP_READ);
 	SPI_masterWrite(addr);
 	uint8_t data = SPI_masterRead();
+	
 	SPI_setChipSelect(PB4, 1);
 	
 	return data;
 }
 
+//Write to Can transceiver
 void CAN_controller_write(uint8_t addr, uint8_t data) {
 	SPI_setChipSelect(PB4, 0);
 	
@@ -35,6 +40,8 @@ void CAN_controller_write(uint8_t addr, uint8_t data) {
 	SPI_setChipSelect(PB4, 1); 
 	
 }
+
+//Modify chosen bits on transceiver register.
 void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data) {
 		SPI_setChipSelect(PB4, 0);
 		SPI_masterWrite(MCP_BITMOD);
@@ -45,15 +52,18 @@ void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data) {
 		SPI_setChipSelect(PB4, 1);
 
 }
+
+//Reset Can controller, necessary for config mode.
 void CAN_controller_reset() {
 	SPI_setChipSelect(PB4, 0);
 	//printf("Before spi write");
 	SPI_masterWrite(MCP_RESET);
 	SPI_setChipSelect(PB4, 1);
 }
+
+//Initiate transceiver, put in Normal mode.
 void CAN_controller_init() {
-	
-	
+
 	SPI_masterInit();
 
 	CAN_controller_setMode(MODE_NORMAL);
@@ -74,8 +84,7 @@ void CAN_controller_init() {
 	//printf("after write to canctrl\n\r");
 	
 	//Check CANSTAT register
-	uint8_t status = CAN_controller_read(MCP_CANSTAT);
-	//printf("Data: %i\n\r", status);
+	volatile uint8_t status = CAN_controller_read(MCP_CANSTAT);
 
 }
 

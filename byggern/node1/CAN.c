@@ -87,9 +87,13 @@ void CAN_transmit_message(CAN_message_t *message) {
 
 void CAN_receiveMessage(volatile CAN_message_t * received_message) {
 	
-	
+	//read ID
 	received_message->ID = ((CAN_controller_read(MCP_RXB0SIDL) & 0b11100000) >> 5) + (CAN_controller_read(MCP_RXB0SIDH) << 3); 
+	
+	//read data length
 	received_message->data_length = (CAN_controller_read(MCP_RXB0DLC) & 0b00001111);
+	
+	//read data
 	for (uint8_t i = 0; i != received_message->data_length; i++) {
 		received_message->data[i] = CAN_controller_read(MCP_RXB0D0 + i);
 	}
@@ -109,6 +113,7 @@ void CAN_sendInputData() {
 	message.data[3] = buttons.right_button;
 	message.data[4] = joystick_pos.x_pos;
 	message.data[5] = joystick_pos.y_pos;
+	
 	CAN_transmit_message(&message);
 }
 

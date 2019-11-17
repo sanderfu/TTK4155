@@ -197,6 +197,8 @@ void game_play(uint8_t gameID)
 {
 	if(gameActive==0)
 	{
+		game_sendStop();
+		_delay_ms(100);
 		game_newgame();	
 	}
 	if (buttons.right_button) {
