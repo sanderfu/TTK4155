@@ -18,14 +18,19 @@ typedef enum DIRECTION {
 
 joystick_position_t joystick_pos;
 
-
+//Initialize joystick
 void joystick_init();
+
+//Read joystick position
 void joystick_readPosition();
 
-//get direction (up, left, right, down, neutral), given position in x,y
+//Get direction (up, left, right, down, neutral), given position in x,y
 DIRECTION_t joystick_getDirection(joystick_position_t * pos);
 
+//Send the joystick direction to terminal over USART
 void joystick_printDirection(DIRECTION_t dir);
+
+//Send the joystick position over CAN
 void joystick_sendPositionOverCAN();
 
 #endif
