@@ -22,6 +22,7 @@ void motor_enable();
  */
 void motor_disable();
 
+
 /**
  * @brief Set speed of motor.
  * @param speed digital value from 0 to 255.
@@ -39,8 +40,10 @@ void motor_control();
  */
 void motor_setDirection(uint8_t dir);
 
+
 /**
  * @brief Calibrate motor, move until motor reaches both walls, reset encoder and set max value for encoder.
  */
 void motor_calibrate();
+
 #endif /* MOTOR_H_ */

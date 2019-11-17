@@ -31,7 +31,7 @@ void motor_init() {
 	prev_error = 0;
 	_delay_ms(500);
 	//printf("Start moving");
-	motor_calibrate();
+	motor_moveUntilEdge(0);
 	
 }
 
@@ -66,8 +66,8 @@ void motor_setSpeed(uint8_t speed) {
 }
 
 void motor_control() {
-
-	//Implementing a PID-regulator
+	
+	
 	int32_t reference_position = slider_pos.right_pos;
 	float K_p = 0.5;
 	float K_i = 0.8;
@@ -77,9 +77,10 @@ void motor_control() {
 	float derivative_error = (error-prev_error)/TIMER3_SECONDS;
 	prev_error = error;
 	int u =  K_p*error + K_i*summed_error + K_d*derivative_error;
-	
-	
-	//u will generally vary between -100 and 100;
+	//printf("Summed error %d\n\r", summed_error);
+	//printf("sumE %d\n\r",  summed_error);
+	//printf("U %d\n\r",  u);
+	//attempting to get u varying between -100 and 100;
 	
 	if (u>0)
 	{
@@ -94,30 +95,32 @@ void motor_control() {
 	int offset = 25;
 	u = u+offset;
 
-	//Safety, setting maximum input
 	if (u>255) {
 		u = 255;
-		summed_error -= error; // anti-windup (as seen in Reguleringsteknikk) 
+		summed_error -= error; // anti-windup (Regtek for life)
 	}
 	
-	
+	//printf("Reference position: %i\n\r", reference_position);
+	//printf("u: %i\n\r", u);
 	motor_setSpeed((uint8_t) u);
+	
 	
 
 }
 
-void motor_calibrate() {
-	motor_setDirection(0);
+void motor_moveUntilEdge(uint8_t dir) {
+	motor_setDirection(dir);
+	//printf("In start of calibration");
 	_delay_ms(500);
 	uint8_t speed = 0;
 	motor_setSpeed(75);	
 	motor_enable();
 
+	//printf("After");
 	int32_t prev_encoder = 10;
 	int32_t current_encoder= 0;
 	_delay_ms(100);
-	
-	//Move until reach left wall
+	//printf("in function");
 	while (current_encoder-prev_encoder >0 || prev_encoder-current_encoder >0) {
 		prev_encoder = current_encoder;
 		encoder_readValues();
@@ -125,24 +128,26 @@ void motor_calibrate() {
 		_delay_ms(1000);
 	}
 	
-	//Reset encoder values
+	//printf("finish loop");
+
 	encoder_init();
+	
 	motor_setDirection(1);
 	prev_encoder = current_encoder+1;
 	_delay_ms(1000);
-	
-	//Move until reach right wall
 	while (current_encoder-prev_encoder >0 || prev_encoder-current_encoder >0) {
 		prev_encoder = current_encoder;
 		encoder_readValues();
 		current_encoder = encoder_value;
+	//	printf("%i", encoder_value);
 		_delay_ms(1000);
 	}
 	
-	//Set max encoder value.
 	encoder_readValues();
 	_delay_ms(50);
 	encoder_maxValue = encoder_value;
-
+	//printf("encoder_max_Value:%i\n\r ", encoder_maxValue);
+	//motor_disable();
+	//_delay_ms(50000);
 
 }

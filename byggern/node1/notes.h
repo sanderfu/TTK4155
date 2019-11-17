@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief Note defines to be used with the music interface
+ */
 
 #define NOTE_H   0
 #define NOTE_B0  31

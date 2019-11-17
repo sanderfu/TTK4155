@@ -27,6 +27,8 @@ void pwm_init() {
 	//Reset prescaler, then set to 8.
 	TCCR1B &= PRESC_OFF;
 	TCCR1B |= PRESC_8;
+
+	//set ocr0 register as something
 	
 	//Timer incremented until counter value matches value in OCR1A
 	TCCR1A |= (1 << WGM11 & ~(1 <<WGM10));
@@ -41,6 +43,7 @@ void pwm_init() {
 	ICR1 = ICR_PERIOD;
 	
 
+	
 	//Set initial pulsewidth
 	OCR1A = ICR_PERIOD/(20)*(2.1+0.9)/2;
 }

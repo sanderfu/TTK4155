@@ -1,12 +1,26 @@
+/**
+ * @file
+ * @brief The music interface
+ */
+
 #ifndef MUSIC_H_
 #define MUSIC_H_
 
-//Play Rick Rolled
+/**
+ * @brief Play Rick Rolled
+ * 
+ */
 void music_playRick();
 
-//Play Game Over music
+/**
+ * @brief Play Game Over Tune
+ * 
+ */
 void music_gameOver();
 
-//Play a specific note
+/**
+ * @brief Play specified note
+ * 
+ */
 void music_playNote(uint16_t note);
 #endif

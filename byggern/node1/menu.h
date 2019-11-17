@@ -1,16 +1,27 @@
-/*
- * menu.h
- *
- * Created: 20.09.2019 11:05:19
- *  Author: torsteoe
- */ 
+/**
+ * @file
+ * @brief Menu interface
+ */
 
 #ifndef MENU_H_
 #define MENU_H_
+
+///////////////////////////////////////////////
+// Includes
+///////////////////////////////////////////////
+
 #include <avr/io.h>
 #include "joystick.h"
+
+///////////////////////////////////////////////
+// Defines
+///////////////////////////////////////////////
 #define MAXCHILDREN 6
 #define MAX_OLED_STRING 16
+
+///////////////////////////////////////////////
+// Enumerations
+///////////////////////////////////////////////
 typedef enum MENU_ID {
 	MAIN_MENU,
 	PLAY_GAME,
@@ -22,6 +33,9 @@ typedef enum MENU_ID {
 	HS2
 } MENU_ID_t ;
 
+///////////////////////////////////////////////
+// Structures
+///////////////////////////////////////////////
 struct MenuNode 
 {
 	MENU_ID_t nodeID;
@@ -40,15 +54,34 @@ typedef struct{
 	DIRECTION_t lastDir;
 } menu;
 
+///////////////////////////////////////////////
+// Global variables
+///////////////////////////////////////////////
 menu currentMenu;
 
-//uses joystick position to change current menu.
+///////////////////////////////////////////////
+// Function declarations
+///////////////////////////////////////////////
+
+/**
+ * @brief Initialize the menu interface 
+ * 
+ */
+void menu_init();
+
+/**
+ * @brief Navigate the menu
+ * 
+ * @param[in] joystick_position_p The Current Joystick position
+ */
 void navigateMenu(joystick_position_t * joystick_position_p);
 
-//Print menu on OLED.
+
+/**
+ * @brief Print menu on OLED display
+ * 
+ */
 void menu_printCurrentMenu();
 
-//Initialize menu
-void menu_init();
 
 #endif /* !MENU_HEADER */

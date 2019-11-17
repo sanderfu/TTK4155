@@ -1,20 +1,44 @@
+/**
+ * @file
+ * @brief Touchbutton interface
+ */
+
 #ifndef TOUCHBUTTON_H_
 #define TOUCHBUTTON_H_
 
+///////////////////////////////////////////////
+// Includes
+///////////////////////////////////////////////
 #include <avr/io.h>
 
+///////////////////////////////////////////////
+// Structures
+///////////////////////////////////////////////
 typedef struct {
 	uint8_t left_button;
 	uint8_t right_button;
 } buttonValues_t;
+
+///////////////////////////////////////////////
+// Global Variables
+///////////////////////////////////////////////
 buttonValues_t buttons;
 
-//Initialize touchButton values
+///////////////////////////////////////////////
+// Function declarations
+///////////////////////////////////////////////
+
+/**
+ * @brief Initialize the touch buttons interface
+ * 
+ */
 void touchButton_init();
 
-//Read the P1000 touchbuttons
+/**
+ * @brief Read the touch buttons
+ * 
+ */
 void touchButton_readButtons();
 
-//Send the touchbutton values stored over CAN to node 2
 void touchButton_sendButtonsOverCAN();
 #endif

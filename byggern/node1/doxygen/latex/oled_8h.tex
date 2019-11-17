@@ -1,0 +1,135 @@
+\hypertarget{oled_8h}{}\doxysection{oled.\+h File Reference}
+\label{oled_8h}\index{oled.h@{oled.h}}
+
+
+O\+L\+ED interface.  
+
+
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{oled_8h_ad95f850c4c6d949229270c8da88c02cb}{oled\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the oled interface. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{oled_8h_a2eafbd600c3a6703f71f47c0cc3f5a52}{oled\+\_\+print\+\_\+arrow}} ()
+\begin{DoxyCompactList}\small\item\em Print left facing arrow on oled. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{oled_8h_a1b5485b06eb18dc266b455d0c3951833}{oled\+\_\+reset}} ()
+\begin{DoxyCompactList}\small\item\em Clear the oled screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{oled_8h_a363f6227a2153e03f9b5d7cea5a856f9}{oled\+\_\+home}} ()
+\begin{DoxyCompactList}\small\item\em Go to position (0,0) on the Ooled screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{oled_8h_afff3fa300d3ef0a1edfe56884dc1e00b}{oled\+\_\+goto\+Line}} (uint8\+\_\+t page)
+\begin{DoxyCompactList}\small\item\em Go to a specified page (line) of the oled screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{oled_8h_af0818ae19297cc5e7339d20e8503ec7b}{oled\+\_\+goto\+Column}} (uint8\+\_\+t column)
+\begin{DoxyCompactList}\small\item\em Go to a specified column of the oled screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{oled_8h_a6bf79383487a46c4c59ff1079378316f}{oled\+\_\+clear\+Line}} (uint8\+\_\+t page)
+\begin{DoxyCompactList}\small\item\em Clear a specified page (line) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{oled_8h_aeffdc04f50e535b749ddeeeac4478f41}{oled\+\_\+print}} (char $\ast$character)
+\begin{DoxyCompactList}\small\item\em Print char array to oled screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+O\+L\+ED interface. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{oled_8h_a6bf79383487a46c4c59ff1079378316f}\label{oled_8h_a6bf79383487a46c4c59ff1079378316f}} 
+\index{oled.h@{oled.h}!oled\_clearLine@{oled\_clearLine}}
+\index{oled\_clearLine@{oled\_clearLine}!oled.h@{oled.h}}
+\doxysubsubsection{\texorpdfstring{oled\_clearLine()}{oled\_clearLine()}}
+{\footnotesize\ttfamily void oled\+\_\+clear\+Line (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{page }\end{DoxyParamCaption})}
+
+
+
+Clear a specified page (line) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em page} & The page to clear \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{oled_8h_af0818ae19297cc5e7339d20e8503ec7b}\label{oled_8h_af0818ae19297cc5e7339d20e8503ec7b}} 
+\index{oled.h@{oled.h}!oled\_gotoColumn@{oled\_gotoColumn}}
+\index{oled\_gotoColumn@{oled\_gotoColumn}!oled.h@{oled.h}}
+\doxysubsubsection{\texorpdfstring{oled\_gotoColumn()}{oled\_gotoColumn()}}
+{\footnotesize\ttfamily void oled\+\_\+goto\+Column (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{column }\end{DoxyParamCaption})}
+
+
+
+Go to a specified column of the oled screen. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em column} & The column to go to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{oled_8h_afff3fa300d3ef0a1edfe56884dc1e00b}\label{oled_8h_afff3fa300d3ef0a1edfe56884dc1e00b}} 
+\index{oled.h@{oled.h}!oled\_gotoLine@{oled\_gotoLine}}
+\index{oled\_gotoLine@{oled\_gotoLine}!oled.h@{oled.h}}
+\doxysubsubsection{\texorpdfstring{oled\_gotoLine()}{oled\_gotoLine()}}
+{\footnotesize\ttfamily void oled\+\_\+goto\+Line (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{page }\end{DoxyParamCaption})}
+
+
+
+Go to a specified page (line) of the oled screen. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em page} & The page to go to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{oled_8h_a363f6227a2153e03f9b5d7cea5a856f9}\label{oled_8h_a363f6227a2153e03f9b5d7cea5a856f9}} 
+\index{oled.h@{oled.h}!oled\_home@{oled\_home}}
+\index{oled\_home@{oled\_home}!oled.h@{oled.h}}
+\doxysubsubsection{\texorpdfstring{oled\_home()}{oled\_home()}}
+{\footnotesize\ttfamily void oled\+\_\+home (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Go to position (0,0) on the Ooled screen. 
+
+\mbox{\Hypertarget{oled_8h_ad95f850c4c6d949229270c8da88c02cb}\label{oled_8h_ad95f850c4c6d949229270c8da88c02cb}} 
+\index{oled.h@{oled.h}!oled\_init@{oled\_init}}
+\index{oled\_init@{oled\_init}!oled.h@{oled.h}}
+\doxysubsubsection{\texorpdfstring{oled\_init()}{oled\_init()}}
+{\footnotesize\ttfamily void oled\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Initialize the oled interface. 
+
+\mbox{\Hypertarget{oled_8h_aeffdc04f50e535b749ddeeeac4478f41}\label{oled_8h_aeffdc04f50e535b749ddeeeac4478f41}} 
+\index{oled.h@{oled.h}!oled\_print@{oled\_print}}
+\index{oled\_print@{oled\_print}!oled.h@{oled.h}}
+\doxysubsubsection{\texorpdfstring{oled\_print()}{oled\_print()}}
+{\footnotesize\ttfamily void oled\+\_\+print (\begin{DoxyParamCaption}\item[{char $\ast$}]{character }\end{DoxyParamCaption})}
+
+
+
+Print char array to oled screen. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em character} & The char array to write to screen \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{oled_8h_a2eafbd600c3a6703f71f47c0cc3f5a52}\label{oled_8h_a2eafbd600c3a6703f71f47c0cc3f5a52}} 
+\index{oled.h@{oled.h}!oled\_print\_arrow@{oled\_print\_arrow}}
+\index{oled\_print\_arrow@{oled\_print\_arrow}!oled.h@{oled.h}}
+\doxysubsubsection{\texorpdfstring{oled\_print\_arrow()}{oled\_print\_arrow()}}
+{\footnotesize\ttfamily void oled\+\_\+print\+\_\+arrow (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Print left facing arrow on oled. 
+
+\mbox{\Hypertarget{oled_8h_a1b5485b06eb18dc266b455d0c3951833}\label{oled_8h_a1b5485b06eb18dc266b455d0c3951833}} 
+\index{oled.h@{oled.h}!oled\_reset@{oled\_reset}}
+\index{oled\_reset@{oled\_reset}!oled.h@{oled.h}}
+\doxysubsubsection{\texorpdfstring{oled\_reset()}{oled\_reset()}}
+{\footnotesize\ttfamily void oled\+\_\+reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Clear the oled screen. 
+

@@ -8,16 +8,9 @@
 #define PWM_H_
 #include <avr/io.h>
 
-/**
-* @brief Initialize pwm module.
-*/
+
 void pwm_init();
 
-/**
-* @brief Set pulse width of pwm signal.
-*
-* @param[in] width of pulse in ms.
-*/
 void pwm_setPulseWidth(float width_ms); 
 
 #endif /* PWM_H_ */

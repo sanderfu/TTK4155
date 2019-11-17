@@ -15,12 +15,10 @@ void encoder_init() {
 	DDRH |= (1 <<PH3);
 	DDRH |= (1 <<PH6);
    
-	//Set !OE low when resetting
+	//!Rst pin set high to use the encoder to know how much motor has rotated.
 	PORTH &= ~(1 << PH5);
 	_delay_us(20);
 
-
-	//Toggle pin to reset encoder
 	PORTH |= (1 << PH6);
 		_delay_us(20);
 
@@ -30,7 +28,6 @@ void encoder_init() {
 	PORTH |= (1 << PH6);
 		_delay_us(20);
 
-	//Set !OE high
 	PORTH |= (1 << PH5);
 	encoder_maxValue = -15000;
 
@@ -42,7 +39,7 @@ void encoder_convertValues() {
 	//printf("Converted encoder_values: %d\n\r", converted_encoderValue);
 }
 void encoder_readValues() {
-
+	
 	//set !OE value low
 	PORTH &= ~(1 << PH5);
 	
@@ -50,17 +47,23 @@ void encoder_readValues() {
 	PORTH &= ~(1 << PH3);
 	_delay_us(20);
 	
-	//Read msb
+	//Read msb !
 	uint8_t high_val = PINK & 0xff;
 
 	
 	//set select low to get high byte, then wait 20 microseconds
 	PORTH |= (1 << PH3);
 	_delay_us(20);
-	
-	//Read lsb 
+	//Read lsb !
 	uint8_t low_val =  PINK & 0xff;
 
+	
+	
+	//toggle reset pin
+	
+	//PORTH |= (1 << PH6);
+	//PORTH &= ~(1 << PH6);
+	//PORTH |= (1 << PH6);
 
 	//Set !OE high
 	PORTH |= (1 << PH5);
@@ -94,8 +97,7 @@ void encoder_readValues() {
 	}
 	*/
 	
-	
-	//Converts encoder values to [-100,100]
 	encoder_convertValues();
+	//printf("Encoder_values: %d\n\r", encoder_value);
 }
 

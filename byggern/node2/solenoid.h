@@ -8,14 +8,7 @@
 #define SOLENOID_H_
 
 volatile uint8_t shooting;
-/**
-* @brief Initialize solenoid module
-*/
 void solenoid_init();
-
-/**
-* @brief Set solenoid pulse, hold PE5 high for a fixed duration of time.
-*/
 void solenoid_setPulse();
 
 

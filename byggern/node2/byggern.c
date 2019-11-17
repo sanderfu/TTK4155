@@ -68,9 +68,6 @@ int main(void)
 			CAN_receiveMessage();
 			
 			if (gameActive) {
-				if (buttons.left_button && !(shooting)) {
-					solenoid_setPulse();
-				}
 				if (slider_pos.left_pos>0) {
 					regulatorOn = 1;
 					} 

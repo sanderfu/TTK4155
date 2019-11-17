@@ -57,23 +57,30 @@ void CAN_controller_reset() {
 	SPI_setChipSelect(PB7, 1);
 }
 void CAN_controller_init() {
+	//printf("Can controller init \n\r");
 	SPI_masterInit();
+	//printf("SPI master init done \n\r");
 
 	CAN_controller_setMode(MODE_NORMAL);
+//	printf("Modes set \n\r");
 
 	//set interrupt on 2560
+	
 	EIMSK |= 1 << INT4;	//interrupt on pin INT4
 	EICRB |= 1 << ISC41; //Turn on falling edge
 	EICRB &= ~(1 << ISC40); //....
 
-	//set PE4 as input
+//set PD2 as input
 	DDRE  &= (1 << PE4); //set as input.
 	
 	
 	
 	_delay_ms(200);
+//	printf("after write to canctrl\n\r");
 	
-	volatile uint8_t status = CAN_controller_read(MCP_CANSTAT);
+	//Check CANSTAT register
+	uint8_t status = CAN_controller_read(MCP_CANSTAT);
+//	printf("Data: %i\n\r", status);
 }
 
 void CAN_controller_RTS(uint8_t buffer) {
@@ -89,7 +96,8 @@ void CAN_controller_RTS(uint8_t buffer) {
 			SPI_masterWrite(MCP_RTS_TX2);
 			break;
 		default: 
-			break;			
+			break;
+			
 	}
 	SPI_setChipSelect(PB7, 1);
 }
@@ -108,10 +116,8 @@ void CAN_controller_setMode(uint8_t mode) {
 	}
 	
 	
-	//set mode
+	//set in loopback mode p.60 MCP2515
 	CAN_controller_bitModify(0b11101110, MCP_CANCTRL, mode | (0b1100));
-	
-	//enable interrupts
 	CAN_controller_bitModify(0b11111111, MCP_CANINTE, 0b1);
 	CAN_controller_bitModify(0b01100000, MCP_RXB0CTRL, 0b01100000); //receive any type of message, no filter p. 27
 

@@ -26,28 +26,11 @@ typedef struct{
 
 //Create global game data
 gameData_t gameData;
-
 uint8_t gameActive;
 volatile int numOf5ms;
-
-/**
- * @brief Initiate game module and sets game as active. This function will be triggered by a specific CAN message from Node 1. 
- */
 void game_init();
-
-/**
- * @brief Update score and time and call sendGameData() every second. 
- */
 void game_play();
-
-/**
- * @brief Disable game, sets game as inactive.
- */
 void game_stop();
-
-/**
- * @brief Send score and time over CAN. 
- */
 void game_sendGameData();
 
 #endif /* GAME_H_ */

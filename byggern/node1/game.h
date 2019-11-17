@@ -1,18 +1,23 @@
-/*
- * game.h
- *
- * Created: 12.11.2019 16:35:33
- *  Author: sanderfu
- */ 
-
+/**
+ * @file
+ * @brief Game Interface
+ */
 
 #ifndef GAME_H_
 #define GAME_H_
+
+///////////////////////////////////////////////
+// Includes
+///////////////////////////////////////////////
 
 #include <avr/interrupt.h>
 #include <stdlib.h>
 #include <avr/io.h>
 #include <string.h>
+
+///////////////////////////////////////////////
+// Structures
+///////////////////////////////////////////////
 
 typedef struct{
 	uint8_t score;
@@ -20,19 +25,36 @@ typedef struct{
 	uint8_t playtime;
 } gameData_t;
 
-//Create global game data
+///////////////////////////////////////////////
+// Global variables
+///////////////////////////////////////////////
 gameData_t gameData; 
 uint8_t gameActive;
 uint8_t highScores[5];
 uint8_t highScores2[5];
 
-//Initialize game values
+///////////////////////////////////////////////
+// Function Declarations
+///////////////////////////////////////////////
+
+/**
+ * @brief Initialize Game Interface
+ * 
+ */
 void game_init();
 
-//Run game in given game mode
+/**
+ * @brief Play game, starts connection between Node 1 and 2
+ * 
+ * @param[in] gameID The ID of the requested game mode.
+ */
 void game_play(uint8_t gameID);
 
-//Display the higscore list for the given game mode
+/**
+ * @brief Show highscores for a given game mode
+ * 
+ * @param[in] gameID The ID of the requested game mode.
+ */
 void game_displayHighscores(uint8_t gameID);
 
 #endif /* GAME_H_ */

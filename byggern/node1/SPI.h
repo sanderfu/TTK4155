@@ -1,25 +1,48 @@
-/*
- * SPI.h
- *
- * Created: 25.09.2019 09:45:23
- *  Author: sanderfu
- */ 
+/**
+ * @file
+ * @brief SPI Interface
+ */
 
 
 #ifndef SPI_H_
 #define SPI_H_
+
+///////////////////////////////////////////////
+// Includes
+///////////////////////////////////////////////
+
 #include <avr/io.h>
 
-//Initialize SPI master
+///////////////////////////////////////////////
+// Function Declarations
+///////////////////////////////////////////////
+
+/**
+ * @brief Initialize the SPI interface
+ * 
+ */
 void SPI_masterInit(void);
 
-//Write to slave
+/**
+ * @brief Write to slave
+ * 
+ * @param[in] cData The data to write
+ */
 void SPI_masterWrite(char cData);
 
-//Select chip
+/**
+ * @brief Chip Select
+ * 
+ * @param[in] pin The pin to set
+ * @param[in] setHigh Decide if the pin should be set high or low
+ */
 void SPI_setChipSelect(uint8_t pin, uint8_t setHigh );
 
-//Read from slave
+/**
+ * @brief Read from slave
+ * 
+ * @param[out] cData The data from the slave
+ */
 uint8_t SPI_masterRead();
 
 #endif /* SPI_H_ */
