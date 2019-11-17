@@ -10,27 +10,13 @@
 
 #define F_CPU 4915200
 #include <avr/interrupt.h>
-#include "menu.h"
 #include <util/delay.h>
 #include "setup.h"
 
-#include <stdlib.h>
-#include "uart.h"
-#include "xmem.h"
-#include "adc.h"
-#include "joystick.h"
-#include "slider.h"
-#include "touchButton.h"
-#include "oled.h"
-#include "avr/interrupt.h"
 #include "menu.h"
 #include "timer.h"
-#include "test.h"
-#include "SPI.h"
 #include "CAN_controller.h"
 #include "MCP2515.h"
-#include "pwm.h"
-#include "music.h"
 #include "CAN.h"
 
 ISR (INT0_vect) {

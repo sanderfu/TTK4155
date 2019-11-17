@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 000003f8  00000000  00000000  00002cec  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000054ad  00000000  00000000  000030e4  2**0
+  6 .debug_info   0000543c  00000000  00000000  000030e4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001d88  00000000  00000000  00008591  2**0
+  7 .debug_abbrev 00001d88  00000000  00000000  00008520  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00002318  00000000  00000000  0000a319  2**0
+  8 .debug_line   000021cb  00000000  00000000  0000a2a8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000940  00000000  00000000  0000c634  2**2
+  9 .debug_frame  00000940  00000000  00000000  0000c474  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000d1a  00000000  00000000  0000cf74  2**0
+ 10 .debug_str    00000d06  00000000  00000000  0000cdb4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00002295  00000000  00000000  0000dc8e  2**0
+ 11 .debug_loc    00002295  00000000  00000000  0000daba  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000398  00000000  00000000  0000ff23  2**0
+ 12 .debug_ranges 00000398  00000000  00000000  0000fd4f  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -273,9 +273,9 @@ uint8_t readAdc(uint8_t channel){ //for ch1 channel = 0;
      572:	08 95       	ret
 
 00000574 <__vector_1>:
+#include "timer.h"
+#include "CAN_controller.h"
 #include "MCP2515.h"
-#include "pwm.h"
-#include "music.h"
 #include "CAN.h"
 
 ISR (INT0_vect) {
@@ -829,7 +829,7 @@ void CAN_sendInputData() {
      898:	8b 87       	std	Y+11, r24	; 0x0b
 	
 	message.data[0] = slider_pos.left_pos;
-     89a:	e1 e7       	ldi	r30, 0x71	; 113
+     89a:	ec e7       	ldi	r30, 0x7C	; 124
      89c:	f3 e0       	ldi	r31, 0x03	; 3
      89e:	80 81       	ld	r24, Z
      8a0:	89 83       	std	Y+1, r24	; 0x01
@@ -837,7 +837,7 @@ void CAN_sendInputData() {
      8a2:	81 81       	ldd	r24, Z+1	; 0x01
      8a4:	8a 83       	std	Y+2, r24	; 0x02
 	message.data[2] = buttons.left_button;
-     8a6:	ef e6       	ldi	r30, 0x6F	; 111
+     8a6:	ea e7       	ldi	r30, 0x7A	; 122
      8a8:	f3 e0       	ldi	r31, 0x03	; 3
      8aa:	80 81       	ld	r24, Z
      8ac:	8b 83       	std	Y+3, r24	; 0x03
@@ -1493,7 +1493,7 @@ void game_recieveGameData()
 		flag=0;
      d16:	10 92 66 03 	sts	0x0366, r1	; 0x800366 <flag>
 		CAN_receiveMessage(&received_message);
-     d1a:	83 e7       	ldi	r24, 0x73	; 115
+     d1a:	8f e6       	ldi	r24, 0x6F	; 111
      d1c:	93 e0       	ldi	r25, 0x03	; 3
      d1e:	0e 94 05 04 	call	0x80a	; 0x80a <CAN_receiveMessage>
 		//Clear interrupt
@@ -1501,7 +1501,7 @@ void game_recieveGameData()
      d22:	0e 94 32 03 	call	0x664	; 0x664 <CAN_clearInterrupt>
 		//Update gamedata
 		gameData.score = received_message.data[0];
-     d26:	a3 e7       	ldi	r26, 0x73	; 115
+     d26:	af e6       	ldi	r26, 0x6F	; 111
      d28:	b3 e0       	ldi	r27, 0x03	; 3
      d2a:	8c 91       	ld	r24, X
      d2c:	e9 e8       	ldi	r30, 0x89	; 137
@@ -1891,7 +1891,7 @@ void game_play(uint8_t gameID)
      f32:	0e 94 6f 06 	call	0xcde	; 0xcde <game_newgame>
 	}
 	if (buttons.right_button) {
-     f36:	80 91 70 03 	lds	r24, 0x0370	; 0x800370 <buttons+0x1>
+     f36:	80 91 7b 03 	lds	r24, 0x037B	; 0x80037b <buttons+0x1>
      f3a:	88 23       	and	r24, r24
      f3c:	21 f0       	breq	.+8      	; 0xf46 <game_play+0x20>
 		gameActive = 0;
@@ -3586,7 +3586,7 @@ void slider_readPosition(slider_position_t * pos) {
 	slider_pos.left_pos = readAdc(LEFT_POS_CHANNEL);
     1880:	82 e0       	ldi	r24, 0x02	; 2
     1882:	0e 94 b2 02 	call	0x564	; 0x564 <readAdc>
-    1886:	c1 e7       	ldi	r28, 0x71	; 113
+    1886:	cc e7       	ldi	r28, 0x7C	; 124
     1888:	d3 e0       	ldi	r29, 0x03	; 3
     188a:	88 83       	st	Y, r24
 	slider_pos.right_pos = readAdc(RIGHT_POS_CHANNEL);
@@ -3714,11 +3714,11 @@ ISR (TIMER1_COMPB_vect) {
     1922:	93 e0       	ldi	r25, 0x03	; 3
     1924:	0e 94 87 09 	call	0x130e	; 0x130e <joystick_readPosition>
 	slider_readPosition(&slider_pos);
-    1928:	81 e7       	ldi	r24, 0x71	; 113
+    1928:	8c e7       	ldi	r24, 0x7C	; 124
     192a:	93 e0       	ldi	r25, 0x03	; 3
     192c:	0e 94 3e 0c 	call	0x187c	; 0x187c <slider_readPosition>
 	touchButton_readButtons(&buttons);
-    1930:	8f e6       	ldi	r24, 0x6F	; 111
+    1930:	8a e7       	ldi	r24, 0x7A	; 122
     1932:	93 e0       	ldi	r25, 0x03	; 3
     1934:	0e 94 df 0c 	call	0x19be	; 0x19be <touchButton_readButtons>
 	if(gameActive==0){
@@ -3827,7 +3827,7 @@ void touchButton_init() {
 void touchButton_readButtons() {
 	buttons.left_button = !!(BUTTON_LEFT);
     19be:	86 b3       	in	r24, 0x16	; 22
-    19c0:	ef e6       	ldi	r30, 0x6F	; 111
+    19c0:	ea e7       	ldi	r30, 0x7A	; 122
     19c2:	f3 e0       	ldi	r31, 0x03	; 3
     19c4:	86 95       	lsr	r24
     19c6:	81 70       	andi	r24, 0x01	; 1
@@ -5416,8 +5416,8 @@ void xmem_init(void) {
     25da:	30 91 03 01 	lds	r19, 0x0103	; 0x800103 <__malloc_heap_start+0x1>
     25de:	30 93 9f 04 	sts	0x049F, r19	; 0x80049f <__brkval+0x1>
     25e2:	20 93 9e 04 	sts	0x049E, r18	; 0x80049e <__brkval>
-    25e6:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <__data_start>
-    25ea:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <__data_start+0x1>
+    25e6:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
+    25ea:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <__DATA_REGION_ORIGIN__+0x1>
     25ee:	21 15       	cp	r18, r1
     25f0:	31 05       	cpc	r19, r1
     25f2:	41 f4       	brne	.+16     	; 0x2604 <malloc+0xea>
