@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief Register defines for the MCP2515
+ */
+
 #ifndef __MCP2515_H
 #define __MCP2515_H
 

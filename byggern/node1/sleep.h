@@ -1,18 +1,25 @@
-/*
- * sleep.h
- *
- * Created: 20.09.2019 15:15:51
- *  Author: torsteoe
- */ 
-
+/**
+ * @file
+ * @brief Sleep interface
+ */
 
 #ifndef SLEEP_H_
 #define SLEEP_H_
 
-//Initialize the sleep function with mode = SLEEP_MODE_IDLE 
+///////////////////////////////////////////////
+// Function declarations
+///////////////////////////////////////////////
+
+/**
+ * @brief Initialize the sleep interface
+ * 
+ */
 void sleep_init();
 
-//Put the MCU to sleep
+/**
+ * @brief Put the MCU to sleep
+ * 
+ */
 void sleep_now();
 
 

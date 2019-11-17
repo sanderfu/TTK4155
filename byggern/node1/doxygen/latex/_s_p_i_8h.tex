@@ -1,0 +1,84 @@
+\hypertarget{_s_p_i_8h}{}\doxysection{S\+P\+I.\+h File Reference}
+\label{_s_p_i_8h}\index{SPI.h@{SPI.h}}
+
+
+S\+PI Interface.  
+
+
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_s_p_i_8h_a734ac497f8d7f26478a883606c3a9989}{S\+P\+I\+\_\+master\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize the S\+PI interface. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_s_p_i_8h_a6ba9b49baa1437e34d04419defc22f1f}{S\+P\+I\+\_\+master\+Write}} (char c\+Data)
+\begin{DoxyCompactList}\small\item\em Write to slave. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_s_p_i_8h_a8d642e367ecb59f4e2a9c40b11cd2c9b}{S\+P\+I\+\_\+set\+Chip\+Select}} (uint8\+\_\+t pin, uint8\+\_\+t set\+High)
+\begin{DoxyCompactList}\small\item\em Chip Select. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{_s_p_i_8h_a9cfaca464281226ce8e7439313d217f2}{S\+P\+I\+\_\+master\+Read}} ()
+\begin{DoxyCompactList}\small\item\em Read from slave. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+S\+PI Interface. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_s_p_i_8h_a734ac497f8d7f26478a883606c3a9989}\label{_s_p_i_8h_a734ac497f8d7f26478a883606c3a9989}} 
+\index{SPI.h@{SPI.h}!SPI\_masterInit@{SPI\_masterInit}}
+\index{SPI\_masterInit@{SPI\_masterInit}!SPI.h@{SPI.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_masterInit()}{SPI\_masterInit()}}
+{\footnotesize\ttfamily void S\+P\+I\+\_\+master\+Init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Initialize the S\+PI interface. 
+
+\mbox{\Hypertarget{_s_p_i_8h_a9cfaca464281226ce8e7439313d217f2}\label{_s_p_i_8h_a9cfaca464281226ce8e7439313d217f2}} 
+\index{SPI.h@{SPI.h}!SPI\_masterRead@{SPI\_masterRead}}
+\index{SPI\_masterRead@{SPI\_masterRead}!SPI.h@{SPI.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_masterRead()}{SPI\_masterRead()}}
+{\footnotesize\ttfamily uint8\+\_\+t S\+P\+I\+\_\+master\+Read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Read from slave. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em c\+Data} & The data from the slave \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_s_p_i_8h_a6ba9b49baa1437e34d04419defc22f1f}\label{_s_p_i_8h_a6ba9b49baa1437e34d04419defc22f1f}} 
+\index{SPI.h@{SPI.h}!SPI\_masterWrite@{SPI\_masterWrite}}
+\index{SPI\_masterWrite@{SPI\_masterWrite}!SPI.h@{SPI.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_masterWrite()}{SPI\_masterWrite()}}
+{\footnotesize\ttfamily void S\+P\+I\+\_\+master\+Write (\begin{DoxyParamCaption}\item[{char}]{c\+Data }\end{DoxyParamCaption})}
+
+
+
+Write to slave. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em c\+Data} & The data to write \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_s_p_i_8h_a8d642e367ecb59f4e2a9c40b11cd2c9b}\label{_s_p_i_8h_a8d642e367ecb59f4e2a9c40b11cd2c9b}} 
+\index{SPI.h@{SPI.h}!SPI\_setChipSelect@{SPI\_setChipSelect}}
+\index{SPI\_setChipSelect@{SPI\_setChipSelect}!SPI.h@{SPI.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_setChipSelect()}{SPI\_setChipSelect()}}
+{\footnotesize\ttfamily void S\+P\+I\+\_\+set\+Chip\+Select (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pin,  }\item[{uint8\+\_\+t}]{set\+High }\end{DoxyParamCaption})}
+
+
+
+Chip Select. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em pin} & The pin to set \\
+\hline
+\mbox{\texttt{ in}}  & {\em set\+High} & Decide if the pin should be set high or low \\
+\hline
+\end{DoxyParams}

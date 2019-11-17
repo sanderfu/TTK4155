@@ -1,12 +1,28 @@
+/**
+ * @file
+ * @brief Joystick interface
+ */
+
 #ifndef JOYSTICK_H_
 #define  JOYSTICK_H_
+
+///////////////////////////////////////////////
+// Includes
+///////////////////////////////////////////////
 #include <avr/io.h>
 
+///////////////////////////////////////////////
+// Structures
+///////////////////////////////////////////////
 typedef struct {
 	int8_t x_pos;
 	int8_t y_pos;
 	int16_t angle;
 } joystick_position_t;
+
+///////////////////////////////////////////////
+// Enumerations
+///////////////////////////////////////////////
 
 typedef enum DIRECTION {
 	LEFT, 
@@ -16,21 +32,47 @@ typedef enum DIRECTION {
 	NEUTRAL
 } DIRECTION_t ;
 
+
+///////////////////////////////////////////////
+// Global variables
+///////////////////////////////////////////////
 joystick_position_t joystick_pos;
 
-//Initialize joystick
+///////////////////////////////////////////////
+// Function declarations
+///////////////////////////////////////////////
+
+/**
+ * @brief Initialize Joystick Interface
+ * 
+ */
 void joystick_init();
 
-//Read joystick position
+/**
+ * @brief Read position of the Joystick
+ * 
+ */
 void joystick_readPosition();
 
-//Get direction (up, left, right, down, neutral), given position in x,y
+/**
+ * @brief get direction (up, left, right, down, neutral), given position in x,y
+ * 
+ * @param[out] dir The joystick direction as an enum
+ * @param[in] *pos The joystick position as x,y value pair
+ */
 DIRECTION_t joystick_getDirection(joystick_position_t * pos);
 
-//Send the joystick direction to terminal over USART
+/**
+ * @brief Print the Joystick position 
+ * 
+ * @param[in] dir Joystick position in enum type
+ */
 void joystick_printDirection(DIRECTION_t dir);
 
-//Send the joystick position over CAN
+/**
+ * @brief Send the current joystick position over CAN.
+ * 
+ */
 void joystick_sendPositionOverCAN();
 
 #endif
