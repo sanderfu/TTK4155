@@ -85,7 +85,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 	//Currently no error handling	
 }
 
-void CAN_receiveMessage(volatile CAN_message_t * received_message) {
+void CAN_receiveMessage(CAN_message_t * received_message) {
 	
 	//read ID
 	received_message->ID = ((CAN_controller_read(MCP_RXB0SIDL) & 0b11100000) >> 5) + (CAN_controller_read(MCP_RXB0SIDH) << 3); 
@@ -119,4 +119,6 @@ void CAN_sendInputData() {
 
 void CAN_init() {
 	CAN_controller_init();
+
+	flag=0;
 }

@@ -102,7 +102,7 @@ void game_recieveGameData()
 	if (flag) {
 		//Handle the message
 		cli();
-		printf("Message received");
+		//printf("Message received");
 		flag=0;
 		CAN_receiveMessage(&received_message);
 		//Clear interrupt

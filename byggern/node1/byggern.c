@@ -30,25 +30,20 @@ ISR (INT0_vect) {
 }
 
 int main(void)
-//p.23 for can read instructions
 {
 
 	setupInit();
-	//test_SRAM();
-	volatile CAN_message_t message;
-	message.ID = 0b10101010111;
-	message.data_length = 3;
-	message.data[0] = 13;
-	message.data[1] = 22;
-	message.data[2] = 33;
+	
+	//Send initialize message to Node 2
+	CAN_message_t message;
+	message.ID = 0x10;
+	message.data_length = 0;
+	CAN_transmit_message(&message);
 	
 	printf("Starting program\n\r");
 	printf("---------------------------------------\n\r");
 	_delay_ms(500);    
 	while (1) {
-		
-		 
-		
 		if (timerFlag)
 		{
 			cli();

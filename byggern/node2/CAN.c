@@ -151,6 +151,9 @@ void CAN_receiveMessage() {
 		case 3:
 			game_stop();
 			break;
+		case 0x10:
+			setupInit();
+			break;
 	}
 	
 	

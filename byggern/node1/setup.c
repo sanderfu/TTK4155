@@ -25,6 +25,8 @@
 	_delay_ms(100);
 	USART_init(MYUBRR);
 	_delay_ms(100);
+	CAN_init();
+	_delay_ms(100);
 	adcInit();
 	_delay_ms(100);
 	joystick_init();
@@ -38,8 +40,6 @@
 	sleep_init();
 	_delay_ms(100);
 	menu_init();
-	_delay_ms(100);
-	CAN_init();
 	_delay_ms(100);
 	pwm_init();
 	_delay_ms(100);
