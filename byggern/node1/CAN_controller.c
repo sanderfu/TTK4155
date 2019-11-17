@@ -7,16 +7,8 @@
 
 
 
-#define F_CPU 4915200
-
-#include <avr/io.h>
-#include <avr/interrupt.h>
-#include "MCP2515.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <util/delay.h>
 #include "CAN_controller.h"
-#include "SPI.h"
+
 uint8_t CAN_controller_read(uint8_t addr) {
 	SPI_setChipSelect(PB4, 0); 
 	SPI_masterWrite(MCP_READ);

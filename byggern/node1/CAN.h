@@ -9,6 +9,18 @@
 #ifndef CAN_H_
 #define CAN_H_
 
+#include "CAN_controller.h"
+#include "CAN.h"
+#include "MCP2515.h"
+#include "slider.h"
+#include "joystick.h"
+#include "touchButton.h"
+
+#define F_CPU 4915200
+
+#include <util/delay.h>
+#include <stdio.h>
+
 typedef struct {
 	volatile uint8_t data[8];
 	volatile uint16_t ID;

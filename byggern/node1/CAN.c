@@ -2,21 +2,11 @@
  * CAN.c
  *
  * Created: 04.10.2019 15:12:56
- *  Author: haavaei
+ *  Author: 
  */ 
 
 
-#include "CAN_controller.h"
 #include "CAN.h"
-#include "MCP2515.h"
-#include "slider.h"
-#include "joystick.h"
-#include "touchButton.h"
-
-#define F_CPU 4915200
-
-#include <util/delay.h>
-#include <stdio.h>
 
 
 
@@ -37,33 +27,6 @@ void CAN_transmit_message(CAN_message_t *message) {
 	buffer_number++;
 	buffer_number = buffer_number%3;
 	
-	
-	/*
-	
-	//while TXBnCTRL. TXREQ not clear, wait
-	switch(buffer_number) {
-		case 0:
-			while (!(CAN_controller_read(TXB0CTRL) & 1 << TXREQ));
-			break;
-		break;
-		case 1:
-			while (CAN_controller_read(TXB1CTRL) & 1 << TXREQ);
-			break;
-		break;
-		case 2:
-			while (CAN_controller_read(TXB2CTRL) & 1 << TXREQ);
-			break;
-		break;
-		
-		
-	}
-	
-	*/
-	
-	
-
-	
-
 	//Load id in registers TXBnSIDH and TXBnSIDL
 	switch(buffer_number) {
 			case 0:
@@ -90,7 +53,6 @@ void CAN_transmit_message(CAN_message_t *message) {
 	//Load length in register TXBnDLC
 	switch(buffer_number) {
 			case 0:
-				//printf("\n\rtransmitting data length: %i\n\r", message->data_length);
 				CAN_controller_bitModify(0b1111, TXB0DLC, message->data_length);
 				break;
 			case 1:
