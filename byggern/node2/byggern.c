@@ -1,9 +1,23 @@
-/*
- * byggern.c
+/**
+ * @mainpage Node 2 Documentation - TTK4155 - Group 46
+ * @section intro_sec Introduction
+ * This page contains the documentation for node 2 of the term project in TTK4155. The main purpose of this node is to control
+ * the motor based on user input in node 1 and send information back regarding playtime and score. The communication between nodes is done using the CAN protocol.
+ * 
+ * @section summary Implementation summary
  *
- * Created: 30.08.2019 15:12:42
- *  Author: torsteoe
- */ 
+ * @subsection drivers Drivers
+ * The interfacing functions have been implemented according to the official data sheet of the ATmega2560 
+ * and the relevant additional IC's used, but details regarding the use of these data sheets are not documented in this node documentation.
+ * We therefore recommend having the relevant data sheets of the IC's open when studying this documentation to get a complete
+ * understanding of the choices that has been taken along the way regarding operation modes, timer settings etc. It is not considered essential
+ * if the main purpose is to get a general overview of the node functionality.
+ *
+ * @subsection game Game Logic
+ * The node introduces two game modes. In Game 1, the player starts with 10 points and have to keep as many points as possible within a given time frame. 
+ * One point is lost every time the ball passes the "goal line". In Game 2, points are given for every second the player keeps the ball away from the goal.
+ *
+*/
 #include <avr/io.h>
 #include <stdio.h>
 

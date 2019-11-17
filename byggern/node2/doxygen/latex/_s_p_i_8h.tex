@@ -1,0 +1,61 @@
+\hypertarget{_s_p_i_8h}{}\doxysection{S\+P\+I.\+h File Reference}
+\label{_s_p_i_8h}\index{SPI.h@{SPI.h}}
+
+
+A library for using the S\+PI interface on node 2.  
+
+
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_s_p_i_8h_a734ac497f8d7f26478a883606c3a9989}\label{_s_p_i_8h_a734ac497f8d7f26478a883606c3a9989}} 
+void \mbox{\hyperlink{_s_p_i_8h_a734ac497f8d7f26478a883606c3a9989}{S\+P\+I\+\_\+master\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize node 2 as a S\+PI master. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_s_p_i_8h_a6ba9b49baa1437e34d04419defc22f1f}{S\+P\+I\+\_\+master\+Write}} (char c\+Data)
+\begin{DoxyCompactList}\small\item\em Write over S\+PI from master to slave. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_s_p_i_8h_a8d642e367ecb59f4e2a9c40b11cd2c9b}{S\+P\+I\+\_\+set\+Chip\+Select}} (uint8\+\_\+t pin, uint8\+\_\+t set\+High)
+\begin{DoxyCompactList}\small\item\em Set pulse width of pwm signal. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{_s_p_i_8h_a9cfaca464281226ce8e7439313d217f2}\label{_s_p_i_8h_a9cfaca464281226ce8e7439313d217f2}} 
+uint8\+\_\+t \mbox{\hyperlink{_s_p_i_8h_a9cfaca464281226ce8e7439313d217f2}{S\+P\+I\+\_\+master\+Read}} ()
+\begin{DoxyCompactList}\small\item\em Read from slave as master. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A library for using the S\+PI interface on node 2. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_s_p_i_8h_a6ba9b49baa1437e34d04419defc22f1f}\label{_s_p_i_8h_a6ba9b49baa1437e34d04419defc22f1f}} 
+\index{SPI.h@{SPI.h}!SPI\_masterWrite@{SPI\_masterWrite}}
+\index{SPI\_masterWrite@{SPI\_masterWrite}!SPI.h@{SPI.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_masterWrite()}{SPI\_masterWrite()}}
+{\footnotesize\ttfamily void S\+P\+I\+\_\+master\+Write (\begin{DoxyParamCaption}\item[{char}]{c\+Data }\end{DoxyParamCaption})}
+
+
+
+Write over S\+PI from master to slave. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em cdata} & Data to write \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_s_p_i_8h_a8d642e367ecb59f4e2a9c40b11cd2c9b}\label{_s_p_i_8h_a8d642e367ecb59f4e2a9c40b11cd2c9b}} 
+\index{SPI.h@{SPI.h}!SPI\_setChipSelect@{SPI\_setChipSelect}}
+\index{SPI\_setChipSelect@{SPI\_setChipSelect}!SPI.h@{SPI.h}}
+\doxysubsubsection{\texorpdfstring{SPI\_setChipSelect()}{SPI\_setChipSelect()}}
+{\footnotesize\ttfamily void S\+P\+I\+\_\+set\+Chip\+Select (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{pin,  }\item[{uint8\+\_\+t}]{set\+High }\end{DoxyParamCaption})}
+
+
+
+Set pulse width of pwm signal. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em pin} & Pin to set \\
+\hline
+\mbox{\texttt{ in}}  & {\em set\+High} & 1 to set High, 0 to set low. \\
+\hline
+\end{DoxyParams}

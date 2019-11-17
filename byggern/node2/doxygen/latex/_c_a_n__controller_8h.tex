@@ -1,0 +1,114 @@
+\hypertarget{_c_a_n__controller_8h}{}\doxysection{C\+A\+N\+\_\+controller.\+h File Reference}
+\label{_c_a_n__controller_8h}\index{CAN\_controller.h@{CAN\_controller.h}}
+
+
+A library for interfacing with the C\+AN transceiver from Node 2.  
+
+
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_c_a_n__controller_8h_aa6d6b6517035ad3d249076eb5bccb101}\label{_c_a_n__controller_8h_aa6d6b6517035ad3d249076eb5bccb101}} 
+void \mbox{\hyperlink{_c_a_n__controller_8h_aa6d6b6517035ad3d249076eb5bccb101}{C\+A\+N\+\_\+controller\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Initialize C\+AN controller. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{_c_a_n__controller_8h_a4d9300062efe6650612737eff58583d8}{C\+A\+N\+\_\+controller\+\_\+read}} (uint8\+\_\+t addr)
+\begin{DoxyCompactList}\small\item\em Read value from register on C\+AN transceiver. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_c_a_n__controller_8h_ab696116e28a0bbdc9291898676251e09}{C\+A\+N\+\_\+controller\+\_\+write}} (uint8\+\_\+t addr, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Write to address on C\+AN transceiver. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_c_a_n__controller_8h_a43e91d9973fdd493594aada67feb148d}{C\+A\+N\+\_\+controller\+\_\+\+R\+TS}} (uint8\+\_\+t buffer)
+\begin{DoxyCompactList}\small\item\em Request to send to chosen buffer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_c_a_n__controller_8h_a6d365c9451954422019e0b334f889a9a}{C\+A\+N\+\_\+controller\+\_\+set\+Mode}} (uint8\+\_\+t mode)
+\begin{DoxyCompactList}\small\item\em Set C\+AN transceiver in wanted mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_c_a_n__controller_8h_a4cf3fae095a08b92dfb42d3fab086d27}{C\+A\+N\+\_\+controller\+\_\+bit\+Modify}} (uint8\+\_\+t mask, uint8\+\_\+t addr, uint8\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em Modify certain bits in Can Transceiver register. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A library for interfacing with the C\+AN transceiver from Node 2. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_c_a_n__controller_8h_a4cf3fae095a08b92dfb42d3fab086d27}\label{_c_a_n__controller_8h_a4cf3fae095a08b92dfb42d3fab086d27}} 
+\index{CAN\_controller.h@{CAN\_controller.h}!CAN\_controller\_bitModify@{CAN\_controller\_bitModify}}
+\index{CAN\_controller\_bitModify@{CAN\_controller\_bitModify}!CAN\_controller.h@{CAN\_controller.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_controller\_bitModify()}{CAN\_controller\_bitModify()}}
+{\footnotesize\ttfamily void C\+A\+N\+\_\+controller\+\_\+bit\+Modify (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{mask,  }\item[{uint8\+\_\+t}]{addr,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})}
+
+
+
+Modify certain bits in Can Transceiver register. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em mask,bitmask} & to modify \\
+\hline
+\mbox{\texttt{ in}}  & {\em addr,register} & to modify \\
+\hline
+\mbox{\texttt{ in}}  & {\em data,data} & to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_c_a_n__controller_8h_a4d9300062efe6650612737eff58583d8}\label{_c_a_n__controller_8h_a4d9300062efe6650612737eff58583d8}} 
+\index{CAN\_controller.h@{CAN\_controller.h}!CAN\_controller\_read@{CAN\_controller\_read}}
+\index{CAN\_controller\_read@{CAN\_controller\_read}!CAN\_controller.h@{CAN\_controller.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_controller\_read()}{CAN\_controller\_read()}}
+{\footnotesize\ttfamily uint8\+\_\+t C\+A\+N\+\_\+controller\+\_\+read (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{addr }\end{DoxyParamCaption})}
+
+
+
+Read value from register on C\+AN transceiver. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em addr} & address on C\+AN transceiver to read from \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_c_a_n__controller_8h_a43e91d9973fdd493594aada67feb148d}\label{_c_a_n__controller_8h_a43e91d9973fdd493594aada67feb148d}} 
+\index{CAN\_controller.h@{CAN\_controller.h}!CAN\_controller\_RTS@{CAN\_controller\_RTS}}
+\index{CAN\_controller\_RTS@{CAN\_controller\_RTS}!CAN\_controller.h@{CAN\_controller.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_controller\_RTS()}{CAN\_controller\_RTS()}}
+{\footnotesize\ttfamily void C\+A\+N\+\_\+controller\+\_\+\+R\+TS (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{buffer }\end{DoxyParamCaption})}
+
+
+
+Request to send to chosen buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em buffer} & one of three possible transmit buffers\+: 0, 1, 2 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_c_a_n__controller_8h_a6d365c9451954422019e0b334f889a9a}\label{_c_a_n__controller_8h_a6d365c9451954422019e0b334f889a9a}} 
+\index{CAN\_controller.h@{CAN\_controller.h}!CAN\_controller\_setMode@{CAN\_controller\_setMode}}
+\index{CAN\_controller\_setMode@{CAN\_controller\_setMode}!CAN\_controller.h@{CAN\_controller.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_controller\_setMode()}{CAN\_controller\_setMode()}}
+{\footnotesize\ttfamily void C\+A\+N\+\_\+controller\+\_\+set\+Mode (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{mode }\end{DoxyParamCaption})}
+
+
+
+Set C\+AN transceiver in wanted mode. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em mode} & C\+AN transceiver mode \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_c_a_n__controller_8h_ab696116e28a0bbdc9291898676251e09}\label{_c_a_n__controller_8h_ab696116e28a0bbdc9291898676251e09}} 
+\index{CAN\_controller.h@{CAN\_controller.h}!CAN\_controller\_write@{CAN\_controller\_write}}
+\index{CAN\_controller\_write@{CAN\_controller\_write}!CAN\_controller.h@{CAN\_controller.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_controller\_write()}{CAN\_controller\_write()}}
+{\footnotesize\ttfamily void C\+A\+N\+\_\+controller\+\_\+write (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{addr,  }\item[{uint8\+\_\+t}]{data }\end{DoxyParamCaption})}
+
+
+
+Write to address on C\+AN transceiver. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em addr} & Address on C\+AN transceiver to write to \\
+\hline
+\mbox{\texttt{ in}}  & {\em data} & Data to write \\
+\hline
+\end{DoxyParams}

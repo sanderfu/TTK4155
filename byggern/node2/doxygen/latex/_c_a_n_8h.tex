@@ -1,0 +1,67 @@
+\hypertarget{_c_a_n_8h}{}\doxysection{C\+A\+N.\+h File Reference}
+\label{_c_a_n_8h}\index{CAN.h@{CAN.h}}
+
+
+A library for communicating via C\+AN on node 2.  
+
+
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_c_a_n__message__t}{C\+A\+N\+\_\+message\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_c_a_n_8h_a0f0806eb43c3a92aa612cc5e54f41d20}{C\+A\+N\+\_\+transmit\+\_\+message}} (\mbox{\hyperlink{struct_c_a_n__message__t}{C\+A\+N\+\_\+message\+\_\+t}} $\ast$message)
+\begin{DoxyCompactList}\small\item\em Send a C\+AN message. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{_c_a_n_8h_ae14a2e6551621f388981f93b0c541e42}\label{_c_a_n_8h_ae14a2e6551621f388981f93b0c541e42}} 
+void \mbox{\hyperlink{_c_a_n_8h_ae14a2e6551621f388981f93b0c541e42}{C\+A\+N\+\_\+receive\+Message}} ()
+\begin{DoxyCompactList}\small\item\em Read message over C\+AN and do action according to ID. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{_c_a_n_8h_aaef9c3157dcd88a49284e75c8294439f}\label{_c_a_n_8h_aaef9c3157dcd88a49284e75c8294439f}} 
+void \mbox{\hyperlink{_c_a_n_8h_aaef9c3157dcd88a49284e75c8294439f}{C\+A\+N\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Initialize C\+AN module. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_c_a_n_8h_a0c6a73f59024a3799ffdb0881b4bc018}{C\+A\+N\+\_\+read\+Position}} (\mbox{\hyperlink{struct_c_a_n__message__t}{C\+A\+N\+\_\+message\+\_\+t}} mess)
+\begin{DoxyCompactList}\small\item\em Set joystick, buttons and slider values from C\+AN message. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{_c_a_n_8h_aeb2ca6b49281b1018c8268ca5dc55783}\label{_c_a_n_8h_aeb2ca6b49281b1018c8268ca5dc55783}} 
+void \mbox{\hyperlink{_c_a_n_8h_aeb2ca6b49281b1018c8268ca5dc55783}{C\+A\+N\+\_\+clear\+Interrupt}} ()
+\begin{DoxyCompactList}\small\item\em Clear C\+AN receive message interrupt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A library for communicating via C\+AN on node 2. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_c_a_n_8h_a0c6a73f59024a3799ffdb0881b4bc018}\label{_c_a_n_8h_a0c6a73f59024a3799ffdb0881b4bc018}} 
+\index{CAN.h@{CAN.h}!CAN\_readPosition@{CAN\_readPosition}}
+\index{CAN\_readPosition@{CAN\_readPosition}!CAN.h@{CAN.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_readPosition()}{CAN\_readPosition()}}
+{\footnotesize\ttfamily void C\+A\+N\+\_\+read\+Position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_c_a_n__message__t}{C\+A\+N\+\_\+message\+\_\+t}}}]{mess }\end{DoxyParamCaption})}
+
+
+
+Set joystick, buttons and slider values from C\+AN message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em message} & with data representing joystick, buttons and slider values \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{_c_a_n_8h_a0f0806eb43c3a92aa612cc5e54f41d20}\label{_c_a_n_8h_a0f0806eb43c3a92aa612cc5e54f41d20}} 
+\index{CAN.h@{CAN.h}!CAN\_transmit\_message@{CAN\_transmit\_message}}
+\index{CAN\_transmit\_message@{CAN\_transmit\_message}!CAN.h@{CAN.h}}
+\doxysubsubsection{\texorpdfstring{CAN\_transmit\_message()}{CAN\_transmit\_message()}}
+{\footnotesize\ttfamily void C\+A\+N\+\_\+transmit\+\_\+message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_c_a_n__message__t}{C\+A\+N\+\_\+message\+\_\+t}} $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+Send a C\+AN message. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em message} & pointer to C\+AN message to transmit \\
+\hline
+\end{DoxyParams}

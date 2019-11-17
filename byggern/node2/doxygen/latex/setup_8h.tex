@@ -1,0 +1,39 @@
+\hypertarget{setup_8h}{}\doxysection{setup.\+h File Reference}
+\label{setup_8h}\index{setup.h@{setup.h}}
+
+
+A library for initial setup of Node 2.  
+
+
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{setup_8h_a802b2b582b121e4632aa9a491d503720}\label{setup_8h_a802b2b582b121e4632aa9a491d503720}} 
+\#define {\bfseries F\+O\+SC}~16000000
+\item 
+\mbox{\Hypertarget{setup_8h_a43bafb28b29491ec7f871319b5a3b2f8}\label{setup_8h_a43bafb28b29491ec7f871319b5a3b2f8}} 
+\#define {\bfseries F\+\_\+\+C\+PU}~16000000
+\item 
+\mbox{\Hypertarget{setup_8h_a62634036639f88eece6fbf226b45f84b}\label{setup_8h_a62634036639f88eece6fbf226b45f84b}} 
+\#define {\bfseries B\+A\+UD}~9600
+\item 
+\mbox{\Hypertarget{setup_8h_a711e9130c825a7269c8c87dbb57a85e0}\label{setup_8h_a711e9130c825a7269c8c87dbb57a85e0}} 
+\#define {\bfseries M\+Y\+U\+B\+RR}~F\+O\+SC/16/B\+A\+UD-\/1
+\item 
+\mbox{\Hypertarget{setup_8h_a0817a980abafd2745068cc1634801d0e}\label{setup_8h_a0817a980abafd2745068cc1634801d0e}} 
+\#define {\bfseries test\+\_\+bit}(reg,  bit)~(reg \& (1$<$$<$bit))
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{setup_8h_af962899555f74161e0b7a2be5801e959}\label{setup_8h_af962899555f74161e0b7a2be5801e959}} 
+void \mbox{\hyperlink{setup_8h_af962899555f74161e0b7a2be5801e959}{setup\+Init}} (void)
+\begin{DoxyCompactList}\small\item\em Initialize all modules that need initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A library for initial setup of Node 2. 
+

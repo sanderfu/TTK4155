@@ -1,0 +1,68 @@
+\hypertarget{motor_8h}{}\doxysection{motor.\+h File Reference}
+\label{motor_8h}\index{motor.h@{motor.h}}
+
+
+A library for interfacing with the motor on Node 2.  
+
+
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{motor_8h_a151cccf0120a24d251b5ce5d878abb67}\label{motor_8h_a151cccf0120a24d251b5ce5d878abb67}} 
+void \mbox{\hyperlink{motor_8h_a151cccf0120a24d251b5ce5d878abb67}{motor\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Initiate motor module. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{motor_8h_a149b45f994fa6dc14d9cc6948185f1b2}\label{motor_8h_a149b45f994fa6dc14d9cc6948185f1b2}} 
+void \mbox{\hyperlink{motor_8h_a149b45f994fa6dc14d9cc6948185f1b2}{motor\+\_\+enable}} ()
+\begin{DoxyCompactList}\small\item\em Turn on motor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{motor_8h_a5d2bf76c35dd856e5bbbc30d7a7a70b4}\label{motor_8h_a5d2bf76c35dd856e5bbbc30d7a7a70b4}} 
+void \mbox{\hyperlink{motor_8h_a5d2bf76c35dd856e5bbbc30d7a7a70b4}{motor\+\_\+disable}} ()
+\begin{DoxyCompactList}\small\item\em Turn off motor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{motor_8h_aa69c03c86e376780fdfcbbb6adf557f8}{motor\+\_\+set\+Speed}} (uint8\+\_\+t speed)
+\begin{DoxyCompactList}\small\item\em Set speed of motor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{motor_8h_a8c7c487a5a127331b0de53443e3ca964}\label{motor_8h_a8c7c487a5a127331b0de53443e3ca964}} 
+void \mbox{\hyperlink{motor_8h_a8c7c487a5a127331b0de53443e3ca964}{motor\+\_\+control}} ()
+\begin{DoxyCompactList}\small\item\em Control motor speed with P\+I\+D-\/regulator, using slider right as reference. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{motor_8h_a77e0edf6566160b356d9d5a7e7b31048}{motor\+\_\+set\+Direction}} (uint8\+\_\+t dir)
+\begin{DoxyCompactList}\small\item\em Set direction of motor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{motor_8h_a98c04ce88875c9bdc0ab1e86368bce26}\label{motor_8h_a98c04ce88875c9bdc0ab1e86368bce26}} 
+void \mbox{\hyperlink{motor_8h_a98c04ce88875c9bdc0ab1e86368bce26}{motor\+\_\+calibrate}} ()
+\begin{DoxyCompactList}\small\item\em Calibrate motor, move until motor reaches both walls, reset encoder and set max value for encoder. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A library for interfacing with the motor on Node 2. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{motor_8h_a77e0edf6566160b356d9d5a7e7b31048}\label{motor_8h_a77e0edf6566160b356d9d5a7e7b31048}} 
+\index{motor.h@{motor.h}!motor\_setDirection@{motor\_setDirection}}
+\index{motor\_setDirection@{motor\_setDirection}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{motor\_setDirection()}{motor\_setDirection()}}
+{\footnotesize\ttfamily void motor\+\_\+set\+Direction (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{dir }\end{DoxyParamCaption})}
+
+
+
+Set direction of motor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & 0 for left, 1 for right. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{motor_8h_aa69c03c86e376780fdfcbbb6adf557f8}\label{motor_8h_aa69c03c86e376780fdfcbbb6adf557f8}} 
+\index{motor.h@{motor.h}!motor\_setSpeed@{motor\_setSpeed}}
+\index{motor\_setSpeed@{motor\_setSpeed}!motor.h@{motor.h}}
+\doxysubsubsection{\texorpdfstring{motor\_setSpeed()}{motor\_setSpeed()}}
+{\footnotesize\ttfamily void motor\+\_\+set\+Speed (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{speed }\end{DoxyParamCaption})}
+
+
+
+Set speed of motor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em speed} & digital value from 0 to 255. \\
+\hline
+\end{DoxyParams}

@@ -1,0 +1,34 @@
+\hypertarget{encoder_8h}{}\doxysection{encoder.\+h File Reference}
+\label{encoder_8h}\index{encoder.h@{encoder.h}}
+
+
+A library for reading encoder values on Node 2.  
+
+
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{encoder_8h_aa4d2ab21e7f298bfc45f67bd6b7c11da}\label{encoder_8h_aa4d2ab21e7f298bfc45f67bd6b7c11da}} 
+void \mbox{\hyperlink{encoder_8h_aa4d2ab21e7f298bfc45f67bd6b7c11da}{encoder\+\_\+read\+Values}} ()
+\begin{DoxyCompactList}\small\item\em Read encoder values and convert them to appropriate values between -\/100 and 100. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{encoder_8h_a1810f19ef7d35edd2e26a7d4ee29f6bc}\label{encoder_8h_a1810f19ef7d35edd2e26a7d4ee29f6bc}} 
+void \mbox{\hyperlink{encoder_8h_a1810f19ef7d35edd2e26a7d4ee29f6bc}{encoder\+\_\+init}} ()
+\begin{DoxyCompactList}\small\item\em Initialize encoder module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{encoder_8h_a132c22087d093413a8d6075fdd72c489}\label{encoder_8h_a132c22087d093413a8d6075fdd72c489}} 
+volatile int16\+\_\+t {\bfseries encoder\+\_\+value}
+\item 
+\mbox{\Hypertarget{encoder_8h_ad953f8d88e7365d99a14d8baab44add1}\label{encoder_8h_ad953f8d88e7365d99a14d8baab44add1}} 
+volatile int16\+\_\+t {\bfseries converted\+\_\+encoder\+Value}
+\item 
+\mbox{\Hypertarget{encoder_8h_a85be5b8d8d4327b8be926e24bd6ce444}\label{encoder_8h_a85be5b8d8d4327b8be926e24bd6ce444}} 
+volatile int {\bfseries encoder\+\_\+max\+Value}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A library for reading encoder values on Node 2. 
+

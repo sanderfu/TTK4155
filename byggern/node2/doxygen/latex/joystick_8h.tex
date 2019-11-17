@@ -1,0 +1,50 @@
+\hypertarget{joystick_8h}{}\doxysection{joystick.\+h File Reference}
+\label{joystick_8h}\index{joystick.h@{joystick.h}}
+
+
+A library for keeping the joystick-\/values and steering the Servo accordingly on Node 2.  
+
+
+{\ttfamily \#include $<$avr/io.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}C\+A\+N.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structjoystick__position__t}{joystick\+\_\+position\+\_\+t}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{joystick_8h_ac1b6be083d64a75cd5b9d40c60f21880}\label{joystick_8h_ac1b6be083d64a75cd5b9d40c60f21880}} 
+typedef enum D\+I\+R\+E\+C\+T\+I\+ON {\bfseries D\+I\+R\+E\+C\+T\+I\+O\+N\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{joystick_8h_aa268a41a13430b18e933ed40207178d0}\label{joystick_8h_aa268a41a13430b18e933ed40207178d0}} 
+enum {\bfseries D\+I\+R\+E\+C\+T\+I\+ON} \{ \newline
+{\bfseries L\+E\+FT}, 
+{\bfseries R\+I\+G\+HT}, 
+{\bfseries UP}, 
+{\bfseries D\+O\+WN}, 
+\newline
+{\bfseries N\+E\+U\+T\+R\+AL}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{joystick_8h_a5caef9563fb73fa0d96679af2694f280}\label{joystick_8h_a5caef9563fb73fa0d96679af2694f280}} 
+void \mbox{\hyperlink{joystick_8h_a5caef9563fb73fa0d96679af2694f280}{joystick\+\_\+set\+Servo}} ()
+\begin{DoxyCompactList}\small\item\em Set servo motor voltage according to joystick position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{joystick_8h_a9378fc03e33b32b5416b85d89e34ba44}\label{joystick_8h_a9378fc03e33b32b5416b85d89e34ba44}} 
+volatile \mbox{\hyperlink{structjoystick__position__t}{joystick\+\_\+position\+\_\+t}} {\bfseries joystick\+\_\+pos}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A library for keeping the joystick-\/values and steering the Servo accordingly on Node 2. 
+
