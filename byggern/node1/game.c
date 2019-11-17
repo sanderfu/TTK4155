@@ -161,9 +161,11 @@ void game_finished(uint8_t gameID) {
 	oled_gotoLine(4);
 	oled_print("Maybe HS?");
 	music_gameOver();
-	gameActive=0;
 	
+	gameActive=0;
+	sei();
 	menu_init();
+	//menu_printCurrentMenu();
 	switch (gameID) {
 		case 1:
 			for (int i = 0; i<5; i++) {
@@ -191,7 +193,7 @@ void game_finished(uint8_t gameID) {
 	}
 	
 	
-	sei();
+	
 }
 void game_play(uint8_t gameID)
 {

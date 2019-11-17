@@ -18,11 +18,7 @@ void sleep_init() {
 
 void sleep_now() {
 	
-	//disable analog reading
-	ACSR |= (1 << ACD | 1 << ACIE);
-
 	
-
 	// Put the device to sleep:
 	sleep_mode();
 	

@@ -48,6 +48,8 @@ int main(void)
 	printf("---------------------------------------\n\r");
 	_delay_ms(500);    
 	while (1) {
+		_delay_ms(5);
+		
 		if (timerFlag)
 		{
 			cli();
@@ -55,11 +57,10 @@ int main(void)
 			joystick_readPosition();
 			slider_readPosition(&slider_pos);
 			touchButton_readButtons();
-			if(gameActive==0){
-				navigateMenu(&joystick_pos);
-				menu_printCurrentMenu();
-			}
+			
 			timerFlag=0;
+			TCNT1 = 0x00;
+
 			sei();
 		}
 		switch(currentMenu.currentMenuItem->nodeID){
@@ -87,6 +88,12 @@ int main(void)
 			
 		}
 		//Put microcontroller to sleep until next interrupt.
+		if(gameActive==0){
+			navigateMenu(&joystick_pos);
+			menu_printCurrentMenu();
+			TCNT1 = 0x00;
+		}
 		sleep_now();
+		
 	}
 }
