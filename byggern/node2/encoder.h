@@ -1,9 +1,8 @@
-/*
- * encoder.h
- *
- * Created: 01.11.2019 13:42:36
- *  Author: sanderfu
- */ 
+/**
+ * @file
+ * @brief A library for reading encoder values on Node 2.
+ */
+
 
 
 #ifndef ENCODER_H_

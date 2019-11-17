@@ -1,9 +1,8 @@
-/*
- * sleep.h
- *
- * Created: 25.10.2019 13:50:57
- *  Author: haavaei
- */ 
+/**
+ * @file
+ * @brief A library for saving battery using sleep.
+ */
+
 
 
 #ifndef SLEEP_H_

@@ -1,9 +1,8 @@
-/*
- * CAN.h
- *
- * Created: 25.09.2019 13:03:02
- *  Author: sanderfu
- */ 
+/**
+ * @file
+ * @brief A library for interfacing with the CAN transceiver from Node 2.
+ */
+
 
 #include <avr/io.h>
 #include <stdlib.h>

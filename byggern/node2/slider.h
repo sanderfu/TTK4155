@@ -1,10 +1,7 @@
-/*
- * slider.h
- *
- * Created: 01.11.2019 10:48:23
- *  Author: sanderfu
- */ 
-
+/**
+ * @file
+ * @brief A library for storing the slider values on node 2.
+ */
 
 #ifndef SLIDER_H_
 #define SLIDER_H_

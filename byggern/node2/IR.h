@@ -1,9 +1,8 @@
-/*
- * IR.h
- *
- * Created: 25.10.2019 11:44:45
- *  Author: haavaei
- */ 
+/**
+ * @file
+ * @brief A library for reading analog IR-values on Node 2.
+ */
+
 
 
 #ifndef IR_H_

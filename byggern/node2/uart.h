@@ -1,3 +1,8 @@
+/**
+ * @file
+ * @brief A library for using the UART-interface on Node 2.
+ */
+
 #ifndef UART_H_
 #define UART_H_
 #include <stdio.h>

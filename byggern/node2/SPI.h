@@ -7,6 +7,11 @@
 
 
 #ifndef SPI_H_
+/**
+ * @file
+ * @brief A library for using the SPI interface on node 2.
+ */
+
 #define SPI_H_
 #include <avr/io.h>
 

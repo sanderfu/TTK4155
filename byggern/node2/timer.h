@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief A library for using the timers on Node 2.
+ */
 
 
 #ifndef TIMER_H_

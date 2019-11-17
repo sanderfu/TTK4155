@@ -1,9 +1,7 @@
-/*
- * ADC.h
- *
- * Created: 25.10.2019 09:59:17
- *  Author: haavaei
- */ 
+/**
+ * @file
+ * @brief A library for reading analog values on Node 2.
+ */
 
 
 #ifndef ADC_H_

@@ -1,9 +1,7 @@
-/*
- * solenoid.h
- *
- * Created: 06.11.2019 15:46:06
- *  Author: torsteoe
- */ 
+/**
+ * @file
+ * @brief A library for interfacing with the solenoid on node 2.
+ */
 
 
 #ifndef SOLENOID_H_

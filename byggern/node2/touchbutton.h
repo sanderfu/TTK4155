@@ -1,10 +1,7 @@
-/*
- * touchbutton.h
- *
- * Created: 06.11.2019 15:45:32
- *  Author: torsteoe
- */ 
-
+/**
+ * @file
+ * @brief A library for storing the touch button values on node 2.
+ */
 
 #ifndef TOUCHBUTTON_H_
 #define TOUCHBUTTON_H_

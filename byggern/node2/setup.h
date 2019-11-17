@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief A library for initial setup of Node 2.
+ */
 #ifndef SETUP_H_
 #define SETUP_H_
 

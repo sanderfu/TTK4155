@@ -1,9 +1,7 @@
-/*
- * joystick.h
- *
- * Created: 11.10.2019 15:39:13
- *  Author: torsteoe
- */ 
+/**
+ * @file
+ * @brief A library for keeping the joystick-values and steering the Servo accordingly on Node 2. 
+ */
 
 
 #ifndef JOYSTICK_H_

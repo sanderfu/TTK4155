@@ -1,9 +1,7 @@
-/*
- * game.h
- *
- * Created: 15.11.2019 09:20:37
- *  Author: torsteoe
- */ 
+/**
+ * @file
+ * @brief A library for playing the 2 games on Node 2.
+ */
 
 
 #ifndef GAME_H_

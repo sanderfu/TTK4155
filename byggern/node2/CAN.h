@@ -1,9 +1,8 @@
-/*
- * CAN.h
- *
- * Created: 04.10.2019 15:12:44
- *  Author: haavaei
- */ 
+/**
+ * @file
+ * @brief A library for communicating via CAN on node 2.
+ */
+
 
 
 #ifndef CAN_H_

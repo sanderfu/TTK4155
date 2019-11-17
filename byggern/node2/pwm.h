@@ -1,9 +1,7 @@
-/*
- * pwm.h
- *
- * Created: 18.10.2019 08:51:34
- *  Author: torsteoe
- */ 
+/**
+ * @file
+ * @brief A library for generating a pwm-signal on Node 2.
+ */
 
 
 #ifndef PWM_H_
