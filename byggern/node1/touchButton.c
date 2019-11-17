@@ -1,3 +1,5 @@
+#define BUTTON_LEFT (PINB & (1 << PB1))
+#define BUTTON_RIGHT (PINB & (1 << PB2))
 
 #include "touchButton.h"
 #include "adc.h"
