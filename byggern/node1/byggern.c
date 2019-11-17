@@ -34,7 +34,6 @@ int main(void)
 {
 
 	setupInit();
-	
 	//test_SRAM();
 	volatile CAN_message_t message;
 	message.ID = 0b10101010111;
@@ -48,7 +47,7 @@ int main(void)
 	_delay_ms(500);    
 	while (1) {
 		
-		//Put microcontroller to sleep until next interrupt. 
+		 
 		
 		if (timerFlag)
 		{
@@ -88,6 +87,7 @@ int main(void)
 				break;
 			
 		}
+		//Put microcontroller to sleep until next interrupt.
 		sleep_now();
 	}
 }
