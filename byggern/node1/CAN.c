@@ -96,7 +96,7 @@ void CAN_transmit_message(CAN_message_t *message) {
 	//ERROR HANDLING?	
 }
 
-void CAN_receiveMessage(CAN_message_t * received_message) {
+void CAN_receiveMessage(volatile CAN_message_t * received_message) {
 	
 	
 	uint8_t buffer = 0;

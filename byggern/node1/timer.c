@@ -17,15 +17,12 @@
 ISR (TIMER1_COMPB_vect) {
 	cli();
 	TCNT1 = 0x00;
-	joystick_readPosition(&joystick_pos);
+	joystick_readPosition();
 	slider_readPosition(&slider_pos);
-	touchButton_readButtons(&buttons);
+	touchButton_readButtons();
 	if(gameActive==0){
 		navigateMenu(&joystick_pos);
 		menu_printCurrentMenu();
-	}
-	else{
-		//game_updateOled();
 	}
 	sei();
 }
