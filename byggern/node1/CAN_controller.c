@@ -47,7 +47,7 @@ void CAN_controller_bitModify(uint8_t mask, uint8_t addr, uint8_t data) {
 }
 void CAN_controller_reset() {
 	SPI_setChipSelect(PB4, 0);
-	printf("Before spi write");
+	//printf("Before spi write");
 	SPI_masterWrite(MCP_RESET);
 	SPI_setChipSelect(PB4, 1);
 }
@@ -56,7 +56,7 @@ void CAN_controller_init() {
 	
 	SPI_masterInit();
 
-	CAN_controller_setMode(MODE_LOOPBACK);
+	CAN_controller_setMode(MODE_NORMAL);
 	
 	
 	//set interrupt on atm162
@@ -71,11 +71,11 @@ void CAN_controller_init() {
 	
 	
 	_delay_ms(200);
-	printf("after write to canctrl\n\r");
+	//printf("after write to canctrl\n\r");
 	
 	//Check CANSTAT register
 	uint8_t status = CAN_controller_read(MCP_CANSTAT);
-	printf("Data: %i\n\r", status);
+	//printf("Data: %i\n\r", status);
 
 }
 
@@ -122,6 +122,6 @@ void CAN_controller_setMode(uint8_t mode) {
 			printf("Not in correct mode: Mode: %i\n\r", mode_bits);
 
 	}
-	printf("Mode set: %i\n\r", status & MODE_MASK);
+	//printf("Mode set: %i\n\r", status & MODE_MASK);
 }
 

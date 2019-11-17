@@ -42,11 +42,7 @@ int main(void)
 	
 	printf("Starting program\n\r");
 	printf("---------------------------------------\n\r");
-	_delay_ms(500);
-	
-	CAN_controller_setMode(MODE_NORMAL);
-	_delay_ms(500);
-	//test_SRAM();            
+	_delay_ms(500);    
 	while (1) {
 		
 		//Put microcontroller to sleep until next interrupt. 

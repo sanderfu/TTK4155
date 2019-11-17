@@ -17,10 +17,6 @@
 #include <util/delay.h>
 
 
-void CAN_init() {
-	CAN_controller_init();
-}
-
 void CAN_clearInterrupt()
 {
 	//CLearing interrupt
@@ -149,4 +145,8 @@ void CAN_sendInputData() {
 	message.data[4] = joystick_pos.x_pos;
 	message.data[5] = joystick_pos.y_pos;
 	CAN_transmit_message(&message);
+}
+
+void CAN_init() {
+	CAN_controller_init();
 }

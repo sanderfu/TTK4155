@@ -10,6 +10,7 @@
 #define SLEEP_H_
 
 void sleep_init();
+void sleep_now();
 
 
 
