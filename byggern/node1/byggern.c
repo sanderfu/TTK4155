@@ -69,6 +69,7 @@ int main(void)
 			case PLAY_GAME:
 				break;
 			case HIGH_SCORE:
+				highScoresActive = 0;
 				break;
 			case MUSIC:
 				music_playRick();
@@ -87,12 +88,17 @@ int main(void)
 				break;
 			
 		}
-		//Put microcontroller to sleep until next interrupt.
-		if(gameActive==0){
-			navigateMenu(&joystick_pos);
+		if (gameActive == 0) {
+					navigateMenu(&joystick_pos);
+
+		}
+		if(gameActive==0 & highScoresActive == 0) {
+			
 			menu_printCurrentMenu();
 			TCNT1 = 0x00;
 		}
+		//Put microcontroller to sleep until next interrupt.
+
 		sleep_now();
 		
 	}

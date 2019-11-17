@@ -30,6 +30,8 @@ typedef struct{
 ///////////////////////////////////////////////
 gameData_t gameData; 
 uint8_t gameActive;
+uint8_t highScoresActive;
+
 uint8_t highScores[5];
 uint8_t highScores2[5];
 

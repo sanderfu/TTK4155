@@ -22,6 +22,7 @@
 void game_init()
 {
 	gameActive=0;
+	highScoresActive = 0;
 	for (int i = 0; i<5; i++) {
 			highScores[i] = 0;
 			highScores2[i] = 0;
@@ -227,6 +228,7 @@ void game_play(uint8_t gameID)
 }
 
 void game_displayHighscores(uint8_t gameID) {
+	highScoresActive= 1;
 	oled_reset();
 	oled_home();
 	oled_print(currentMenu.currentMenuItem->name);
