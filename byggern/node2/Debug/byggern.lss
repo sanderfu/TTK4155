@@ -361,7 +361,7 @@ int main(void)
 	
 	setupInit();
      248:	8c d6       	rcall	.+3352   	; 0xf62 <setupInit>
-	printf("------------------------6---------------\n\n\n\n\n\n\r");
+	printf("---------------------------------------\n\n\n\n\n\n\r");
      24a:	87 e0       	ldi	r24, 0x07	; 7
      24c:	92 e0       	ldi	r25, 0x02	; 2
      24e:	9f 93       	push	r25
@@ -407,7 +407,7 @@ int main(void)
      274:	01 97       	sbiw	r24, 0x01	; 1
      276:	f1 f7       	brne	.-4      	; 0x274 <main+0x2c>
      278:	00 c0       	rjmp	.+0      	; 0x27a <main+0x32>
-	printf("------------------------6---------------\n\n\n\n\n\n\r");
+	printf("---------------------------------------\n\n\n\n\n\n\r");
 
 	while (1) {
 		_delay_ms(5);
@@ -533,7 +533,7 @@ void CAN_transmit_message(CAN_message_t *message) {
      308:	cf 93       	push	r28
      30a:	8c 01       	movw	r16, r24
 	printf("Transmitting message");
-     30c:	87 e3       	ldi	r24, 0x37	; 55
+     30c:	86 e3       	ldi	r24, 0x36	; 54
      30e:	92 e0       	ldi	r25, 0x02	; 2
      310:	9f 93       	push	r25
      312:	8f 93       	push	r24
