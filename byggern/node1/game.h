@@ -8,6 +8,8 @@
 
 #ifndef GAME_H_
 #define GAME_H_
+
+#include <avr/interrupt.h>
 #include <stdlib.h>
 #include <avr/io.h>
 #include <string.h>

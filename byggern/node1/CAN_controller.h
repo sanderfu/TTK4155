@@ -8,15 +8,8 @@
 #ifndef CAN_controller_H_
 #define CAN_controller_H_
 
-#define F_CPU 4915200
-
 #include <avr/io.h>
-#include <avr/interrupt.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <util/delay.h>
-#include "MCP2515.h"
-#include "SPI.h"
+
 
 void CAN_controller_init();
 uint8_t CAN_controller_read(uint8_t addr);

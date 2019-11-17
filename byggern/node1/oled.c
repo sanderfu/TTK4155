@@ -2,6 +2,7 @@
 #include "fonts.h"
 #define OLED_COMMAND_BASE_ADDRESS 0x1000
 #define OLED_DATA_BASE_ADDRESS 0x1200
+#define	ASCII_SPACE 32
 //#include <util/delay.h>
 void oled_write_c(uint8_t data) {
 	volatile char *ext_mem = (char *) OLED_COMMAND_BASE_ADDRESS;

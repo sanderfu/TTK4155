@@ -7,7 +7,13 @@
 
 
 #include "CAN.h"
-
+#include "CAN_controller.h"
+#include "MCP2515.h"
+#include "slider.h"
+#include "joystick.h"
+#include "touchButton.h"
+#define F_CPU 4915200
+#include <util/delay.h>
 
 
 void CAN_init() {
